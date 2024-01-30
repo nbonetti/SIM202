@@ -10,7 +10,6 @@
 using namespace std;
 
 
-
 class Point 
 {
     public:
@@ -102,12 +101,36 @@ class Chemin : public individu
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
-    Chemin(const vector<int> &t, const Ville &vp): trajet(t), villes(vp){}; 
+    Chemin(const vector<int> &t, const Ville &v): trajet(t), villes(v)
+    {
+        int n =trajet.size(); 
+        int r=0; 
+        for (int i=1; i<n;++i)
+        {
+            r=r+v.distances[t[i]][t[i-1]];
+        }
+    }; 
     Chemin(){}
 
     void print(ostream&out) const; 
-    double cout() const; 
-}; 
+    double poids() const; 
+};
+
+
+
+//définition des fonctions de chemin 
+void Chemin :: print(ostream&out ) const 
+{
+    int n=trajet.size();
+    out << "["; 
+    for (int i=0; i<n-1; ++i)
+    {
+        out << villes->nom[trajet[i]]<<","; 
+
+    }
+    out << villes->nom[trajet[n-1]]<<"]"<<endl; 
+
+}
 
 
 
