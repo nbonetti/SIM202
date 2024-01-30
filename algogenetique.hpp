@@ -79,17 +79,17 @@ public:
         genes[l] = genes[k];
         genes[k] = gene_l;
     };
+};
 
-    class population
-    {
-    private:
-        int m;
-        vector<individu> indi;
+class population
+{
+private:
+    int m;
+    vector<individu> indi;
 
-    public:
-        // constructeur avec une taille donnée
-        population(int taille) : m(taille), indi(taille) {}
-        // constructeur avec des valeurs données
-        population(const std::vector<individu> &indiList) : m(indiList.size()), indi(indiList) {}
-    };
+public:
+    // constructeur avec une taille donnée
+    population(int taille) : m(taille), indi(taille) {}
+    // constructeur avec des valeurs données
+    population(const std::vector<individu> &indiList) : m(indiList.size()), indi(indiList) {}
 };
