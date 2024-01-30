@@ -18,6 +18,8 @@ class Point
     //constructeur 
     Point(double a, double b): x(a),y(b){}
     void print(ostream& out) const; // affichage 
+    //distance entre deux points 
+    double dist(const Point&p, const Point &q); 
 };
 
 
@@ -28,6 +30,12 @@ void Point :: print(ostream& out) const
     out << "(" << x << ","<< y <<")"; 
 }
 
+double Point :: dist (const Point&p, const Point&q)
+{
+    double resultat; 
+    resultat=sqrt((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y));
+    return resultat; 
+}
 
 class Ville
 {
@@ -46,6 +54,43 @@ class Ville
     }; 
 };
 
+
+
+//définition des fonctions de villes 
+
+void Ville:: print(ostream &out ) const 
+{
+    int n= nombre_villes();
+    out << "["; 
+    for (int i=0; i<m-1; ++i)
+    {
+        out << nom[i] << ",";
+    }
+    out << nom[m-1]<< "]" << endl; 
+}
+
+
+
+void Ville :: calcul_distance()
+{
+    int n= nom.size();
+    distances.resize(n,vector<double> (n)); //redimension de la matrice
+    for (int i=0; i<n;++i)//lignes
+    {
+        for (int j=0; j<n;++j)//colonnes
+        {
+            if (i==j)
+            {
+                distances[i][j]=0;
+            }
+            else
+            {// on applique à la ieme ligen et jieme colonne la distance entre les deux points (deux villes)
+                distances[i][j]= dist(coord[i],coord[j]);
+                distances[j][i]= dist(coord[i],coord[j]);
+            }
+        }
+    }
+}
 
 class Chemin : public individu 
 {
