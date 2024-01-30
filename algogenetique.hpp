@@ -26,6 +26,7 @@ public:
     // constructeur avec des valeurs données
     individu(const std::vector<int> &geneList) : n(geneList.size()), genes(geneList) {}
 
+    // création de deux enfants avec hybridation avec deux individus
     individu crossover(const individu &partner)
     {
         // Vérifie que les deux parents ont la même taille
@@ -63,17 +64,31 @@ public:
 
         return (enfant_1, enfant_2);
     }
-};
 
-class population
-{
-private:
-    int m;
-    vector<individu> indi;
+    // mutation inverse deux gènes aléatoirement
+    individu mutation()
+    {
+        if (n <= 1)
+        {
+            cout << "mutation impossible car <=1";
+            exit(-1);
+        }
+        int l = unif_rand(n);
+        int k = unif_rand(n);
+        int gene_l = genes[l];
+        genes[l] = genes[k];
+        genes[k] = gene_l;
+    };
 
-public:
-    // constructeur avec une taille donnée
-    population(int taille) : m(taille), indi(taille) {}
-    // constructeur avec des valeurs données
-    population(const std::vector<individu> &indiList) : m(indiList.size()), indi(indiList) {}
-};
+    class population
+    {
+    private:
+        int m;
+        vector<individu> indi;
+
+    public:
+        // constructeur avec une taille donnée
+        population(int taille) : m(taille), indi(taille) {}
+        // constructeur avec des valeurs données
+        population(const std::vector<individu> &indiList) : m(indiList.size()), indi(indiList) {}
+    };
