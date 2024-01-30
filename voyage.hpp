@@ -21,6 +21,14 @@ class Point
 };
 
 
+//définition des fonctions 
+
+void Point :: print(ostream& out) const 
+{
+    out << "(" << x << ","<< y <<")"; 
+}
+
+
 class Ville
 {
     public: 
@@ -49,7 +57,11 @@ class Chemin : public individu
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
-    Chemin(const vector<int> &t, const Ville);
+    Chemin(const vector<int> &t, const Ville &vp): trajet(t), villes(vp){}; 
+    Chemin(){}
+
+    void print(ostream&out) const; 
+    double cout() const; 
 }; 
 
 
