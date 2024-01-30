@@ -5,12 +5,12 @@
 #include <random>
 using namespace std;
 
-// fonction qui renvoie un nombre aléatoire entre 1 et n-1 de manière unifrome
-int unif_rand(int n)
+// fonction qui renvoie un nombre aléatoire entre k et n de manière unifrome
+int unif_rand(int k, int n)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, n - 1);
+    std::uniform_int_distribution<> dis(k, n);
     return dis(gen);
 }
 
@@ -47,7 +47,7 @@ public:
         individu enfant_2(n);
 
         // Choisissez un point de croisement aléatoire
-        int pt_rand = unif_rand(n);
+        int pt_rand = unif_rand(0, n - 1);
         // copie des premieres valeurs de genes des enfants
         for (int i = 0; i < pt_rand; ++i)
         {
@@ -73,11 +73,33 @@ public:
             cout << "mutation impossible car <=1";
             exit(-1);
         }
-        int l = unif_rand(n);
-        int k = unif_rand(n);
+        int l = unif_rand(0, n - 1);
+        int k = unif_rand(0, n - 1);
         int gene_l = genes[l];
         genes[l] = genes[k];
         genes[k] = gene_l;
+    };
+
+    individu flip()
+    {
+        if (n <= 1)
+        {
+            cout << "mutation impossible car <=1";
+            exit(-1);
+        }
+
+        // deux indices alétoirement
+        int l = unif_rand(1, n - 1);
+        int k = unif_rand(0, n - 2);
+
+        // échange des valeurs
+        int gene_k = genes[k];
+        genes[k] = genes[k + 1];
+        genes[k + 1] = gene_k;
+
+        int gene_l = genes[l];
+        genes[k] = genes[l - 1];
+        genes[l - 1] = gene_l;
     };
 };
 
