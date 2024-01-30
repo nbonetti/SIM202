@@ -92,3 +92,4 @@ public:
         // constructeur avec des valeurs données
         population(const std::vector<individu> &indiList) : m(indiList.size()), indi(indiList) {}
     };
+};
