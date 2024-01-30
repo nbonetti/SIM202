@@ -49,7 +49,7 @@ class Chemin : public individu
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
-    Chemin(const vector<int> &t, const Ville)
+    Chemin(const vector<int> &t, const Ville);
 }; 
 
 
