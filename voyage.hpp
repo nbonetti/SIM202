@@ -94,10 +94,8 @@ void Ville :: calcul_distance()
 class Chemin : public individu 
 {
     public:
-    Chemin crossover ();
-    Chemin mutation (); 
-
-
+    Chemin* crossover ();
+    Chemin* mutation (); 
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
@@ -113,9 +111,12 @@ class Chemin : public individu
     Chemin(){}
 
     void print(ostream&out) const; 
-    double poids() const; 
+    double poids() const; // calcul de la distance totale parcourue dans la tournée 
+    double adapter(const vector<vector<double>>& distances ) const //fonction d'adaptation: retourne la distance totale parcourue
+    {
+        return poids(distances); 
+    }
 };
-
 
 
 //définition des fonctions de chemin 
@@ -135,10 +136,18 @@ void Chemin :: print(ostream&out ) const
 
 double Chemin :: poids() const 
 {
-    
+    double poid=0;
+    int n=villes->nombre_villes();
+    for (int i=0;i<n;++i)
+    {
+        poid+=villes->distances[trajet[i]][trajet[i-1]];
+    }
+    poids+=distances[trajet.back()][trajet[0]];
+    return poids; 
 }
 
 
+//fonction d'adaptation
 
 
 
