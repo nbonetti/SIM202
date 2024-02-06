@@ -18,6 +18,8 @@ private:
 public:
     virtual double poids() const = 0;
     Individu *flip();
+    Individu *mutation();
+    Individu *crossover(const Individu &partner);
 };
 
 class Chemin : public Individu
