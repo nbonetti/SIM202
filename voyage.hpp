@@ -122,11 +122,7 @@ class Chemin : public individu
     Chemin(){}
 
     void print(ostream&out) const; //afficher les villes dans le chemin
-    double poids(const vector<vector<double>>& distances) const; // calcul de la distance totale parcourue dans la tournée 
-    double adapter(const vector<vector<double>>& distances ) const //fonction d'adaptation: retourne la distance totale parcourue
-    {
-        return poids(distances); 
-    }
+    double poids() const; // calcul de la distance totale parcourue dans la tournée (adaptation)
 };
 
 
@@ -145,7 +141,7 @@ void Chemin :: print(ostream&out ) const
 }
 
 
-double Chemin :: poids(const vector<vector<double>>& distances) const 
+double Chemin :: poids() const 
 {
     double poid=0;
     int n=villes->nombre_villes();
@@ -168,6 +164,42 @@ Chemin* Chemin :: mutation()
 
 }
 
+
+//=========================================================================================
+//=================================SELECTION===============================================
+population selection_roulette(population&P,int p);
+
+population selection_roulette(population&P,int p)
+{
+    population Q(p);//population à retourner
+    vector<double> vdist;
+    vector<double> vdist_temp;
+    double s=0; //somme de toutes les fonctions d'adaptation d'une population
+    vector <int> rang ; 
+
+    int n= P.individu.size();
+    for (int i=0;i<n;++i)
+    {
+        vdist.push_bacj(P.individu[i]->poids());
+        s=s+P.individu[i]->poids();
+        rang.push_back(i);
+    }
+
+     for (int j=0;j<p;j++) {
+        int a=0;
+        double r=s*((double) rand() / (RAND_MAX));// génère aléatoirement suivant une loi uniforme 
+        double S_temp=0;
+        while (S_temp<r) {
+            S_temp= S_temp + vdist[rang[a]];
+            a=a+1;
+        }
+        Q.individu.push_back(P.individu[rang[a]]);
+        rang.erase(rang.begin()+a);
+    }
+    return Q;
+
+
+}
 
 
 
