@@ -133,7 +133,10 @@ void Chemin :: print(ostream&out ) const
 }
 
 
-
+double Chemin :: poids() const 
+{
+    
+}
 
 
 
