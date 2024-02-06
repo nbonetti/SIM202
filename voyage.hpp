@@ -105,8 +105,6 @@ void Ville :: calcul_distance()
 class Chemin : public individu 
 {
     public:
-    Chemin* crossover ();
-    Chemin* mutation (); 
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
@@ -154,15 +152,6 @@ double Chemin :: poids() const
 }
 
 
-Chemin* Chemin:: crossover()
-{
-
-}
-
-Chemin* Chemin :: mutation()
-{
-
-}
 
 
 //=========================================================================================
@@ -180,7 +169,7 @@ population selection_roulette(population&P,int p)
     int n= P.individu.size();
     for (int i=0;i<n;++i)
     {
-        vdist.push_bacj(P.individu[i]->poids());
+        vdist.push_back(P.individu[i]->poids());
         s=s+P.individu[i]->poids();
         rang.push_back(i);
     }
@@ -189,15 +178,22 @@ population selection_roulette(population&P,int p)
         int a=0;
         double r=s*((double) rand() / (RAND_MAX));// génère aléatoirement suivant une loi uniforme 
         double S_temp=0;
-        while (S_temp<r) {
+        while (S_temp<r) { //on somme les fonctions jusqu'à atteindre la valeur r 
             S_temp= S_temp + vdist[rang[a]];
             a=a+1;
         }
         Q.individu.push_back(P.individu[rang[a]]);
         rang.erase(rang.begin()+a);
     }
-    return Q;
+    return Q;// dernier individu qui a contribué à cette somme 
 
+
+}
+
+
+population selection_rang(const population&P, int p);
+population selection_rang(const population&P, int p)
+{
 
 }
 
