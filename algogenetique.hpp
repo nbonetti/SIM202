@@ -48,6 +48,10 @@ class Chemin : public Individu
 private:
     vector<double> genes;
     double poid_chemin;
+
+public:
+    void print(ostream &out) const;
+    double poids() const;
 };
 
 //=========================================================================================================================

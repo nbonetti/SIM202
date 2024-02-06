@@ -71,3 +71,23 @@ Individu *Individu ::crossover(const Individu &partner)
     }
     // creer les deux enfants
 };
+
+//=========================================================================================================================
+//                         fonctions virtuelles
+//=========================================================================================================================
+
+void Chemin ::print(ostream &out) const {
+    // fonction d'affichage à écrire
+
+};
+
+double Chemin ::poids() const
+{
+    double poids = 0;
+    int n; // nb de villes  /// on retourne au point de départ
+    for (int i = 0; i < n; i++)
+    {
+        // poids+=; CALCUL A FAIRE
+    }
+    return poids;
+};
