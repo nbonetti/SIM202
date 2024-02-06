@@ -5,7 +5,7 @@
 #include <random>
 using namespace std;
 
-// fonction qui renvoie un nombre aléatoire entre k et n de manière unifrome
+// fonction qui renvoie un nombre aléatoire entre k et n de manière uniforme
 int unif_rand(int k, int n)
 {
     std::random_device rd;
@@ -90,6 +90,10 @@ public:
         }
         // creer les deux enfants
     };
+};
+
+class Creator
+{
 };
 
 class population
