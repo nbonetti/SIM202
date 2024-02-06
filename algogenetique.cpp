@@ -71,14 +71,3 @@ Individu *Individu ::crossover(const Individu &partner)
     }
     // creer les deux enfants
 };
-}
-;
-
-class indiCreator
-{
-public:
-    individu *individuCreator()
-    {
-        return new individu;
-    };
-};

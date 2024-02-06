@@ -27,4 +27,4 @@ class Chemin : public Individu
 private:
     vector<double> genes;
     double poid_chemin;
-}
+};
