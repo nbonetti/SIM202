@@ -13,7 +13,7 @@ int unif_rand(int k, int n)
 //=========================================================================================================================
 
 // flip entre 4 gènes cf projet
-individu *flip()
+Individu *Individu ::flip()
 {
     if (n <= 1)
     {
@@ -36,7 +36,7 @@ individu *flip()
 };
 
 // mutation entre deux gènes aléatoires
-individu *mutation()
+Individu *Individu ::mutation()
 {
 
     // Choisissez un point de croisement aléatoire
@@ -55,7 +55,7 @@ individu *mutation()
 };
 
 // création de deux enfants issus de 2 parents
-individu *crossover(const individu &partner)
+Individu *Individu ::crossover(const Individu &partner)
 {
     // Vérifie que les deux parents ont la même taille
     if (n != partner.n)
@@ -81,9 +81,4 @@ public:
     {
         return new individu;
     };
-    //=========================================================================================================================
-    //                         fonctions virtuelles propres à l'application considérée
-    //=========================================================================================================================
-    // calcul du poids des gènes
-    virtual double poids() = 0;
 };

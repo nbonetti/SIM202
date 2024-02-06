@@ -10,5 +10,19 @@ int unif_rand(int k, int n);
 
 class Individu
 {
-    Public:
+private:
+    vector<double> genes;
+    double poid_chemin;
+    int n;
+
+public:
+    virtual double poids() const = 0;
+    Individu *flip();
 };
+
+class Chemin : public Individu
+{
+private:
+    vector<double> genes;
+    double poid_chemin;
+}
