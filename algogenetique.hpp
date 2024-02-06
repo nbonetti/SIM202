@@ -77,7 +77,6 @@ public:
         individu *enfant_2(n);
 
         // Choisissez un point de croisement aléatoire
-        int pt_rand = unif_rand(n);
         int pt_rand = unif_rand(0, n - 1);
         // copie des premieres valeurs de genes des enfants
         for (int i = 0; i < pt_rand; ++i)
@@ -85,8 +84,6 @@ public:
             cout << "mutation impossible car <=1";
             exit(-1);
         }
-        int l = unif_rand(n);
-        int k = unif_rand(n);
         int l = unif_rand(0, n - 1);
         int k = unif_rand(0, n - 1);
         int gene_l = genes[l];
