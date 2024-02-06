@@ -27,7 +27,7 @@ public:
     individu(const std::vector<int> &geneList) : n(geneList.size()), genes(geneList) {}
 
     // création de deux enfants avec hybridation avec deux individus
-    individu crossover(const individu &partner)
+    virtual individu *crossover(const individu &partner)
     {
         // Vérifie que les deux parents ont la même taille
         if (n != partner.n)
@@ -66,7 +66,7 @@ public:
     }
 
     // mutation inverse deux gènes aléatoirement
-    individu mutation()
+    virtual individu *mutation()
     {
         if (n <= 1)
         {
@@ -101,6 +101,8 @@ public:
         genes[k] = genes[l - 1];
         genes[l - 1] = gene_l;
     };
+
+    virtual double poids() const = 0;
 };
 
 class population
