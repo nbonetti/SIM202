@@ -23,20 +23,27 @@ private:
 public:
     // constructeur avec une taille donnée
     individu(int taille) : n(taille), genes(taille) {}
-
     // constructeur avec des valeurs données
     individu(const std::vector<int> &geneList) : n(geneList.size()), genes(geneList) {}
+
+    //=========================================================================================================================
+    //                         fonctions virtuelles propres à l'application considérée
+    //=========================================================================================================================
     // calcul du poids des gènes
     virtual double poids() = 0;
 
+    //=========================================================================================================================
+    //                         fonctions propres à l'algorithme génétique
+    //=========================================================================================================================
+
     // flip entre 4 gènes cf projet
-    virtual individu *flip() = 0;
+    individu flip(){};
 
     // mutation entre deux gènes aléatoires
-    virtual individu *mutation() = 0;
+    individu mutation(){};
 
     // création de deux enfants issus de 2 parents
-    virtual individu *crossover(const individu &ind) = 0;
+    individu crossover(const individu &ind2){};
 };
 
 class population
