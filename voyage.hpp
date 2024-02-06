@@ -9,7 +9,8 @@
 #include <string>
 using namespace std;
 
-
+//=========================================================================
+//===========================CLASS POINT===================================
 class Point 
 {
     public:
@@ -35,6 +36,12 @@ double Point :: dist (const Point&p, const Point&q)
     resultat=sqrt((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y));
     return resultat; 
 }
+ 
+
+
+
+ //==============================================================
+ //===============================CLASS VILLE====================
 
 class Ville
 {
@@ -91,6 +98,10 @@ void Ville :: calcul_distance()
     }
 }
 
+
+
+//====================================================================
+//============================== CLASS CHEMIN ========================
 class Chemin : public individu 
 {
     public:
@@ -110,8 +121,8 @@ class Chemin : public individu
     }; 
     Chemin(){}
 
-    void print(ostream&out) const; 
-    double poids() const; // calcul de la distance totale parcourue dans la tournée 
+    void print(ostream&out) const; //afficher les villes dans le chemin
+    double poids(const vector<vector<double>>& distances) const; // calcul de la distance totale parcourue dans la tournée 
     double adapter(const vector<vector<double>>& distances ) const //fonction d'adaptation: retourne la distance totale parcourue
     {
         return poids(distances); 
@@ -134,7 +145,7 @@ void Chemin :: print(ostream&out ) const
 }
 
 
-double Chemin :: poids() const 
+double Chemin :: poids(const vector<vector<double>>& distances) const 
 {
     double poid=0;
     int n=villes->nombre_villes();
@@ -146,8 +157,6 @@ double Chemin :: poids() const
     return poids; 
 }
 
-
-//fonction d'adaptation
 
 
 
