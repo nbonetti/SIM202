@@ -55,7 +55,23 @@ public:
     };
 
     // mutation entre deux gènes aléatoires
-    individu *mutation(){};
+    individu *mutation()
+    {
+
+        // Choisissez un point de croisement aléatoire
+        int pt_rand = unif_rand(0, n - 1);
+        // copie des premieres valeurs de genes des enfants
+        for (int i = 0; i < pt_rand; ++i)
+        {
+            cout << "mutation impossible car <=1";
+            exit(-1);
+        }
+        int l = unif_rand(0, n - 1);
+        int k = unif_rand(0, n - 1);
+        int gene_l = genes[l];
+        genes[l] = genes[k];
+        genes[k] = gene_l;
+    };
 
     // création de deux enfants issus de 2 parents
     individu *crossover(const individu &partner)
@@ -73,22 +89,6 @@ public:
             exit(-1);
         }
         // creer les deux enfants
-        individu *enfant_1(n);
-        individu *enfant_2(n);
-
-        // Choisissez un point de croisement aléatoire
-        int pt_rand = unif_rand(0, n - 1);
-        // copie des premieres valeurs de genes des enfants
-        for (int i = 0; i < pt_rand; ++i)
-        {
-            cout << "mutation impossible car <=1";
-            exit(-1);
-        }
-        int l = unif_rand(0, n - 1);
-        int k = unif_rand(0, n - 1);
-        int gene_l = genes[l];
-        genes[l] = genes[k];
-        genes[k] = gene_l;
     };
 };
 
