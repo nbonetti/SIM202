@@ -105,6 +105,7 @@ void Ville :: calcul_distance()
 class Chemin : public individu 
 {
     public:
+    
     vector <int> trajet; // liste de villes 
     const Ville* villes; 
     //constructeur 
