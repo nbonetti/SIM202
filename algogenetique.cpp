@@ -1,5 +1,13 @@
 #include "algogenetique.hpp"
 
+int unif_rand(int k, int n)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(k, n);
+    return dis(gen);
+};
+
 //=========================================================================================================================
 //                         fonctions propres à l'algorithme génétique
 //=========================================================================================================================
