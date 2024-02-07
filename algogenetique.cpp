@@ -53,21 +53,28 @@ Individu *Individu ::mutationAleatoire()
 };
 
 // création de deux enfants issus de 2 parents
-Individu *Individu ::hybridation(const Individu &partner)
+Individu *Individu ::hybridation(const Individu &partenaire)
 {
+    if (type != partenaire.type)
+    {
+        exit(-1);
+    }
     // Vérifie que les deux parents ont la même taille
-    if (nombreGenes != partner.nombreGenes)
+    if (nombreGenes != partenaire.nombreGenes)
     {
         cout << "Erreur : Les parents ont des tailles différentes." << std::endl;
         exit(-1);
     }
     // Vérifie que les tableaux de gènes ne sont pas vides
-    if (genes.empty() || partner.genes.empty())
+    if (genes.empty() || partenaire.genes.empty())
     {
         cout << "Erreur : Les tableaux de gènes sont vides." << std::endl;
         exit(-1);
     }
     // creer les deux enfants
+    IndividuCreator creator;
+    Individu *child1 = creator.CreateChemin();
+    Individu *child2 = creator.CreateChemin();
 };
 
 //=========================================================================================================================
@@ -87,19 +94,18 @@ Individu *IndividuCreator ::FactoryMethod()
     }
 };
 
-void IndividuCreator ::CreateIndividu(IndividuType)
-{
-    this->type = type;
-    Individu *ptr = this->FactoryMethod();
-};
-
 //=========================================================================================================================
 //                         fonctions virtuelles
 //=========================================================================================================================
 
-void Chemin ::print(ostream &out) const {
-    // fonction d'affichage à écrire
-
+void Chemin ::print(ostream &out) const
+{
+    cout << "[";
+    for (int i = 0; i < nombreGenes - 1; i++)
+    {
+        out << genes[i] << ", ";
+    }
+    out << genes[nombreGenes - 1] << "]" << endl;
 };
 
 double Chemin ::poids() const

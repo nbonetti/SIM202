@@ -36,6 +36,8 @@ public:
     Individu *mutationPermutation();
     Individu *mutationAleatoire();
     Individu *hybridation(const Individu &partenaire);
+
+    IndividuType type;
 };
 
 //=========================================================================================================================
@@ -51,7 +53,7 @@ class IndividuCreator
 {
 public:
     Individu *FactoryMethod();
-    void CreateIndividu(IndividuType type);
+    Individu *CreateChemin() { return new Chemin; };
     IndividuType type;
 };
 
@@ -65,6 +67,7 @@ class Chemin : public Individu
 public:
     void print(ostream &out) const;
     double poids() const;
+    IndividuType Chemin;
 };
 
 //=========================================================================================================================
