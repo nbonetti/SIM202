@@ -1,10 +1,11 @@
 #include "algogenetique.hpp"
+using namespace std;
 
-int unif_rand(int k, int n)
+int unif_rand(int k, int nombreGenes)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(k, n);
+    std::uniform_int_distribution<> dis(k, nombreGenes);
     return dis(gen);
 };
 
@@ -13,17 +14,17 @@ int unif_rand(int k, int n)
 //=========================================================================================================================
 
 // flip entre 4 gènes cf projet
-Individu *Individu ::flip()
+Individu *Individu ::mutationPermutation()
 {
-    if (n <= 1)
+    if (nombreGenes <= 2)
     {
-        cout << "mutation impossible car <=1";
+        cout << "mutation impossible car <=2";
         exit(-1);
     }
 
     // deux indices alétoirement
-    int l = unif_rand(1, n - 1);
-    int k = unif_rand(0, n - 2);
+    int l = unif_rand(1, nombreGenes - 1);
+    int k = unif_rand(0, nombreGenes - 2);
 
     // échange des valeurs
     int gene_k = genes[k];
@@ -31,34 +32,31 @@ Individu *Individu ::flip()
     genes[k + 1] = gene_k;
 
     int gene_l = genes[l];
-    genes[k] = genes[l - 1];
+    genes[l] = genes[l - 1];
     genes[l - 1] = gene_l;
 };
 
 // mutation entre deux gènes aléatoires
-Individu *Individu ::mutation()
+Individu *Individu ::mutationAleatoire()
 {
-
-    // Choisissez un point de croisement aléatoire
-    int pt_rand = unif_rand(0, n - 1);
-    // copie des premieres valeurs de genes des enfants
-    for (int i = 0; i < pt_rand; ++i)
+    if (nombreGenes <= 1)
     {
-        cout << "mutation impossible car <=1";
+        cout << "mutation impossible car <=2";
         exit(-1);
     }
-    int l = unif_rand(0, n - 1);
-    int k = unif_rand(0, n - 1);
+
+    int l = unif_rand(0, nombreGenes - 1);
+    int k = unif_rand(0, nombreGenes - 1);
     int gene_l = genes[l];
     genes[l] = genes[k];
     genes[k] = gene_l;
 };
 
 // création de deux enfants issus de 2 parents
-Individu *Individu ::crossover(const Individu &partner)
+Individu *Individu ::hybridation(const Individu &partner)
 {
     // Vérifie que les deux parents ont la même taille
-    if (n != partner.n)
+    if (nombreGenes != partner.nombreGenes)
     {
         cout << "Erreur : Les parents ont des tailles différentes." << std::endl;
         exit(-1);
@@ -73,6 +71,29 @@ Individu *Individu ::crossover(const Individu &partner)
 };
 
 //=========================================================================================================================
+//                                           CLASSE createur
+//=========================================================================================================================
+
+Individu *IndividuCreator ::FactoryMethod()
+{
+    if (type == IndividuType::Chemin)
+    {
+        cout << "nouveau chemin crée";
+        return new Chemin();
+    }
+    else
+    {
+        return nullptr;
+    }
+};
+
+void IndividuCreator ::CreateIndividu(IndividuType)
+{
+    this->type = type;
+    Individu *ptr = this->FactoryMethod();
+};
+
+//=========================================================================================================================
 //                         fonctions virtuelles
 //=========================================================================================================================
 
@@ -84,8 +105,8 @@ void Chemin ::print(ostream &out) const {
 double Chemin ::poids() const
 {
     double poids = 0;
-    int n; // nb de villes  /// on retourne au point de départ
-    for (int i = 0; i < n; i++)
+    int nombreGenes; // nb de villes  /// on retourne au point de départ
+    for (int i = 0; i < nombreGenes; i++)
     {
         // poids+=; CALCUL A FAIRE
     }

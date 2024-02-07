@@ -14,10 +14,9 @@ int unif_rand(int k, int n);
 
 class Individu
 {
-private:
+protected:
     vector<double> genes;
-    double poid_chemin;
-    int n;
+    int nombreGenes;
 
 public:
     //=================================================================
@@ -34,9 +33,26 @@ public:
     //         fonction propre à la classe Individu
     //=================================================================
 
-    Individu *flip();
-    Individu *mutation();
-    Individu *crossover(const Individu &partner);
+    Individu *mutationPermutation();
+    Individu *mutationAleatoire();
+    Individu *hybridation(const Individu &partenaire);
+};
+
+//=========================================================================================================================
+//                                           CLASSE CREATEUR
+//=========================================================================================================================
+
+enum class IndividuType
+{
+    Chemin
+};
+
+class IndividuCreator
+{
+public:
+    Individu *FactoryMethod();
+    void CreateIndividu(IndividuType type);
+    IndividuType type;
 };
 
 //=========================================================================================================================
@@ -45,9 +61,6 @@ public:
 
 class Chemin : public Individu
 {
-private:
-    vector<double> genes;
-    double poid_chemin;
 
 public:
     void print(ostream &out) const;
@@ -58,7 +71,7 @@ public:
 //                                                CLASSE POPULATION
 //=========================================================================================================================
 
-class population
+class Population
 {
 public:
     vector<Individu *> Individus;
