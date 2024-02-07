@@ -14,7 +14,7 @@ int unif_rand(int k, int nombreGenes)
 //=========================================================================================================================
 
 // flip entre 4 gènes cf projet
-Individu *Individu ::mutationPermutation()
+Individu *Individu::mutationPermutation()
 {
     if (nombreGenes <= 2)
     {
@@ -37,7 +37,7 @@ Individu *Individu ::mutationPermutation()
 };
 
 // mutation entre deux gènes aléatoires
-Individu *Individu ::mutationAleatoire()
+Individu *Individu::mutationAleatoire()
 {
     if (nombreGenes <= 1)
     {
@@ -53,7 +53,7 @@ Individu *Individu ::mutationAleatoire()
 };
 
 // création de deux enfants issus de 2 parents
-Individu *Individu ::hybridation(const Individu &partenaire)
+Population Individu::hybridation(const Individu &partenaire)
 {
     if (type != partenaire.type)
     {
@@ -72,33 +72,28 @@ Individu *Individu ::hybridation(const Individu &partenaire)
         exit(-1);
     }
     // creer les deux enfants
-    IndividuCreator creator;
-    Individu *child1 = creator.CreateChemin();
-    Individu *child2 = creator.CreateChemin();
+    Individu *child1 = FactoryMethod(CheminType);
+    Individu *child2 = FactoryMethod(CheminType);
+
+    vector<double> genes1, genes2;
+
+    // REMPLIT VECTORS
+
+    child1->setGenes(genes1);
+    child2->setGenes(genes2);
+
+    return Population({child1, child2});
 };
 
 //=========================================================================================================================
 //                                           CLASSE createur
 //=========================================================================================================================
 
-Individu *IndividuCreator ::FactoryMethod()
-{
-    if (type == IndividuType::Chemin)
-    {
-        cout << "nouveau chemin crée";
-        return new Chemin();
-    }
-    else
-    {
-        return nullptr;
-    }
-};
-
 //=========================================================================================================================
 //                         fonctions virtuelles
 //=========================================================================================================================
 
-void Chemin ::print(ostream &out) const
+void Chemin::print(ostream &out) const
 {
     cout << "[";
     for (int i = 0; i < nombreGenes - 1; i++)
@@ -108,7 +103,7 @@ void Chemin ::print(ostream &out) const
     out << genes[nombreGenes - 1] << "]" << endl;
 };
 
-double Chemin ::poids() const
+double Chemin::poids() const
 {
     double poids = 0;
     int nombreGenes; // nb de villes  /// on retourne au point de départ

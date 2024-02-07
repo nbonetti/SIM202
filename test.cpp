@@ -3,7 +3,8 @@ using namespace std;
 
 int main()
 {
-    IndividuCreator creator;
-    Individu *child1 = creator.CreateChemin();
+    Individu *child1 = FactoryMethod(CheminType);
     child1->print(cout);
+
+    return (0);
 }

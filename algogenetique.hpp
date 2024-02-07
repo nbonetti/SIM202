@@ -5,6 +5,12 @@
 #include <random>
 using namespace std;
 
+enum IndividuType
+{
+    NoneType,
+    CheminType
+};
+
 // fonction qui renvoie un nombre aléatoire entre k et n de manière uniforme
 int unif_rand(int k, int n);
 
@@ -22,12 +28,26 @@ public:
     //=================================================================
     //   fonctions virtuelles à définir dans la classe fille
     //=================================================================
-
+    Individu() { type = NoneType; };
+    Individu(vector<double> premiersGenes)
+    {
+        genes = premiersGenes;
+        nombreGenes = premiersGenes.size();
+        type = NoneType;
+    }
     // fonction qui affiche le chemin
     virtual void print(ostream &out) const = 0;
 
     // fonction qui calcule la distance totale du chemin
     virtual double poids() const = 0;
+
+    virtual ~Individu(){};
+
+    void setGenes(vector<double> nouveauxGenes)
+    {
+        genes = nouveauxGenes;
+        nombreGenes = nouveauxGenes.size();
+    }
 
     //=================================================================
     //         fonction propre à la classe Individu
@@ -35,25 +55,8 @@ public:
 
     Individu *mutationPermutation();
     Individu *mutationAleatoire();
-    Individu *hybridation(const Individu &partenaire);
+    Population hybridation(const Individu &partenaire);
 
-    IndividuType type;
-};
-
-//=========================================================================================================================
-//                                           CLASSE CREATEUR
-//=========================================================================================================================
-
-enum class IndividuType
-{
-    Chemin
-};
-
-class IndividuCreator
-{
-public:
-    Individu *FactoryMethod();
-    Individu *CreateChemin() { return new Chemin; };
     IndividuType type;
 };
 
@@ -65,10 +68,47 @@ class Chemin : public Individu
 {
 
 public:
-    void print(ostream &out) const;
-    double poids() const;
-    IndividuType Chemin;
+    Chemin() { type = CheminType; };
+    Chemin(vector<double> premiersGenes) : Individu(premiersGenes) { type = CheminType; };
+
+    void print(ostream &out) const
+    {
+        cout << "[";
+        for (int i = 0; i < nombreGenes - 1; i++)
+        {
+            out << genes[i] << ", ";
+        }
+        out << genes[nombreGenes - 1] << "]" << endl;
+    };
+
+    double poids() const
+    {
+        double poids = 0;
+        int nombreGenes; // nb de villes  /// on retourne au point de départ
+        for (int i = 0; i < nombreGenes; i++)
+        {
+            // poids+=; CALCUL A FAIRE
+        }
+        return poids;
+    };
+
+    ~Chemin(){};
 };
+//=========================================================================================================================
+//                                           CLASSE CREATEUR
+//=========================================================================================================================
+
+Individu *FactoryMethod(IndividuType type)
+{
+    if (type == CheminType)
+    {
+        return new Chemin();
+    }
+    else
+    {
+        return nullptr;
+    }
+}
 
 //=========================================================================================================================
 //                                                CLASSE POPULATION
@@ -77,5 +117,11 @@ public:
 class Population
 {
 public:
-    vector<Individu *> Individus;
+    Population(vector<Individu *> premiersIndividus)
+    {
+        individus = premiersIndividus;
+    }
+    vector<Individu *> individus;
+
+    // Override + for population so that it concatenates the vectors
 };
