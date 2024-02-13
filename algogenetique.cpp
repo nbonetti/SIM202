@@ -1,5 +1,6 @@
 #include "algogenetique.hpp"
 #include <iostream>
+#include "
 using namespace std;
 
 int unif_rand(int k, int nombreGenes)
@@ -54,7 +55,7 @@ Individu *Individu::mutationAleatoire()
 };
 
 // création de deux enfants issus de 2 parents
-Population hybridation(const Individu &parent_1, const Individu &parent_2)
+Population hybridation(const Individu &parent_1, const Individu &parent_2, int (*pointeur_FactoryMethod)(IndividuType type))
 
 {
     if (parent_1.type != parent_2.type)
@@ -74,8 +75,8 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2)
         exit(-1);
     }
     // creer les deux enfants
-    Individu *child1 = FactoryMethod(IndividuType::CheminType);
-    Individu *child2 = FactoryMethod(IndividuType::CheminType);
+    Individu *child1 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
+    Individu *child2 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
 
     vector<double> genes1, genes2;
 

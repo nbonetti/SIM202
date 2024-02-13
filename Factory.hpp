@@ -16,4 +16,6 @@ Individu *FactoryMethod(IndividuType type)
     }
 }
 
+Individu *(*pointeur_FactoryMethod)(IndividuType type) = FactoryMethod;
+
 #endif

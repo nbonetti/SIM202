@@ -64,8 +64,6 @@ public:
     IndividuType type;
 };
 
-Population hybridation(const Individu &parent_1, const Individu &parent_2);
-
 //=========================================================================================================================
 //                                                CLASSE POPULATION
 //=========================================================================================================================
@@ -86,5 +84,7 @@ public:
     Population operator+(const Population &Pop2);
     // virtual void print(ostream &out) = 0;
 };
+
+Population hybridation(const Individu &parent_1, const Individu &parent_2, int (*pointeur_FactoryMethod)(IndividuType type));
 
 #endif
