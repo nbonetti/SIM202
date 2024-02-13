@@ -85,6 +85,6 @@ public:
     // virtual void print(ostream &out) = 0;
 };
 
-Population hybridation(const Individu &parent_1, const Individu &parent_2, int (*pointeur_FactoryMethod)(IndividuType type));
+Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));
 
 #endif
