@@ -54,16 +54,16 @@ class Ville : public Point
     vector<vector<double>> distances; // distances villes sous forme de tableau 
     void print(ostream& out) const; 
     //constructeur
-    Ville(const vector<string> &n, const vector <Point> &p): nom(n),coord(p.size)
+    Ville(const vector<string> &n, const vector <Point> &p): nom(n),coord(p.size())
     {
-        for (int i=0, i<p.size(); ++i)
+        for (int i=0; i<p.size(); ++i)
         {
             coord[i]=p[i]; 
         }
     }
     // calcul de la distance 
     void calcul_distance();
-    int nombre_villes()
+    int nombre_villes() const 
     {
         return nom.size();
     }; 
