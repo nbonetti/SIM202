@@ -74,8 +74,8 @@ Population Individu::hybridation(const Individu &partenaire)
         exit(-1);
     }
     // creer les deux enfants
-    Individu *child1 = FactoryMethod(CheminType);
-    Individu *child2 = FactoryMethod(CheminType);
+    Individu *child1 = FactoryMethod(IndividuType::CheminType);
+    Individu *child2 = FactoryMethod(IndividuType::CheminType);
 
     vector<double> genes1, genes2;
 
