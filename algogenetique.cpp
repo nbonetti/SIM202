@@ -53,6 +53,16 @@ Individu *Individu::mutationAleatoire()
     genes[k] = gene_l;
 };
 
+//=========================================================================================================================
+//                                           CLASSE population
+//=========================================================================================================================
+
+Population Population ::operator+(const Population &Pop2)
+{
+    individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
+    taille_Population = individus.size();
+};
+
 // création de deux enfants issus de 2 parents
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type))
 
@@ -85,14 +95,4 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
     child2->setGenes(genes2);
 
     return Population({child1, child2});
-};
-
-//=========================================================================================================================
-//                                           CLASSE population
-//=========================================================================================================================
-
-Population Population ::operator+(const Population &Pop2)
-{
-    individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
-    taille_Population = individus.size();
 };

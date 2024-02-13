@@ -6,8 +6,6 @@ using namespace std;
 
 int main()
 {
-    Individu *child1 = FactoryMethod(IndividuType::CheminType);
-    child1->print(cout);
     vector<string> cityNames = {"A", "B", "C"};
     vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8)};
     Ville city(cityNames, cityCoords);
