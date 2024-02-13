@@ -12,10 +12,12 @@ int main()
     vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8)};
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
-    
+
     cout << "Distances between cities:" << endl;
-    for (const auto& row : city.distances) {
-        for (double dist : row) {
+    for (const auto &row : city.distances)
+    {
+        for (double dist : row)
+        {
             cout << dist << "\t";
         }
         cout << endl;
@@ -29,10 +31,3 @@ int main()
     cout << "Initial path weight: " << path.poids() << endl;
     return (0);
 }
-
-
-
-
-    
-
-  

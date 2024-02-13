@@ -55,20 +55,21 @@ Individu *Individu::mutationAleatoire()
 };
 
 // création de deux enfants issus de 2 parents
-Population Individu::hybridation(const Individu &partenaire)
+Population hybridation(const Individu &parent_1, const Individu &parent_2)
+
 {
-    if (type != partenaire.type)
+    if (parent_1.type != parent_2.type)
     {
         exit(-1);
     }
     // Vérifie que les deux parents ont la même taille
-    if (nombreGenes != partenaire.nombreGenes)
+    if (parent_1.nombreGenes != parent_2.nombreGenes)
     {
         cout << "Erreur : Les parents ont des tailles différentes." << std::endl;
         exit(-1);
     }
     // Vérifie que les tableaux de gènes ne sont pas vides
-    if (genes.empty() || partenaire.genes.empty())
+    if (parent_1.genes.empty() || parent_2.genes.empty())
     {
         cout << "Erreur : Les tableaux de gènes sont vides." << std::endl;
         exit(-1);

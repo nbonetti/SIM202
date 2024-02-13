@@ -24,11 +24,11 @@ int unif_rand(int k, int n);
 
 class Individu
 {
-protected:
+
+public:
     vector<double> genes;
     int nombreGenes;
 
-public:
     //=================================================================
     //   fonctions virtuelles à définir dans la classe fille
     //=================================================================
@@ -60,10 +60,11 @@ public:
 
     Individu *mutationPermutation();
     Individu *mutationAleatoire();
-    Population hybridation(const Individu &partenaire);
 
     IndividuType type;
 };
+
+Population hybridation(const Individu &parent_1, const Individu &parent_2);
 
 //=========================================================================================================================
 //                                                CLASSE POPULATION
