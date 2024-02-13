@@ -109,11 +109,11 @@ class Chemin : public Individu
     qui ici dans la classe chemin représente le nombre de villes
     et le numéro des villes présentes dans le chemin */
 public:
-    const Ville * vsp;
+    const Ville *vsp;
     Chemin()
     {
         type = IndividuType::CheminType;
-        vsp = Ville();
+        vsp = &Ville();
     };
     Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
     {
