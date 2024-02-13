@@ -70,7 +70,7 @@ Individu *FactoryMethod(IndividuType type)
 {
     if (type == CheminType)
     {
-        return new Chemin();
+        return new Chemin;
     }
     else
     {

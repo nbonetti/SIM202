@@ -113,7 +113,7 @@ public:
     Chemin()
     {
         type = IndividuType::CheminType;
-        vsp = &Ville();
+        vsp = nullptr;
     };
     Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
     {
