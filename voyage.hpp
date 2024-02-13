@@ -7,6 +7,7 @@
 #include <utility>
 #include <cmath>
 #include <string>
+#include "algogenetique.hpp"
 using namespace std;
 
 //==================================================================================================================
@@ -60,8 +61,6 @@ class Ville
     }; 
 };
 
-
-
 //définition des fonctions de villes 
 
 void Ville:: print(ostream &out ) const 
@@ -102,40 +101,42 @@ void Ville :: calcul_distance()
 
 //=========================================================================================================================
 //============================== CLASS CHEMIN =============================================================================
-class Chemin : public individu 
+
+class Chemin : public Individu
 {
-    public:
-    
-    vector <int> trajet; // liste de villes 
-    const Ville* villes; 
-    //constructeur 
-    Chemin(const vector<int> &t, const Ville &v): trajet(t), villes(v)
-    {
-        int n =trajet.size(); 
+/*on a dans protected le nombre de genes et le vecteur de genes 
+qui ici dans la classe chemin représente le nombre de villes 
+et le numéro des villes présentes dans le chemin */
+public:
+    const Ville* vsp;
+    Chemin() { type = CheminType; };
+    Chemin(vector<double> premiersGenes,const Ville &v) : Individu(premiersGenes), vsp(v) 
+    { 
+        type = CheminType; 
+        int n=nombreGenes; 
         int r=0; 
         for (int i=1; i<n;++i)
         {
-            r=r+v.distances[t[i]][t[i-1]];
+            r=r+v.distances[genes[i]][genes[i-1]];
         }
-    }; 
-    Chemin(){}
+    };
+    void print(ostream &out) const;//afficher les villes dans le chemin
+    double poids() const;// calcul de la distance totale parcourue dans la tournée (adaptation)
+    ~Chemin(){};//deconstructeur
 
-    void print(ostream&out) const; //afficher les villes dans le chemin
-    double poids() const; // calcul de la distance totale parcourue dans la tournée (adaptation)
 };
+
 
 
 //définition des fonctions de chemin 
 void Chemin :: print(ostream&out ) const 
 {
-    int n=trajet.size();
-    out << "["; 
-    for (int i=0; i<n-1; ++i)
-    {
-        out << villes->nom[trajet[i]]<<","; 
-
-    }
-    out << villes->nom[trajet[n-1]]<<"]"<<endl; 
+ cout << "[";
+        for (int i = 0; i < nombreGenes - 1; i++)
+        {
+            out << genes[i] << ", ";
+        }
+        out << genes[nombreGenes - 1] << "]" << endl;
 
 }
 
@@ -143,16 +144,19 @@ void Chemin :: print(ostream&out ) const
 double Chemin :: poids() const 
 {
     double poid=0;
-    int n=villes->nombre_villes();
+    int n=nombreGenes;
     for (int i=0;i<n;++i)
     {
-        poid+=villes->distances[trajet[i]][trajet[i-1]];
+        poid+=v->distances[genes[i]][genes[i-1]];
     }
-    poids+=distances[trajet.back()][trajet[0]];
+    poids+=distances[genes.back()][genes[0]];
     return poids; 
 }
 
 
+
+
+   
 
 
 //=========================================================================================
