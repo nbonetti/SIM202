@@ -43,6 +43,7 @@ public:
 
     virtual ~Individu(){};
 
+    // permet de remplir les gènes d'un individu donné + récup la taille du vecteur de gènes
     void setGenes(vector<double> nouveauxGenes)
     {
         genes = nouveauxGenes;
