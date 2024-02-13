@@ -1,3 +1,6 @@
+#ifndef ALGOGENETIQUE_HPP
+#define ALGOGENETIQUE_HPP
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -96,5 +99,7 @@ public:
     }
 
     Population operator+(const Population &Pop2);
-    void print(ostream &out);
+    // virtual void print(ostream &out) = 0;
 };
+
+#endif
