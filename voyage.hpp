@@ -108,7 +108,11 @@ class Chemin : public Individu
     et le numéro des villes présentes dans le chemin */
 public:
     const Ville *const vsp;
-    Chemin() { type = CheminType; };
+    Chemin()
+    {
+        type = CheminType;
+        vsp = Ville();
+    };
     Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
     {
         type = CheminType;
