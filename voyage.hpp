@@ -48,6 +48,8 @@ public:
     vector<string> nom;               // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
     void print(ostream &out) const;
+    //constructeur générique de ville 
+    Ville(){}; 
     // constructeur
     Ville(const vector<string> &n, const vector<Point> &p) : nom(n), coord(p.size())
     {
