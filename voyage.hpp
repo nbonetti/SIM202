@@ -1,7 +1,6 @@
 #ifndef VOYAGE_HPP
 #define VOYAGE_HPP
 
-
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -12,160 +11,141 @@ using namespace std;
 
 //==================================================================================================================
 //===========================CLASS POINT============================================================================
-class Point 
+class Point
 {
-    public:
-    double x,y; // se sera les coordonnées des villes
-    //constructeur par défaut
-    Point(): x(0),y(0){}
-    //constructeur 
-    Point(double a, double b): x(a),y(b){}
-    void print(ostream& out) const; // affichage 
-    //distance entre deux points 
-    double dist(const Point&p, const Point &q); 
+public:
+    double x, y; // se sera les coordonnées des villes
+    // constructeur par défaut
+    Point() : x(0), y(0) {}
+    // constructeur
+    Point(double a, double b) : x(a), y(b) {}
+    void print(ostream &out) const; // affichage
+    // distance entre deux points
+    double dist(const Point &p, const Point &q);
 };
 
+// définition des fonctions
 
-//définition des fonctions 
-
-void Point :: print(ostream& out) const 
+void Point ::print(ostream &out) const
 {
-    out << "(" << x << ","<< y <<")"; 
+    out << "(" << x << "," << y << ")";
 }
 
-double Point :: dist (const Point&p, const Point&q)
+double Point ::dist(const Point &p, const Point &q)
 {
-    double resultat; 
-    resultat=sqrt((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y));
-    return resultat; 
+    double resultat;
+    resultat = sqrt((p.x - q.x) * (p.x - q.x) + (p.y - q.y) * (p.y - q.y));
+    return resultat;
 }
- 
 
+//========================================================================================================
+//===============================CLASS VILLE==============================================================
 
-
- //========================================================================================================
- //===============================CLASS VILLE==============================================================
-
-class Ville : public Point 
+class Ville : public Point
 {
-    public: 
-    vector<Point> coord; //coordonnées des villes 
-    vector<string> nom; // nom de la ville en vecteur
-    vector<vector<double>> distances; // distances villes sous forme de tableau 
-    void print(ostream& out) const; 
-    //constructeur
-    Ville(const vector<string> &n, const vector <Point> &p): nom(n),coord(p.size())
+public:
+    vector<Point> coord;              // coordonnées des villes
+    vector<string> nom;               // nom de la ville en vecteur
+    vector<vector<double>> distances; // distances villes sous forme de tableau
+    void print(ostream &out) const;
+    // constructeur
+    Ville(const vector<string> &n, const vector<Point> &p) : nom(n), coord(p.size())
     {
-        for (int i=0; i<p.size(); ++i)
+        for (int i = 0; i < p.size(); ++i)
         {
-            coord[i]=p[i]; 
+            coord[i] = p[i];
         }
     }
-    // calcul de la distance 
+    // calcul de la distance
     void calcul_distance();
-    int nombre_villes() const 
+    int nombre_villes() const
     {
         return nom.size();
-    }; 
+    };
 };
 
-//définition des fonctions de villes 
+// définition des fonctions de villes
 
-void Ville:: print(ostream &out ) const 
+void Ville::print(ostream &out) const
 {
-    int n= nombre_villes();
-    out << "["; 
-    for (int i=0; i<n-1; ++i)
+    int n = nombre_villes();
+    out << "[";
+    for (int i = 0; i < n - 1; ++i)
     {
         out << nom[i] << ",";
     }
-    out << nom[n-1]<< "]" << endl; 
+    out << nom[n - 1] << "]" << endl;
 }
 
-
-
-void Ville :: calcul_distance()
+void Ville ::calcul_distance()
 {
-    int n= nom.size();
-    distances.resize(n,vector<double> (n)); //redimension de la matrice
-    for (int i=0; i<n;++i)//lignes
+    int n = nom.size();
+    distances.resize(n, vector<double>(n)); // redimension de la matrice
+    for (int i = 0; i < n; ++i)             // lignes
     {
-        for (int j=0; j<n;++j)//colonnes
+        for (int j = 0; j < n; ++j) // colonnes
         {
-            if (i==j)
+            if (i == j)
             {
-                distances[i][j]=0;
+                distances[i][j] = 0;
             }
             else
-            {// on applique à la ieme ligen et jieme colonne la distance entre les deux points (deux villes)
-                distances[i][j]= dist(coord[i],coord[j]);
-                distances[j][i]= dist(coord[i],coord[j]);
+            { // on applique à la ieme ligen et jieme colonne la distance entre les deux points (deux villes)
+                distances[i][j] = dist(coord[i], coord[j]);
+                distances[j][i] = dist(coord[i], coord[j]);
             }
         }
     }
 }
-
-
 
 //=========================================================================================================================
 //============================== CLASS CHEMIN =============================================================================
 
 class Chemin : public Individu
 {
-/*on a dans protected le nombre de genes et le vecteur de genes 
-qui ici dans la classe chemin représente le nombre de villes 
-et le numéro des villes présentes dans le chemin */
+    /*on a dans protected le nombre de genes et le vecteur de genes
+    qui ici dans la classe chemin représente le nombre de villes
+    et le numéro des villes présentes dans le chemin */
 public:
-    const Ville* const vsp;
+    const Ville *const vsp;
     Chemin() { type = CheminType; };
-    Chemin(vector<double> premiersGenes,const Ville &v) : Individu(premiersGenes), vsp(v) 
-    { 
-        type = CheminType; 
-        int n=nombreGenes; 
-        int r=0; 
-        for (int i=1; i<n;++i)
+    Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
+    {
+        type = CheminType;
+        int n = nombreGenes;
+        int r = 0;
+        for (int i = 1; i < n; ++i)
         {
-            r=r+v.distances[genes[i]][genes[i-1]];
+            r = r + v.distances[genes[i]][genes[i - 1]];
         }
     };
-    void print(ostream &out) const;//afficher les villes dans le chemin
-    double poids() const;// calcul de la distance totale parcourue dans la tournée (adaptation)
-    ~Chemin(){};//deconstructeur
-
+    void print(ostream &out) const; // afficher les villes dans le chemin
+    double poids() const;           // calcul de la distance totale parcourue dans la tournée (adaptation)
+    ~Chemin(){};                    // deconstructeur
 };
 
-
-
-//définition des fonctions de chemin 
-void Chemin :: print(ostream&out ) const 
+// définition des fonctions de chemin
+void Chemin ::print(ostream &out) const
 {
- cout << "[";
-        for (int i = 0; i < nombreGenes - 1; i++)
-        {
-            out << genes[i] << ", ";
-        }
-        out << genes[nombreGenes - 1] << "]" << endl;
-
-}
-
-
-double Chemin :: poids() const 
-{
-    double poid=0;
-    int n=nombreGenes;
-    for (int i=0;i<n;++i)
+    cout << "[";
+    for (int i = 0; i < nombreGenes - 1; i++)
     {
-        poid+=v->distances[genes[i]][genes[i-1]];
+        out << genes[i] << ", ";
     }
-    poids+=distances[genes.back()][genes[0]];
-    return poids; 
+    out << genes[nombreGenes - 1] << "]" << endl;
 }
 
-
-
-
-   
-
+double Chemin ::poids() const
+{
+    double poid = 0;
+    int n = nombreGenes;
+    for (int i = 0; i < n; ++i)
+    {
+        poid += vsp->distances[genes[i]][genes[i - 1]];
+    }
+    poid += vsp->distances[genes.back()][genes[0]];
+    return poid;
+}
 
 //=========================================================================================
 //=================================SELECTION===============================================
@@ -177,7 +157,7 @@ population selection_roulette(population&P,int p)
     vector<double> vdist;
     vector<double> vdist_temp;
     double s=0; //somme de toutes les fonctions d'adaptation d'une population
-    vector <int> rang ; 
+    vector <int> rang ;
 
     int n= P.individu.size();
     for (int i=0;i<n;++i)
@@ -189,16 +169,16 @@ population selection_roulette(population&P,int p)
 
      for (int j=0;j<p;j++) {
         int a=0;
-        double r=s*((double) rand() / (RAND_MAX));// génère aléatoirement suivant une loi uniforme 
+        double r=s*((double) rand() / (RAND_MAX));// génère aléatoirement suivant une loi uniforme
         double S_temp=0;
-        while (S_temp<r) { //on somme les fonctions jusqu'à atteindre la valeur r 
+        while (S_temp<r) { //on somme les fonctions jusqu'à atteindre la valeur r
             S_temp= S_temp + vdist[rang[a]];
             a=a+1;
         }
         Q.individu.push_back(P.individu[rang[a]]);
         rang.erase(rang.begin()+a);
     }
-    return Q;// dernier individu qui a contribué à cette somme 
+    return Q;// dernier individu qui a contribué à cette somme
 
 
 }
@@ -209,14 +189,5 @@ population selection_rang(const population&P, int p)
 {
 
 }*/
-
-
-
-
-
-
-
-
-
 
 #endif
