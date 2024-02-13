@@ -161,7 +161,7 @@ double Chemin :: poids() const
 
 //=========================================================================================
 //=================================SELECTION===============================================
-population selection_roulette(population&P,int p);
+/*population selection_roulette(population&P,int p);
 
 population selection_roulette(population&P,int p)
 {
@@ -200,7 +200,7 @@ population selection_rang(const population&P, int p);
 population selection_rang(const population&P, int p)
 {
 
-}
+}*/
 
 
 
