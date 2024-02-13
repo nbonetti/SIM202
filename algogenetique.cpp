@@ -1,6 +1,5 @@
 #include "algogenetique.hpp"
 #include <iostream>
-#include "
 using namespace std;
 
 int unif_rand(int k, int nombreGenes)
@@ -55,7 +54,7 @@ Individu *Individu::mutationAleatoire()
 };
 
 // création de deux enfants issus de 2 parents
-Population hybridation(const Individu &parent_1, const Individu &parent_2, int (*pointeur_FactoryMethod)(IndividuType type))
+Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type))
 
 {
     if (parent_1.type != parent_2.type)
@@ -96,29 +95,4 @@ Population Population ::operator+(const Population &Pop2)
 {
     individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
     taille_Population = individus.size();
-};
-
-//=========================================================================================================================
-//                         fonctions virtuelles
-//=========================================================================================================================
-
-void Chemin::print(ostream &out) const
-{
-    cout << "[";
-    for (int i = 0; i < nombreGenes - 1; i++)
-    {
-        out << genes[i] << ", ";
-    }
-    out << genes[nombreGenes - 1] << "]" << endl;
-};
-
-double Chemin::poids() const
-{
-    double poids = 0;
-    int nombreGenes; // nb de villes  /// on retourne au point de départ
-    for (int i = 0; i < nombreGenes; i++)
-    {
-        // poids+=; CALCUL A FAIRE
-    }
-    return poids;
 };
