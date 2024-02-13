@@ -145,7 +145,7 @@ double Chemin ::poids() const
 {
     double poid = 0;
     int n = nombreGenes;
-    for (int i = 0; i < n; ++i)
+    for (int i = 1; i < n; ++i)
     {
         poid += vsp->distances[genes[i]][genes[i - 1]];
     }
