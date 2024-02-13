@@ -1,5 +1,4 @@
 #include "algogenetique.hpp"
-#include "Factory.hpp"
 #include <iostream>
 using namespace std;
 
