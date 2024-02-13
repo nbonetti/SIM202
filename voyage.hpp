@@ -131,15 +131,20 @@ public:
 };
 
 // définition des fonctions de chemin
-void Chemin ::print(ostream &out) const
+void Chemin::print(ostream &out) const
 {
     cout << "[";
-    for (int i = 0; i < nombreGenes - 1; i++)
+    for (int i = 0; i < nombreGenes; i++) // Itérer jusqu'à nombreGenes
     {
-        out << genes[i] << ", ";
+        out << genes[i];
+        if (i < nombreGenes - 1) // Ajouter une virgule si ce n'est pas le dernier élément
+        {
+            out << ", ";
+        }
     }
-    out << genes[nombreGenes - 1] << "]" << endl;
+    out << "]" << endl;
 }
+
 
 double Chemin ::poids() const
 {
