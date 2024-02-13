@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <random>
+#include "voyage.hpp"
 using namespace std;
 
 enum IndividuType
@@ -61,40 +62,6 @@ public:
     IndividuType type;
 };
 
-//=========================================================================================================================
-//                                           CLASSE ENFANT AKA CHEMIN
-//=========================================================================================================================
-
-class Chemin : public Individu
-{
-
-public:
-    Chemin() { type = CheminType; };
-    Chemin(vector<double> premiersGenes) : Individu(premiersGenes) { type = CheminType; };
-
-    void print(ostream &out) const
-    {
-        cout << "[";
-        for (int i = 0; i < nombreGenes - 1; i++)
-        {
-            out << genes[i] << ", ";
-        }
-        out << genes[nombreGenes - 1] << "]" << endl;
-    };
-
-    double poids() const
-    {
-        double poids = 0;
-        int nombreGenes; // nb de villes  /// on retourne au point de départ
-        for (int i = 0; i < nombreGenes; i++)
-        {
-            // poids+=; CALCUL A FAIRE
-        }
-        return poids;
-    };
-
-    ~Chemin(){};
-};
 //=========================================================================================================================
 //                                           CREATEUR
 //=========================================================================================================================

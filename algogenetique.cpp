@@ -1,4 +1,5 @@
 #include "algogenetique.hpp"
+#include "voyage.hpp"
 #include <iostream>
 using namespace std;
 
