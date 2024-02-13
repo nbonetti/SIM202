@@ -16,6 +16,8 @@ class Point
 {
     public:
     double x,y; // se sera les coordonnées des villes
+    //constructeur par défaut
+    Point(): x(0),y(0){}
     //constructeur 
     Point(double a, double b): x(a),y(b){}
     void print(ostream& out) const; // affichage 
@@ -52,7 +54,13 @@ class Ville : public Point
     vector<vector<double>> distances; // distances villes sous forme de tableau 
     void print(ostream& out) const; 
     //constructeur
-    Ville(const vector<string> &n, const vector <Point> &p): nom(n),coord(p){}
+    Ville(const vector<string> &n, const vector <Point> &p): nom(n),coord(p.size)
+    {
+        for (int i=0, i<p.size(); ++i)
+        {
+            coord[i]=p[i]; 
+        }
+    }
     // calcul de la distance 
     void calcul_distance();
     int nombre_villes()
@@ -108,7 +116,7 @@ class Chemin : public Individu
 qui ici dans la classe chemin représente le nombre de villes 
 et le numéro des villes présentes dans le chemin */
 public:
-    const Ville* vsp;
+    const Ville* const vsp;
     Chemin() { type = CheminType; };
     Chemin(vector<double> premiersGenes,const Ville &v) : Individu(premiersGenes), vsp(v) 
     { 
