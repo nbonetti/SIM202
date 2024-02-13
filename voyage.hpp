@@ -118,7 +118,7 @@ public:
     Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
     {
         type = IndividuType::CheminType;
-        int n = nombreGenes;
+        int n = premiersGenes.size();
         int r = 0;
         for (int i = 1; i < n; ++i)
         {
