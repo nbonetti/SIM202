@@ -62,7 +62,7 @@ public:
     void calcul_distance();
     int nombre_villes() const
     {
-        return nom.size(); 
+        return nom.size();
     };
 };
 

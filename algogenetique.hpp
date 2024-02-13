@@ -6,7 +6,7 @@
 #include <vector>
 #include <utility>
 #include <random>
-#include "voyage.hpp"
+
 using namespace std;
 
 enum IndividuType
@@ -64,22 +64,6 @@ public:
 
     IndividuType type;
 };
-
-//=========================================================================================================================
-//                                           CREATEUR
-//=========================================================================================================================
-
-Individu *FactoryMethod(IndividuType type)
-{
-    if (type == CheminType)
-    {
-        return new Chemin;
-    }
-    else
-    {
-        return nullptr;
-    }
-}
 
 //=========================================================================================================================
 //                                                CLASSE POPULATION
