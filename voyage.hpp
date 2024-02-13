@@ -44,11 +44,11 @@ double Point :: dist (const Point&p, const Point&q)
  //========================================================================================================
  //===============================CLASS VILLE==============================================================
 
-class Ville
+class Ville : public Point 
 {
     public: 
     vector<Point> coord; //coordonnées des villes 
-    vector<string> nom; // nom de la ville 
+    vector<string> nom; // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau 
     void print(ostream& out) const; 
     //constructeur
@@ -67,11 +67,11 @@ void Ville:: print(ostream &out ) const
 {
     int n= nombre_villes();
     out << "["; 
-    for (int i=0; i<m-1; ++i)
+    for (int i=0; i<n-1; ++i)
     {
         out << nom[i] << ",";
     }
-    out << nom[m-1]<< "]" << endl; 
+    out << nom[n-1]<< "]" << endl; 
 }
 
 
