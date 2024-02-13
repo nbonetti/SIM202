@@ -48,8 +48,8 @@ public:
     vector<string> nom;               // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
     void print(ostream &out) const;
-    //constructeur générique de ville 
-    Ville(){}; 
+    // constructeur générique de ville
+    Ville(){};
     // constructeur
     Ville(const vector<string> &n, const vector<Point> &p) : nom(n), coord(p.size())
     {
@@ -112,12 +112,12 @@ public:
     const Ville *const vsp;
     Chemin()
     {
-        type = CheminType;
+        type = IndividuType::CheminType;
         vsp = Ville();
     };
     Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
     {
-        type = CheminType;
+        type = IndividuType::CheminType;
         int n = nombreGenes;
         int r = 0;
         for (int i = 1; i < n; ++i)

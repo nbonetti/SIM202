@@ -29,12 +29,12 @@ public:
     //=================================================================
     //   fonctions virtuelles à définir dans la classe fille
     //=================================================================
-    Individu() { type = NoneType; };
+    Individu() : type(IndividuType::NoneType){};
     Individu(vector<double> premiersGenes)
     {
         genes = premiersGenes;
         nombreGenes = premiersGenes.size();
-        type = NoneType;
+        type = IndividuType::NoneType;
     }
     // fonction qui affiche le chemin//les gènes
     virtual void print(ostream &out) const = 0;
