@@ -35,7 +35,7 @@ public:
         nombreGenes = premiersGenes.size();
         type = NoneType;
     }
-    // fonction qui affiche le chemin
+    // fonction qui affiche le chemin//les gènes
     virtual void print(ostream &out) const = 0;
 
     // fonction qui calcule la distance totale du chemin
@@ -117,12 +117,17 @@ Individu *FactoryMethod(IndividuType type)
 
 class Population
 {
+protected:
+    vector<Individu *> individus;
+    int taille_Population;
+
 public:
     Population(vector<Individu *> premiersIndividus)
     {
         individus = premiersIndividus;
+        taille_Population = individus.size();
     }
-    vector<Individu *> individus;
 
-    // Override + for population so that it concatenates the vectors
+    Population operator+(const Population &Pop2);
+    void print(ostream &out);
 };

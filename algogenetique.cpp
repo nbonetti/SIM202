@@ -1,4 +1,5 @@
 #include "algogenetique.hpp"
+#include <iostream>
 using namespace std;
 
 int unif_rand(int k, int nombreGenes)
@@ -86,8 +87,14 @@ Population Individu::hybridation(const Individu &partenaire)
 };
 
 //=========================================================================================================================
-//                                           CLASSE createur
+//                                           CLASSE population
 //=========================================================================================================================
+
+Population Population ::operator+(const Population &Pop2)
+{
+    individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
+    taille_Population = individus.size();
+};
 
 //=========================================================================================================================
 //                         fonctions virtuelles
