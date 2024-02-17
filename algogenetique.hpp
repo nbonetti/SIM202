@@ -76,6 +76,9 @@ protected:
     int taille_Population;
 
 public:
+    // Constructeur par défaut
+    Population() : taille_Population(0) {}
+
     // constructeur de population d'individu*
     Population(vector<Individu *> premiersIndividus)
     {
@@ -85,10 +88,33 @@ public:
 
     // surcharge d'opérateur qui permet de concatener deux populations
     Population operator+(const Population &Pop2);
-    // virtual void print(ostream &out) = 0;
+
+    // Accesseur pour obtenir un individu à un indice donné
+    Individu *getIndividu(int index) const
+    {
+        if (index >= 0 && index < taille_Population)
+        {
+            return individus[index];
+        }
+        else
+        {
+            return nullptr; // Indice invalide
+        }
+    }
+
+    // Accesseur pour obtenir le nombre d'individus dans la population
+    int getTaillePopulation() const
+    {
+        return taille_Population;
+    }
 };
+;
 
 // permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));
+
+// prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
+
+Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type));
 
 #endif

@@ -1,5 +1,7 @@
 #include "algogenetique.hpp"
 #include <iostream>
+#include <algorithm> // Pour la fonction std::shuffle
+#include <random>    // Pour les générateurs de nombres aléatoire
 using namespace std;
 
 // permet de tirer un nombre aléatoire entre k et n suivant une loi uniforme
@@ -99,4 +101,43 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
     child2->setGenes(genes2);
 
     return Population({child1, child2});
+};
+
+// prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
+
+Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type))
+{
+    // Crée une copie de la population parentale pour ne pas la modifier
+    Population parentsMelanges = parents;
+
+    // Mélange l'ordre des individus dans la population parentale
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(parentsMelanges.getIndividu(0), parentsMelanges.getIndividu(parents.getTaillePopulation()), g);
+
+    Population enfants; // La population des descendants
+
+    // Parcourt les paires de parents mélangés
+    for (size_t i = 0; i < parentsMelanges.getTaillePopulation(); i += 2)
+    {
+        // Assure qu'il reste un parent
+        if (i + 1 < parentsMelanges.getTaillePopulation())
+        {
+            // Obtient les deux parents de manière aléatoire
+            const Individu &parent1 = *(parentsMelanges.getIndividu(i));
+            const Individu &parent2 = *(parentsMelanges.getIndividu(i));
+
+            // Effectue l'hybridation pour obtenir les enfants
+            Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod);
+
+            // Ajoute les enfants à la population des descendants
+            enfants = enfants + enfants_crees;
+        }
+        else // Si le nombre de parents est impair, ajoute simplement le dernier parent à la population des descendants
+        {
+            enfants = enfants + Population({parentsMelanges.getIndividu(i)});
+        }
+    }
+
+    return enfants;
 };
