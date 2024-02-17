@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// permet de faire la liste de toutes les classes d'individu possibles
 enum IndividuType
 {
     NoneType,
@@ -75,16 +76,19 @@ protected:
     int taille_Population;
 
 public:
+    // constructeur de population d'individu*
     Population(vector<Individu *> premiersIndividus)
     {
         individus = premiersIndividus;
         taille_Population = individus.size();
     }
 
+    // surcharge d'opérateur qui permet de concatener deux populations
     Population operator+(const Population &Pop2);
     // virtual void print(ostream &out) = 0;
 };
 
+// permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));
 
 #endif

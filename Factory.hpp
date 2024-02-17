@@ -4,6 +4,8 @@
 #include "voyage.hpp"
 #include "algogenetique.hpp"
 
+// fonction de factory renvoie un pointeur d'individu en fonction du type mis en argument
+
 Individu *FactoryMethod(IndividuType type)
 {
     if (type == CheminType)
@@ -16,6 +18,7 @@ Individu *FactoryMethod(IndividuType type)
     }
 }
 
+// création du pointeur de la fonction de factory methode (necessaire pour l'hybridation)
 Individu *(*pointeur_FactoryMethod)(IndividuType type) = FactoryMethod;
 
 #endif

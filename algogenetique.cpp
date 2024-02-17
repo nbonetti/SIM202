@@ -2,11 +2,12 @@
 #include <iostream>
 using namespace std;
 
-int unif_rand(int k, int nombreGenes)
+// permet de tirer un nombre aléatoire entre k et n suivant une loi uniforme
+int unif_rand(int k, int n)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(k, nombreGenes);
+    std::uniform_int_distribution<> dis(k, n);
     return dis(gen);
 };
 
@@ -57,6 +58,8 @@ Individu *Individu::mutationAleatoire()
 //                                           CLASSE population
 //=========================================================================================================================
 
+// surcharge d'opérateur qui permet de concaténer deux populations
+
 Population Population ::operator+(const Population &Pop2)
 {
     individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
@@ -64,6 +67,7 @@ Population Population ::operator+(const Population &Pop2)
 };
 
 // création de deux enfants issus de 2 parents
+// prend en argument les 2 parents, + un pointeur vers la fonction de factory méthode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type))
 
 {
