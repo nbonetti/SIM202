@@ -40,7 +40,7 @@ Individu *Individu::mutationPermutation()
     genes[l - 1] = gene_l;
     return this;
 
-};
+}
 
 // mutation entre deux gènes aléatoires
 Individu *Individu::mutationAleatoire()
@@ -57,7 +57,7 @@ Individu *Individu::mutationAleatoire()
     genes[l] = genes[k];
     genes[k] = gene_l;
     return this; 
-};
+}
 
 //=========================================================================================================================
 //                                           CLASSE population
