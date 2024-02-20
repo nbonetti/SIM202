@@ -128,6 +128,11 @@ public:
     void print(ostream &out) const; // afficher les villes dans le chemin
     double poids() const;           // calcul de la distance totale parcourue dans la tournée (adaptation)
     ~Chemin(){};                    // deconstructeur
+
+    Individu* mutationPermutation() 
+    {
+        return Individu::mutationPermutation(); 
+    }
 };
 
 // définition des fonctions de chemin
