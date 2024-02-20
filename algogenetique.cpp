@@ -38,7 +38,9 @@ Individu *Individu::mutationPermutation()
     int gene_l = genes[l];
     genes[l] = genes[l - 1];
     genes[l - 1] = gene_l;
-}
+    return this;
+
+};
 
 // mutation entre deux gènes aléatoires
 Individu *Individu::mutationAleatoire()
@@ -54,7 +56,8 @@ Individu *Individu::mutationAleatoire()
     int gene_l = genes[l];
     genes[l] = genes[k];
     genes[k] = gene_l;
-}
+    return this; 
+};
 
 //=========================================================================================================================
 //                                           CLASSE population
@@ -66,7 +69,7 @@ Population Population ::operator+(const Population &Pop2)
 {
     individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
     taille_Population = individus.size();
-}
+};
 
 // création de deux enfants issus de 2 parents
 // prend en argument les 2 parents, + un pointeur vers la fonction de factory méthode cf Factory.hpp
@@ -101,7 +104,7 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
     child2->setGenes(genes2);
 
     return Population({child1, child2});
-}
+};
 
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
@@ -140,4 +143,4 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
     }
 
     return enfants;
-}
+};
