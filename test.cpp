@@ -6,8 +6,9 @@ using namespace std;
 
 int main()
 {
-    vector<string> cityNames = {"A", "B", "C"};
-    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8)};
+    vector<string> cityNames = {"A", "B", "C", "D", "E"};
+    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)};
+    
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
 
@@ -20,7 +21,7 @@ int main()
         }
         cout << endl;
     }
-    vector<double> initialGenes = {0, 1, 2}; // Initial path: A -> B -> C
+    vector<double> initialGenes = {0, 1, 2,3,4}; // Initial path: A -> B -> C
     Chemin path(initialGenes, city);
 
     cout << "Initial path: ";
