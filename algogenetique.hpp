@@ -59,7 +59,28 @@ public:
     //         fonction propre à la classe Individu
     //=================================================================
 
-    Individu *mutationPermutation();
+    Individu *mutationPermutation()
+    {
+            if (nombreGenes <= 2)
+    {
+        cout << "mutation impossible car <=2";
+        exit(-1);
+    }
+
+    // deux indices alétoirement
+    int l = unif_rand(1, nombreGenes - 1);
+    int k = unif_rand(0, nombreGenes - 2);
+
+    // échange des valeurs
+    int gene_k = genes[k];
+    genes[k] = genes[k + 1];
+    genes[k + 1] = gene_k;
+
+    int gene_l = genes[l];
+    genes[l] = genes[l - 1];
+    genes[l - 1] = gene_l;
+    return this;
+    };
     Individu *mutationAleatoire();
 
     IndividuType type;
