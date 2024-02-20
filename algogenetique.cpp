@@ -69,6 +69,7 @@ Population Population ::operator+(const Population &Pop2)
 {
     individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
     taille_Population = individus.size();
+    return *this ; 
 };
 
 // création de deux enfants issus de 2 parents
