@@ -6,6 +6,16 @@
 #include <vector>
 #include <utility>
 #include <random>
+#include <random>
+
+// Fonction pour générer un nombre aléatoire entre k et n de manière uniforme
+int unif_rand(int k, int n)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(k, n);
+    return dis(gen);
+}
 
 using namespace std;
 
