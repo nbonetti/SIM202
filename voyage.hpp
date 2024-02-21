@@ -43,7 +43,7 @@ double Point ::dist(const Point &p, const Point &q)
 
 class Ville : public Point
 {
-public:
+    public:
     vector<Point> coord;              // coordonnées des villes
     vector<string> nom;               // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
@@ -163,47 +163,5 @@ double Chemin ::poids() const
     return poid;
 }
 
-//=========================================================================================
-//=================================SELECTION===============================================
-/*population selection_roulette(population&P,int p);
-
-population selection_roulette(population&P,int p)
-{
-    population Q(p);//population à retourner
-    vector<double> vdist;
-    vector<double> vdist_temp;
-    double s=0; //somme de toutes les fonctions d'adaptation d'une population
-    vector <int> rang ;
-
-    int n= P.individu.size();
-    for (int i=0;i<n;++i)
-    {
-        vdist.push_back(P.individu[i]->poids());
-        s=s+P.individu[i]->poids();
-        rang.push_back(i);
-    }
-
-     for (int j=0;j<p;j++) {
-        int a=0;
-        double r=s*((double) rand() / (RAND_MAX));// génère aléatoirement suivant une loi uniforme
-        double S_temp=0;
-        while (S_temp<r) { //on somme les fonctions jusqu'à atteindre la valeur r
-            S_temp= S_temp + vdist[rang[a]];
-            a=a+1;
-        }
-        Q.individu.push_back(P.individu[rang[a]]);
-        rang.erase(rang.begin()+a);
-    }
-    return Q;// dernier individu qui a contribué à cette somme
-
-
-}
-
-
-population selection_rang(const population&P, int p);
-population selection_rang(const population&P, int p)
-{
-
-}*/
 
 #endif

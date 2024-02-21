@@ -144,5 +144,6 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
 Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type));
-
+//sélection méthodes
+Population selection_roulette(Population&P,int p);
 #endif
