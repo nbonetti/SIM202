@@ -149,7 +149,7 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
 //=========================================================================================
 //=================================SELECTION===============================================
 
-
+/*
 Population selection_roulette(Population &P, int p)
 {
     Population Q; // population à retourner
@@ -182,4 +182,4 @@ Population selection_roulette(Population &P, int p)
     }
 
     return Q;
-}
+}*/
