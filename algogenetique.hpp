@@ -139,7 +139,7 @@ public:
         return taille_Population;
     }
 
-    void trierPopulation(double (Individu::*pointeur_fct_poids)() const)
+    void trierPopulation(double (Individu::*pointeur_fct_poids)() const);
 };
 ;
 

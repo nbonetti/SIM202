@@ -62,18 +62,11 @@ Population selection_roulette(int n, Population &Pop_initiale, double (Individu:
     return (P_finale);
 };
 
-void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
-{
-    // Utilisez std::sort pour trier la population en fonction de la fonction de poids
-    sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
-         { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
-}
-
 // selection par rang
 Population selection_rang(Population &Pop_initiale)
 {
     // Triez la population en fonction de la fonction d'adaptation
-    Pop_initiale.trierPopulation(&Population::poids);
+    Pop_initiale.trierPopulation(&Individu::poids);
 
     int p = Pop_initiale.getTaillePopulation();
     std::vector<double> probSelection(p);
