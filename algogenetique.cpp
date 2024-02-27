@@ -124,9 +124,10 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
     Population parentsMelanges = parents;
 
     // Mélange l'ordre des individus dans la population parentale
-    // std::random_device rd;
-    // std::mt19937 g(rd());
-    // std::shuffle(parentsMelanges.getIndividu(0), parentsMelanges.getIndividu(parents.getTaillePopulation()), g);
+    std::random_device rd;
+    std::mt19937 g(rd());
+    vector<Individu *> individus = parentsMelanges.getIndividus();
+    std::shuffle(individus.begin(), individus.end(), g);
 
     Population enfants; // La population des descendants
 
