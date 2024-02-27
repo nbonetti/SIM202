@@ -68,25 +68,25 @@ public:
 
     Individu *mutationPermutation()
     {
-            if (nombreGenes <= 2)
-    {
-        cout << "mutation impossible car <=2";
-        exit(-1);
-    }
+        if (nombreGenes <= 2)
+        {
+            cout << "mutation impossible car <=2";
+            exit(-1);
+        }
 
-    // deux indices alétoirement
-    int l = unif_rand(1, nombreGenes - 1);
-    int k = unif_rand(0, nombreGenes - 2);
+        // deux indices alétoirement
+        int l = unif_rand(1, nombreGenes - 1);
+        int k = unif_rand(0, nombreGenes - 2);
 
-    // échange des valeurs
-    int gene_k = genes[k];
-    genes[k] = genes[k + 1];
-    genes[k + 1] = gene_k;
+        // échange des valeurs
+        int gene_k = genes[k];
+        genes[k] = genes[k + 1];
+        genes[k + 1] = gene_k;
 
-    int gene_l = genes[l];
-    genes[l] = genes[l - 1];
-    genes[l - 1] = gene_l;
-    return this;
+        int gene_l = genes[l];
+        genes[l] = genes[l - 1];
+        genes[l - 1] = gene_l;
+        return this;
     };
     Individu *mutationAleatoire();
 
@@ -144,6 +144,7 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
 Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type));
-//sélection méthodes
-Population selection_roulette(Population&P,int p);
+
+// sélection méthodes
+Population selection_roulette(Population &P);
 #endif
