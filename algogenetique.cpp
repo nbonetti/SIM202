@@ -80,7 +80,10 @@ void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
     sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
          { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
 }
-
+void Population :: print(ostream &out) const
+{
+   
+}
 // création de deux enfants issus de 2 parents
 // prend en argument les 2 parents, + un pointeur vers la fonction de factory méthode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type))
