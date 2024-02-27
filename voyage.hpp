@@ -43,7 +43,7 @@ double Point ::dist(const Point &p, const Point &q)
 
 class Ville : public Point
 {
-    public:
+public:
     vector<Point> coord;              // coordonnées des villes
     vector<string> nom;               // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
@@ -129,9 +129,9 @@ public:
     double poids() const;           // calcul de la distance totale parcourue dans la tournée (adaptation)
     ~Chemin(){};                    // deconstructeur
 
-    Individu* mutationPermutation() 
+    Individu *mutationPermutation()
     {
-        return Individu::mutationPermutation(); 
+        return Individu::mutationPermutation();
     }
 };
 
@@ -150,7 +150,6 @@ void Chemin::print(ostream &out) const
     out << "]" << endl;
 }
 
-
 double Chemin ::poids() const
 {
     double poid = 0;
@@ -162,54 +161,5 @@ double Chemin ::poids() const
     poid += vsp->distances[genes.back()][genes[0]];
     return poid;
 }
-//=========================================================================================
-//=================================SELECTION===============================================
-
-
-Individu selection_roulette(Population &P, int p)
-{
-    Population Q; // population à retourner (le dernier individu qui a contribué à la somme)
-    Individu *indiv=Q.getIndividu(0);
-    vector<double> vdist;
-    double s = 0.0; // somme de toutes les fonctions d'adaptation d'une population
-
-    
-    // Calcul de la somme des fonctions d'adaptation et initialisation des vecteurs
-    for (int i=0;i<P.getTaillePopulation();++i)
-    {
-        Individu *individu=P.getIndividu(i);
-        if (individu)
-        {
-            vdist.push_back(individu->poids());
-            s += individu->poids();
-        }
-        
-    }
-
-    // Sélection des individus par roulette
-    for (int j = 0; j < p; ++j)
-    {
-        int a = 0;
-        double r = s * ((double)rand() / RAND_MAX); // génère aléatoirement suivant une loi uniforme
-        double S_temp = 0.0;
-
-        // Recherche de l'individu sélectionné
-        while (S_temp < r && a < P.getTaillePopulation())
-        {
-            S_temp += vdist[a];
-            ++a;
-        }
-
-        // Ajout de l'individu sélectionné à la population Q
-        if (a>0 && a<=P.getTaillePopulation())
-        {
-            Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
-        }
-    }
-        
-
-    return Q.getIndividu(p);
-}
-
 
 #endif
