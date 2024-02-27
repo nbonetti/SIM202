@@ -1,7 +1,7 @@
 #include "algogenetique.hpp"
 #include "voyage.hpp"
 #include "Factory.hpp"
-// #include "selection.hpp"
+#include "selection.hpp"
 
 using namespace std;
 
@@ -33,13 +33,13 @@ int main()
     // on a un chemin et on a calculé la distance de parcours
     // maintenant on va essayer d'appliquer mutation à l'indivu soit au chemin formé
     //  Mutation du chemin
-    // path.mutationPermutation(); // Vous pouvez choisir entre mutationPermutation() et mutationAleatoire() selon votre besoin
+    path.mutationPermutation(); // Vous pouvez choisir entre mutationPermutation() et mutationAleatoire() selon votre besoin
     //  Affichage du chemin après mutation et recalcul de la distance parcourue
-    /*cout << "Path after mutation: ";
+    cout << "Path after mutation: ";
     path.print(cout);
-    cout << "Path weight after mutation: " << path.poids() << endl;*/
+    cout << "Path weight after mutation: " << path.poids() << endl;
 
-    //-------------------------test de reproduction---------------------------------------//
+    //-------------------------test de sélection ---------------------------------------//
 
     // Création d'une population de chemins
     vector<Individu *> populationInitiale;
@@ -47,8 +47,26 @@ int main()
 
     Population population(populationInitiale);
 
+    // Test de la fonction de sélection
+    Population selection = selection_roulette(5, population, &Individu::poids);
+
+    // Affichage des individus sélectionnés
+    cout << "Individus sélectionnés: " << endl;
+    for (int i = 0; i < selection.getTaillePopulation(); ++i)
+    {
+        Chemin *individu = dynamic_cast<Chemin *>(selection.getIndividu(i));
+        if (individu)
+        {
+            cout << "Individu " << i + 1 << ": ";
+            individu->print(cout);
+            cout << "Poids de l'individu " << i + 1 << ": " << individu->poids() << endl;
+        }
+    }
+
+    //-------------------------test de reproduction---------------------------------------//
+
     // Test de la fonction de reproduction
-    Population enfants = reproduction(population, FactoryMethod);
+    Population enfants = reproduction(selection, FactoryMethod);
 
     // Affichage des enfants générés
     cout << "Enfants générés: " << endl;
