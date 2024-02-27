@@ -165,7 +165,7 @@ double Chemin ::poids() const
 //=========================================================================================
 //=================================SELECTION===============================================
 
-/*
+
 Population selection_roulette(Population &P, int p)
 {
     Population Q; // population à retourner
@@ -173,10 +173,15 @@ Population selection_roulette(Population &P, int p)
     double s = 0.0; // somme de toutes les fonctions d'adaptation d'une population
 
     // Calcul de la somme des fonctions d'adaptation et initialisation des vecteurs
-    for (Individu *individu : P.individus)
+    for (int i=0;i<P.getTaillePopulation();++i)
     {
-        vdist.push_back(individu->poids());
-        s += individu->poids();
+        Individu *individu=P.getIndividu(i);
+        if (individu)
+        {
+            vdist.push_back(individu->poids());
+            s += individu->poids();
+        }
+        
     }
 
     // Sélection des individus par roulette
@@ -194,11 +199,15 @@ Population selection_roulette(Population &P, int p)
         }
 
         // Ajout de l'individu sélectionné à la population Q
-        Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
+        if (a>0 && a<=P.getTaillePopulation())
+        {
+            Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
+        }
     }
+        
 
     return Q;
-}*/
+}
 
 
 #endif
