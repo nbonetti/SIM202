@@ -62,4 +62,50 @@ Population selection_roulette(int n, Population &Pop_initiale, double (Individu:
     return (P_finale);
 };
 
+void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
+{
+    // Utilisez std::sort pour trier la population en fonction de la fonction de poids
+    sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
+         { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
+}
+
+// selection par rang
+Population selection_rang(Population &Pop_initiale)
+{
+    // Triez la population en fonction de la fonction d'adaptation
+    Pop_initiale.trierPopulation(&Population::poids);
+
+    int p = Pop_initiale.getTaillePopulation();
+    std::vector<double> probSelection(p);
+    double sommeProb = 0.0;
+
+    // Attribuer un rang à chaque individu (1 pour le plus mauvais)
+    for (int i = 0; i < p; ++i)
+    {
+        probSelection[i] = static_cast<double>(p - i) / (p * (p + 1) / 2);
+        sommeProb += probSelection[i];
+    }
+
+    // Sélection d'individus par rang
+    Population P_finale;
+
+    for (int i = 0; i < p; ++i)
+    {
+        double r = sommeProb * ((double)rand() / RAND_MAX);
+        double S_temp = 0.0;
+        int a = 0;
+
+        while (S_temp < r && a < p)
+        {
+            S_temp += probSelection[a];
+            ++a;
+        }
+
+        Individu *individu_selectionne = Pop_initiale.getIndividu(a - 1); // a - 1 car les indices commencent à 0
+        P_finale = P_finale + Population({individu_selectionne});
+    }
+
+    return P_finale;
+}
+
 #endif

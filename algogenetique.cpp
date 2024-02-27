@@ -39,7 +39,6 @@ Individu *Individu::mutationPermutation()
     genes[l] = genes[l - 1];
     genes[l - 1] = gene_l;
     return this;
-
 }
 
 // mutation entre deux gènes aléatoires
@@ -56,7 +55,7 @@ Individu *Individu::mutationAleatoire()
     int gene_l = genes[l];
     genes[l] = genes[k];
     genes[k] = gene_l;
-    return this; 
+    return this;
 }
 
 //=========================================================================================================================
@@ -69,8 +68,16 @@ Population Population ::operator+(const Population &Pop2)
 {
     individus.insert(individus.end(), Pop2.individus.begin(), Pop2.individus.end());
     taille_Population = individus.size();
-    return *this ; 
+    return *this;
 };
+
+// fonction qui trie la population selon la fonction d'adaptation
+void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
+{
+    // Utilisez std::sort pour trier la population en fonction de la fonction de poids
+    sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
+         { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
+}
 
 // création de deux enfants issus de 2 parents
 // prend en argument les 2 parents, + un pointeur vers la fonction de factory méthode cf Factory.hpp
@@ -145,4 +152,3 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
 
     return enfants;
 };
-
