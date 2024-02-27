@@ -1,6 +1,7 @@
 #include "algogenetique.hpp"
 #include "voyage.hpp"
 #include "Factory.hpp"
+#include "selection.hpp"
 
 using namespace std;
 
