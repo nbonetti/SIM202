@@ -1,7 +1,7 @@
 #include "algogenetique.hpp"
 #include "voyage.hpp"
 #include "Factory.hpp"
-#include "selection.hpp"
+// #include "selection.hpp"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ int main()
 {
     vector<string> cityNames = {"A", "B", "C", "D", "E"};
     vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)};
-    
+
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
 
@@ -22,7 +22,7 @@ int main()
         }
         cout << endl;
     }
-    vector<double> initialGenes = {0, 1, 2,3,4}; // Initial path: A -> B -> C->D->E
+    vector<double> initialGenes = {0, 1, 2, 3, 4}; // Initial path: A -> B -> C->D->E
     Chemin path(initialGenes, city);
 
     cout << "Initial path: ";
@@ -30,20 +30,16 @@ int main()
 
     cout << "Initial path weight: " << path.poids() << endl;
 
-
-    //on a un chemin et on a calculé la distance de parcours 
-    //maintenant on va essayer d'appliquer mutation à l'indivu soit au chemin formé 
-    // Mutation du chemin
-    //path.mutationPermutation(); // Vous pouvez choisir entre mutationPermutation() et mutationAleatoire() selon votre besoin
-    // Affichage du chemin après mutation et recalcul de la distance parcourue
+    // on a un chemin et on a calculé la distance de parcours
+    // maintenant on va essayer d'appliquer mutation à l'indivu soit au chemin formé
+    //  Mutation du chemin
+    // path.mutationPermutation(); // Vous pouvez choisir entre mutationPermutation() et mutationAleatoire() selon votre besoin
+    //  Affichage du chemin après mutation et recalcul de la distance parcourue
     /*cout << "Path after mutation: ";
     path.print(cout);
     cout << "Path weight after mutation: " << path.poids() << endl;*/
 
-
-
     //-------------------------test de reproduction---------------------------------------//
-
 
     // Création d'une population de chemins
     vector<Individu *> populationInitiale;
@@ -67,8 +63,5 @@ int main()
         }
     }
 
-    
-
     return (0);
 }
-

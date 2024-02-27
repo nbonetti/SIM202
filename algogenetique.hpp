@@ -8,16 +8,10 @@
 #include <random>
 #include <random>
 
-// Fonction pour générer un nombre aléatoire entre k et n de manière uniforme
-int unif_rand(int k, int n)
-{
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(k, n);
-    return dis(gen);
-}
-
 using namespace std;
+
+// Fonction pour générer un nombre aléatoire entre k et n de manière uniforme
+int unif_rand(int k, int n);
 
 // permet de faire la liste de toutes les classes d'individu possibles
 enum IndividuType
@@ -66,28 +60,7 @@ public:
     //         fonction propre à la classe Individu
     //=================================================================
 
-    Individu *mutationPermutation()
-    {
-        if (nombreGenes <= 2)
-        {
-            cout << "mutation impossible car <=2";
-            exit(-1);
-        }
-
-        // deux indices alétoirement
-        int l = unif_rand(1, nombreGenes - 1);
-        int k = unif_rand(0, nombreGenes - 2);
-
-        // échange des valeurs
-        int gene_k = genes[k];
-        genes[k] = genes[k + 1];
-        genes[k + 1] = gene_k;
-
-        int gene_l = genes[l];
-        genes[l] = genes[l - 1];
-        genes[l - 1] = gene_l;
-        return this;
-    };
+    Individu *mutationPermutation();
     Individu *mutationAleatoire();
 
     IndividuType type;
