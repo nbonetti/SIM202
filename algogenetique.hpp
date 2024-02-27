@@ -90,6 +90,11 @@ public:
         taille_Population = individus.size();
     }
 
+    // getter de tous les individus
+    const vector<Individu *> &getIndividus() const
+    {
+        return individus;
+    }
     // surcharge d'opérateur qui permet de concatener deux populations
     Population operator+(const Population &Pop2);
 
