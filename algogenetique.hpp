@@ -145,6 +145,4 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
 
 Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type));
 
-// sélection méthodes
-Population selection_roulette(Population &P, double);
 #endif
