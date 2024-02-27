@@ -172,6 +172,7 @@ Population selection_roulette(Population &P, int p)
     vector<double> vdist;
     double s = 0.0; // somme de toutes les fonctions d'adaptation d'une population
 
+    
     // Calcul de la somme des fonctions d'adaptation et initialisation des vecteurs
     for (int i=0;i<P.getTaillePopulation();++i)
     {
@@ -201,7 +202,7 @@ Population selection_roulette(Population &P, int p)
         // Ajout de l'individu sélectionné à la population Q
         if (a>0 && a<=P.getTaillePopulation())
         {
-            Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
+            Q.individu.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
         }
     }
         
