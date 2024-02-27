@@ -12,6 +12,7 @@
 #include "voyage.hpp"
 #include "Factory.hpp"
 
+// prend en argument une population P et une fonction d'adaptationn et retourne 1 seul individu sélectionné de cette population
 Individu *selection_roulette_unique(Population &P, double (Individu::*pointeur_fct_poids)() const)
 {
     int p = P.getTaillePopulation();
@@ -49,6 +50,16 @@ Individu *selection_roulette_unique(Population &P, double (Individu::*pointeur_f
     return (P.getIndividu(a));
 }
 
-Population selection_roulette();
+Population selection_roulette(int n, Population &Pop_initiale, double (Individu::*pointeur_fct_poids)() const)
+{
+    Population P_finale;
+    while (P_finale.getTaillePopulation() < n)
+    {
+        Individu *individu_selectionne = selection_roulette_unique(Pop_initiale, pointeur_fct_poids);
+        P_finale = P_finale + Population({individu_selectionne});
+    }
+
+    return (P_finale);
+};
 
 #endif
