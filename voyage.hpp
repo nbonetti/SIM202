@@ -202,7 +202,7 @@ Population selection_roulette(Population &P, int p)
         // Ajout de l'individu sélectionné à la population Q
         if (a>0 && a<=P.getTaillePopulation())
         {
-            Q.individu.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
+            Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
         }
     }
         
