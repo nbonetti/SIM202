@@ -166,7 +166,7 @@ double Chemin ::poids() const
 //=================================SELECTION===============================================
 
 
-Population selection_roulette(Population &P, int p)
+Individu selection_roulette(Population &P, int p)
 {
     Population Q; // population à retourner
     vector<double> vdist;
@@ -200,14 +200,14 @@ Population selection_roulette(Population &P, int p)
         }
 
         // Ajout de l'individu sélectionné à la population Q
-        if (a>0 && a<=P.getTaillePopulation())
+        /*if (a>0 && a<=P.getTaillePopulation())
         {
-            Q.individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
-        }
+            vector<Individu *> Q::individus.push_back(P.getIndividu(a - 1)); // On décrémente a car il a été incrémenté une fois de trop
+        }*/
     }
         
 
-    return Q;
+    return Q.getIndividu(p);
 }
 
 
