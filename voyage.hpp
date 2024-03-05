@@ -133,6 +133,7 @@ public:
     {
         return Individu::mutationPermutation();
     }
+    Chemin* clone();
 };
 
 // définition des fonctions de chemin
@@ -160,6 +161,11 @@ double Chemin ::poids() const
     }
     poid += vsp->distances[genes.back()][genes[0]];
     return poid;
+}
+
+Chemin* Chemin::clone()
+{
+    return new Chemin(*this);
 }
 
 #endif
