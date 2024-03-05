@@ -7,11 +7,12 @@
 using namespace std;          //allow to use cin/cout instead of std::cin
 
 
-void csv_reader(string fname){
+vector<vector<double>> csv_reader(string fname){
     
-    vector<vector<string>> content;
-    vector<string> row;
+    vector<vector<double>> content;
+    vector<double> row;
     string line, word;         //store the line and then the word in the line
+    double num;
  
     fstream file (fname, ios::in);
     if(file.is_open())
@@ -23,14 +24,15 @@ void csv_reader(string fname){
             stringstream str(line);
  
             while(getline(str, word, ','))  //Le fichier csv est séparé par des virgules
-                row.push_back(word);
+                num=stod(word);
+                row.push_back(num);
             content.push_back(row);
         }
     }
       
     else{
         cout<<"Could not open the file\n";
-        return -1;
+        
         }
     
     return content;
@@ -39,43 +41,3 @@ void csv_reader(string fname){
 
 
 
-int main()
-{
-    string fname;              //store the file name
-    cout<<"Enter the file name: ";
-    cin>>fname;
-
-vector<vector<string>> content;
-    vector<string> row;
-    string line, word;         //store the line and then the word in the line
- 
-    fstream file (fname, ios::in);
-    if(file.is_open())
-    {
-        while(getline(file, line))
-        {
-            row.clear();
- 
-            stringstream str(line);
- 
-            while(getline(str, word, ','))  //Le fichier csv est séparé par des virgules
-                row.push_back(word);
-            content.push_back(row);
-        }
-    }
-      
-    else{
-        cout<<"Could not open the file\n";
-        }
-
-
-    for(int i=0;i<content.size();i++)
-    {
-        for(int j=0;j<content[i].size();j++)
-        {
-            cout<<content[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
-    return 0;
-}
