@@ -48,7 +48,7 @@ int main()
     Population population(populationInitiale);
 
     // Test de la fonction de sélection
-    Population selection = selection_roulette(5, population, &Individu::poids);
+    Population selection = select_roulette(population, );
 
     // Affichage des individus sélectionnés
     cout << "Individus sélectionnés: " << endl;

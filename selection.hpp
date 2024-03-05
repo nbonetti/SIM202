@@ -23,7 +23,7 @@ int findIndex(const vector<double> &arr, double item)
 
     return -1;
 }
-// selection par rang
+// selection par rang p= nb d'individus à sélectionner
 Population selection_rang(Population &Pop_initiale)
 {
     // Triez la population en fonction de la fonction d'adaptation
@@ -62,7 +62,7 @@ Population selection_rang(Population &Pop_initiale)
     return P_finale;
 }
 
-// sélection par eugénisme
+// sélection par eugénisme p= nb d'individus à sélectionner
 
 Population select_eugenisme(Population &P, int p)
 {
@@ -83,7 +83,7 @@ Population select_eugenisme(Population &P, int p)
     return Q;
 }
 
-// Sélection par roulette
+// Sélection par roulette p= nb d'individus à sélectionner
 
 Population select_roulette(Population &P, int p)
 {
@@ -120,7 +120,7 @@ Population select_roulette(Population &P, int p)
     return P_select;
 }
 
-// Sélection par rang
+// Sélection par rang p= nb d'individus à sélectionner
 
 Population select_rang(Population &P, int p)
 {
