@@ -7,6 +7,7 @@
 #include <utility>
 #include <random>
 #include <random>
+#include <algorithm>
 using namespace std;
 
 #include "algogenetique.hpp"
