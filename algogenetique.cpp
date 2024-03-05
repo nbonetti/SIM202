@@ -110,18 +110,41 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
         cout << "Erreur : Les tableaux de gènes sont vides." << std::endl;
         exit(-1);
     }
+
+    // def la taille des individus
+    int taille = parent_1.nombreGenes;
+
     // creer les deux enfants
     Individu *child1 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
     Individu *child2 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
 
-    vector<double> genes1, genes2;
+    // Choisissez un point de coupure aléatoire entre 0 et le nombre de gènes
+    int point_coupure = rand() % taille;
 
-    // REMPLIT VECTORS
+    // créer les vecteurs de gènes des enfants - leur taille égale à celle des parents avec comme valeur par défaut -1
+    vector<double> genes1 = parent_1.genes;
+    vector<double> genes2 = parent_2.genes;
+
+    // Copiez les parties restantes des gènes du parent 2 et 1
+    for (int i = point_coupure; i < parent_1.nombreGenes; ++i)
+    {
+        genes1[i] = parent_2.genes[i];
+        genes2[i] = parent_1.genes[i];
+    }
 
     child1->setGenes(genes1);
     child2->setGenes(genes2);
 
-    return Population({child1, child2});
+    Population enfants = Population({child1, child2});
+
+    cout << "taille pop" << enfants.getTaillePopulation() << "\n";
+    // Affichez les enfants
+    for (int i = 0; i < enfants.getTaillePopulation(); ++i)
+    {
+        cout << "Enfant " << i + 1 << ": ";
+        enfants.getIndividu(i)->print(cout);
+    }
+    return enfants;
 };
 
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
@@ -147,7 +170,7 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
         {
             // Obtient les deux parents de manière aléatoire
             const Individu &parent1 = *(parentsMelanges.getIndividu(i));
-            const Individu &parent2 = *(parentsMelanges.getIndividu(i));
+            const Individu &parent2 = *(parentsMelanges.getIndividu(i + 1));
 
             // Effectue l'hybridation pour obtenir les enfants
             Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod);

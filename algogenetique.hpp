@@ -104,6 +104,19 @@ public:
         individus.push_back(individu);
     }
 
+    void removeIndividu(int index)
+    {
+        if (index >= 0 && index < taille_Population)
+        {
+            delete individus[index];
+            individus.erase(individus.begin() + index);
+            taille_Population--;
+        }
+        else
+        {
+            std::cerr << "Erreur : Index d'individu invalide." << std::endl;
+        }
+    }
     // surcharge d'opérateur qui permet de concatener deux populations
     Population operator+(const Population &Pop2);
 

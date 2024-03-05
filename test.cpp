@@ -47,39 +47,32 @@ int main()
 
     Population population(populationInitiale);
 
+    cout << "la pop est \n";
+    population.print(cout);
     // Test de la fonction de sélection
-    Population selection = select_roulette(population, path.nombreGenes);
+    Population selection = selection_eugenisme(population, 1);
 
     // Affichage des individus sélectionnés
     cout << "Individus sélectionnés: " << endl;
-    for (int i = 0; i < selection.getTaillePopulation(); ++i)
-    {
-        Chemin *individu = dynamic_cast<Chemin *>(selection.getIndividu(i));
-        if (individu)
-        {
-            cout << "Individu " << i + 1 << ": ";
-            individu->print(cout);
-            cout << "Poids de l'individu " << i + 1 << ": " << individu->poids() << endl;
-        }
-    }
+    selection.print(cout);
+    // for (int i = 0; i < selection.getTaillePopulation(); ++i)
+    // {
+    //     Chemin *individu = dynamic_cast<Chemin *>(selection.getIndividu(i));
+    //     if (individu)
+    //     {
+    //         cout << "Individu " << i + 1 << ": ";
+    //         individu->print(cout);
+    //         cout << "Poids de l'individu " << i + 1 << ": " << individu->poids() << endl;
+    //     }
+    // }
 
     //-------------------------test de reproduction---------------------------------------//
 
     // Test de la fonction de reproduction
     Population enfants = reproduction(selection, FactoryMethod);
 
-    // Affichage des enfants générés
-    cout << "Enfants générés: " << endl;
-    for (int i = 0; i < enfants.getTaillePopulation(); ++i)
-    {
-        Chemin *enfant = dynamic_cast<Chemin *>(enfants.getIndividu(i));
-        if (enfant)
-        {
-            cout << "Enfant " << i + 1 << ": ";
-            enfant->print(cout);
-            cout << "Poids de l'enfant " << i + 1 << ": " << enfant->poids() << endl;
-        }
-    }
+    cout << "affiche les enfants \n";
+    // enfants.print(cout);
 
     return (0);
 }

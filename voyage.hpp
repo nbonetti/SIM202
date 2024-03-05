@@ -133,8 +133,8 @@ public:
     {
         return Individu::mutationPermutation();
     }
-    Individu* clone() const;
-    Chemin* clone();
+    Individu *clone() const;
+    Chemin *clone();
 };
 
 // définition des fonctions de chemin
@@ -156,20 +156,19 @@ double Chemin ::poids() const
 {
     double poid = 0;
     int n = nombreGenes;
-    for (int i = 1; i < n; ++i)
+    for (int i = 1; i < n - 1; ++i)
     {
-        poid += vsp->distances[genes[i]][genes[i - 1]];
+        poid += vsp->distances[genes[i]][genes[i + 1]];
     }
     poid += vsp->distances[genes.back()][genes[0]];
     return poid;
 }
-Individu* Chemin :: clone()const
+Individu *Chemin ::clone() const
 {
     return new Chemin(*this);
 }
 
-
-Chemin* Chemin::clone()
+Chemin *Chemin::clone()
 {
     return new Chemin(*this);
 }
