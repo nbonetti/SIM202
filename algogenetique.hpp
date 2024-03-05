@@ -66,8 +66,8 @@ public:
     IndividuType type;
 };
 
-// création d'un pointeur vers la fonction poids nécessaire pour la sélections
-extern double (Individu::*pointeur_fct_poids)() const;
+// // création d'un pointeur vers la fonction poids nécessaire pour la sélections
+// extern double (Individu::*pointeur_fct_poids)() const;
 
 //=========================================================================================================================
 //                                                CLASSE POPULATION
