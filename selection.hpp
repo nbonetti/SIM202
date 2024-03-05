@@ -155,5 +155,13 @@ Population select_rang(Population &P, int p)
     }
     return P_select;
 }
+int findIndex(const vector<double> &arr, double item) {
 
+    for (auto i = 0; i < arr.size(); ++i) {
+        if (arr[i] == item)
+            return i;
+    }
+
+    return -1;
+}
 #endif
