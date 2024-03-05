@@ -48,7 +48,7 @@ int main()
     Population population(populationInitiale);
 
     // Test de la fonction de sélection
-    Population selection = select_roulette(population, );
+    Population selection = select_roulette(population, path.nombreGenes);
 
     // Affichage des individus sélectionnés
     cout << "Individus sélectionnés: " << endl;

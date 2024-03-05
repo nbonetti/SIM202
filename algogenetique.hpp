@@ -34,6 +34,7 @@ public:
     //=================================================================
     //   fonctions virtuelles à définir dans la classe fille
     //=================================================================
+
     Individu() : type(IndividuType::NoneType){};
     Individu(vector<double> premiersGenes)
     {
