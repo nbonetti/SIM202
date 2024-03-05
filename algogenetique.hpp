@@ -97,6 +97,12 @@ public:
     {
         return individus;
     }
+
+    void addIndividu(Individu *individu)
+    {
+        individus.push_back(individu);
+    }
+
     // surcharge d'opérateur qui permet de concatener deux populations
     Population operator+(const Population &Pop2);
 

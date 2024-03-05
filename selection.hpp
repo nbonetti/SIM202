@@ -12,6 +12,17 @@
 #include "voyage.hpp"
 #include "Factory.hpp"
 
+int findIndex(const vector<double> &arr, double item)
+{
+
+    for (auto i = 0; i < arr.size(); ++i)
+    {
+        if (arr[i] == item)
+            return i;
+    }
+
+    return -1;
+}
 // selection par rang
 Population selection_rang(Population &Pop_initiale)
 {
@@ -103,7 +114,7 @@ Population select_roulette(Population &P, int p)
             S_temp = S_temp + vdist[rang[a]];
             a = a + 1;
         }
-        P_select.getIndividus().push_back(P.getIndividu(rang[a]));
+        P_select.addIndividu(P.getIndividu(rang[a]));
         rang.erase(rang.begin() + a);
     }
     return P_select;
@@ -150,18 +161,10 @@ Population select_rang(Population &P, int p)
             S_temp = S_temp + rang[a];
             a = a + 1;
         }
-        P_select.getIndividus().push_back(P.getIndividu(rang[a]));
+        P_select.addIndividu(P.getIndividu(rang[a]));
         rang.erase(rang.begin() + a);
     }
     return P_select;
 }
-int findIndex(const vector<double> &arr, double item) {
 
-    for (auto i = 0; i < arr.size(); ++i) {
-        if (arr[i] == item)
-            return i;
-    }
-
-    return -1;
-}
 #endif
