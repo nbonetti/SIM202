@@ -66,7 +66,7 @@ Population select_eugenisme(Population &P, int p)
 
     for (int i = 0; i < m; i++)
     {
-        Q.getIndividu(i) = P.getIndividu(i)->clone();
+        *Q.getIndividu(i) = *(P.getIndividu(i)->clone());
     }
 
     return Q;
@@ -84,10 +84,10 @@ Population select_roulette(Population &P, int p)
     vector<int> rang;
 
     // Remplissage des vecteurs des longueurs des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i; i < P.individus.size(); i++)
+    for (int i; i < P.getTaillePopulation(); i++)
     {
-        vdist.push_back(P.individus[i]->coute());
-        S = S + P.individus[i]->coute();
+        vdist.push_back(P.getIndividu(i)->poids());
+        S = S + P.getIndividu(i)->poids();
         rang.push_back(i);
     }
 
@@ -103,7 +103,7 @@ Population select_roulette(Population &P, int p)
             S_temp = S_temp + vdist[rang[a]];
             a = a + 1;
         }
-        P_select.individus.push_back(P.individus[rang[a]]);
+        P_select.getIndividus().push_back(P.getIndividu(rang[a]));
         rang.erase(rang.begin() + a);
     }
     return P_select;
@@ -111,10 +111,10 @@ Population select_roulette(Population &P, int p)
 
 // Sélection par rang
 
-population select_rang(population &P, int p)
+Population select_rang(Population &P, int p)
 {
     srand(time(0));
-    population P_select(p);
+    Population P_select(p);
     vector<double> vdist;
     vector<double> vdist_temp;
     int S = 0;
@@ -122,10 +122,10 @@ population select_rang(population &P, int p)
 
     // Remplissage de vecteurs de fonctions d'adaptation puis tri
 
-    for (int i; i < P.individus.size(); i++)
+    for (int i; i < P.getTaillePopulation(); i++)
     {
-        vdist.push_back(P.individus[i]->coute());
-        vdist_temp.push_back(P.individus[i]->coute());
+        vdist.push_back(P.getIndividu(i)->poids());
+        vdist_temp.push_back(P.getIndividu(i)->poids());
         S = S + i;
         rang.push_back(i);
     }
@@ -133,10 +133,10 @@ population select_rang(population &P, int p)
 
     // Tri des individus du plus mauvais au meilleur
     int index = 0;
-    for (int j; j < P.individus.size(); j++)
+    for (int j; j < P.getTaillePopulation(); j++)
     {
         index = findIndex(vdist_temp, vdist[j]);
-        P.individus[P.individus.size() - 1 - j] = P.individus[index];
+        *P.getIndividu(P.getTaillePopulation() - 1 - j) = *P.getIndividu(index);
     }
 
     // Sélection par roulette avec la fonction de rang
@@ -150,7 +150,7 @@ population select_rang(population &P, int p)
             S_temp = S_temp + rang[a];
             a = a + 1;
         }
-        P_select.individus.push_back(P.individus[rang[a]]);
+        P_select.getIndividus().push_back(P.getIndividu(rang[a]));
         rang.erase(rang.begin() + a);
     }
     return P_select;
