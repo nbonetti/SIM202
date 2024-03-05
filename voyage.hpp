@@ -135,10 +135,6 @@ public:
     }
     Individu* clone() const;
     Chemin* clone();
-    int nombre_chemin() const
-    {
-        return Chemin.size();
-    };
 };
 
 // définition des fonctions de chemin
