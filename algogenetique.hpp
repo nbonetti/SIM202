@@ -56,6 +56,7 @@ public:
         nombreGenes = nouveauxGenes.size();
     }
 
+    virtual Individu *clone() const = 0;
     //=================================================================
     //         fonction propre à la classe Individu
     //=================================================================
@@ -82,8 +83,8 @@ protected:
 public:
     // Constructeur par défaut
     Population() : taille_Population(0) {}
-    //constructeur par taille 
-    Population(int n):taille_Population(n){}
+    // constructeur par taille
+    Population(int n) : taille_Population(n) {}
     // constructeur de population d'individu*
     Population(vector<Individu *> premiersIndividus)
     {
