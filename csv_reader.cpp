@@ -5,7 +5,40 @@
 #include <sstream>
  
 using namespace std;          //allow to use cin/cout instead of std::cin
+
+
+void csv_reader(string fname){
+    
+    vector<vector<string>> content;
+    vector<string> row;
+    string line, word;         //store the line and then the word in the line
  
+    fstream file (fname, ios::in);
+    if(file.is_open())
+    {
+        while(getline(file, line))
+        {
+            row.clear();
+ 
+            stringstream str(line);
+ 
+            while(getline(str, word, ','))  //Le fichier csv est séparé par des virgules
+                row.push_back(word);
+            content.push_back(row);
+        }
+    }
+      
+    else{
+        cout<<"Could not open the file\n";
+        return -1;
+        }
+    
+    return content;
+}
+
+
+
+
 int main()
 {
     string fname;              //store the file name
@@ -44,6 +77,5 @@ vector<vector<string>> content;
         }
         cout<<"\n";
     }
- 
     return 0;
 }
