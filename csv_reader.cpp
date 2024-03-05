@@ -4,17 +4,17 @@
 #include <vector>
 #include <sstream>
  
-using namespace std;          %allow to use cin/cout instead of std::cin
+using namespace std;          //allow to use cin/cout instead of std::cin
  
 int main()
 {
-    string fname;              %store the file name
+    string fname;              //store the file name
     cout<<"Enter the file name: ";
     cin>>fname;
 
 vector<vector<string>> content;
     vector<string> row;
-    string line, word;         %store the line and then the word in the line
+    string line, word;         //store the line and then the word in the line
  
     fstream file (fname, ios::in);
     if(file.is_open())
@@ -25,7 +25,7 @@ vector<vector<string>> content;
  
             stringstream str(line);
  
-            while(getline(str, word, ','))  %Le fichier csv est séparé par des virgules
+            while(getline(str, word, ','))  //Le fichier csv est séparé par des virgules
                 row.push_back(word);
             content.push_back(row);
         }
