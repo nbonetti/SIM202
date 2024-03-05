@@ -82,7 +82,8 @@ protected:
 public:
     // Constructeur par défaut
     Population() : taille_Population(0) {}
-
+    //constructeur par taille 
+    Population(int n):taille_Population(n){}
     // constructeur de population d'individu*
     Population(vector<Individu *> premiersIndividus)
     {
