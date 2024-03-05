@@ -133,6 +133,7 @@ public:
     {
         return Individu::mutationPermutation();
     }
+    Individu* clone() const;
     Chemin* clone();
 };
 
@@ -162,6 +163,11 @@ double Chemin ::poids() const
     poid += vsp->distances[genes.back()][genes[0]];
     return poid;
 }
+Individu* Chemin :: clone()const
+{
+    return new Chemin(*this);
+}
+
 
 Chemin* Chemin::clone()
 {
