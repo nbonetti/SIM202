@@ -7,6 +7,7 @@
 #include <utility>
 #include <random>
 #include <random>
+using namespace std;
 
 #include "algogenetique.hpp"
 #include "voyage.hpp"
