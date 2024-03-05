@@ -67,8 +67,7 @@ Population selection_rang(Population &Pop_initiale)
 Population select_eugenisme(Population &P, int p)
 {
     // Trier par la fonction d'adaptation (le plus faible est le mieux)
-    sort(P.getIndividus().begin(), P.getIndividus().end(), [](const Individu *a, const Individu *b)
-         { return a->poids() < b->poids(); });
+    trierParPoids(P);
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
     int n = P.getTaillePopulation();
