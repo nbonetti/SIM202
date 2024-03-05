@@ -37,7 +37,3 @@ vector<vector<double>> csv_reader(string fname){
     
     return content;
 }
-
-
-
-
