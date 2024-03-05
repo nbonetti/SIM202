@@ -96,7 +96,7 @@ Population select_roulette(Population &P, int p)
     vector<int> rang;
 
     // Remplissage des vecteurs des longueurs des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i; i < P.getTaillePopulation(); i++)
+    for (int i=0; i < P.getTaillePopulation(); i++)
     {
         vdist.push_back(P.getIndividu(i)->poids());
         S = S + P.getIndividu(i)->poids();
@@ -134,7 +134,7 @@ Population select_rang(Population &P, int p)
 
     // Remplissage de vecteurs de fonctions d'adaptation puis tri
 
-    for (int i; i < P.getTaillePopulation(); i++)
+    for (int i=0; i < P.getTaillePopulation(); i++)
     {
         vdist.push_back(P.getIndividu(i)->poids());
         vdist_temp.push_back(P.getIndividu(i)->poids());
@@ -145,7 +145,7 @@ Population select_rang(Population &P, int p)
 
     // Tri des individus du plus mauvais au meilleur
     int index = 0;
-    for (int j; j < P.getTaillePopulation(); j++)
+    for (int j=0; j < P.getTaillePopulation(); j++)
     {
         index = findIndex(vdist_temp, vdist[j]);
         *P.getIndividu(P.getTaillePopulation() - 1 - j) = *P.getIndividu(index);
