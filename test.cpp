@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    vector<string> cityNames = {"A", "B", "C", "D", "E"};
+    vector<int> cityNames = {0,1,2,3,4};
     vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)};
 
     Ville city(cityNames, cityCoords);

@@ -45,13 +45,13 @@ class Ville : public Point
 {
 public:
     vector<Point> coord;              // coordonnées des villes
-    vector<string> nom;               // nom de la ville en vecteur
+    vector<int> nom;               // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
     void print(ostream &out) const;
     // constructeur générique de ville
     Ville(){};
     // constructeur
-    Ville(const vector<string> &n, const vector<Point> &p) : nom(n), coord(p.size())
+    Ville(const vector<int> &n, const vector<Point> &p) : nom(n), coord(p.size())
     {
         for (int i = 0; i < p.size(); ++i)
         {
