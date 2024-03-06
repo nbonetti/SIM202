@@ -33,17 +33,17 @@ int main()
     cout << "Population initiale:" << endl;
     population.print(cout);
 
-    /*// Sélection des individus pour la reproduction
-    Population selection = select_roulette(population, 2);
+    // Sélection des individus pour la reproduction
+    Population selection = selection_rang(population);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);
 
-    // Reproduction des individus sélectionnés
+    //Reproduction des individus sélectionnés
     Population enfants = reproduction(selection, FactoryMethod);
 
     cout << "\nEnfants après reproduction:" << endl;
-    enfants.print(cout);*/
+    enfants.print(cout);
 
     return 0;
 }
