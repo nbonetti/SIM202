@@ -35,8 +35,8 @@ int main()
 
     // Sélection des individus pour la reproduction
     //Population selection = selection_rang(population);
-    Population selection= select_roulette(population,2);
-    //Population selection=select_eugenisme(population,2);
+    //Population selection= select_roulette(population,2);
+    Population selection=select_eugenisme(population,2);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);
