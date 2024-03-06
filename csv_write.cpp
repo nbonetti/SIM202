@@ -11,7 +11,8 @@ void csv_write(int* parcours, int n_index)
       int x;
       for (int i=0;i<n_index;i++){
             x=parcours[i];
-            myfile << x<<endl;
+            myfile << x ;
+            myfile << "\n";
       }
       myfile.close();
 }
