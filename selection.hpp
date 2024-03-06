@@ -73,12 +73,13 @@ Population select_eugenisme(Population &P, int p)
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
     int n = P.getTaillePopulation();
-    int m = (int)((double)p) / 100.0 * (double)n;
+    int m = (p*n) / 100.0;
     Population Q(m);
 
     for (int i = 0; i < m; i++)
     {
-        *Q.getIndividu(i) = *(P.getIndividu(i)->clone());
+        //*Q.getIndividu(i) = *(P.getIndividu(i)->clone());
+        Q.addIndividu(P.getIndividu(i)->clone());
     }
 
     return Q;

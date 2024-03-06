@@ -35,17 +35,25 @@ int main()
 
     // Sélection des individus pour la reproduction
     //Population selection = selection_rang(population);
-    //Population selection= select_roulette(population,2);
-    Population selection=select_eugenisme(population,2);
+    Population selection= select_roulette(population,2);
+    //Population selection=select_eugenisme(population,2);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);
 
-    /*//Reproduction des individus sélectionnés
+    //Reproduction des individus sélectionnés
     Population enfants = reproduction(selection, FactoryMethod);
 
     cout << "\nEnfants après reproduction:" << endl;
-    enfants.print(cout);*/
+    enfants.print(cout);
+
+    // Mutation des enfants
+    for (int i = 0; i < enfants.getTaillePopulation(); ++i) {
+        enfants.getIndividu(i)->mutationPermutation();
+    }
+
+    cout << "\nEnfants après mutation:" << endl;
+    enfants.print(cout);
 
     return 0;
 }
