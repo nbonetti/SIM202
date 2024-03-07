@@ -6,7 +6,7 @@
 
 using namespace std;          //allow to use cin/cout instead of std::cin
 
-
+//fonction pour lire le fichier
 vector<vector<double>> csv_reader(string fname){
     
     vector<vector<double>> content;
@@ -36,4 +36,21 @@ vector<vector<double>> csv_reader(string fname){
         }
     
     return content;
+}
+
+
+
+//fonction pour récupérer les données et avoir un nouveau fichier 
+void csv_write(int* parcours, int n_index)
+{
+      std::ofstream myfile;
+      myfile.open ("solution.csv");
+      myfile << "index\n";
+      int x;
+      for (int i=0;i<n_index;i++){
+            x=parcours[i];
+            myfile << x ;
+            myfile << "\n";
+      }
+      myfile.close();
 }
