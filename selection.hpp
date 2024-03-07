@@ -26,10 +26,10 @@ int findIndex(const vector<double> &arr, double item)
     return -1;
 }
 // selection par rang p= nb d'individus à sélectionner
-Population selection_rang(Population &Pop_initiale, int nb_indis_voulus)
+Population selection_rang(Population &Pop_ini, int nb_indis_voulus)
 {
     // Triez la population en fonction de la fonction d'adaptation
-    Pop_initiale.trierPopulation(&Individu::poids);
+    Population Pop_initiale = trierPopulation(Pop_ini);
 
     int p = Pop_initiale.getTaillePopulation();
     std::vector<double> probSelection(p);
@@ -66,10 +66,10 @@ Population selection_rang(Population &Pop_initiale, int nb_indis_voulus)
 
 // sélection par eugénisme p= nb d'individus à sélectionner
 
-Population selection_eugenisme(Population &Pop_initiale, int p)
+Population selection_eugenisme(Population &Pop_ini, int p)
 {
     // Trier par la fonction d'adaptation (le plus faible est le mieux)
-    Pop_initiale.trierPopulation(&Individu::poids);
+    Population Pop_initiale = trierPopulation(Pop_ini);
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
     int n = Pop_initiale.getTaillePopulation();

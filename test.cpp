@@ -92,8 +92,8 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 int main()
 {
     // Création des données des villes à parcourir
-    vector<int> cityNames = {0, 1, 2, 3, 4,5,6,7,8};
-    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2), Point(10,7), Point (14,1), Point(5,4), Point(5,9)}; // coordonnées de chaque ville
+    vector<int> cityNames = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2), Point(10, 7), Point(14, 1), Point(5, 4), Point(5, 9)}; // coordonnées de chaque ville
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
 
@@ -101,9 +101,7 @@ int main()
     vector<vector<double>> paths = {
         {0, 1, 2, 3, 4}, // Chemin 1
         {0, 2, 4, 1, 3}, // Chemin 2
-        {5,6 , 7, 8, 1},
-        {1, 4, 5, 7, 3},
-        {8, 2, 4, 3, 1} // Chemin 3
+        {0, 2, 3, 4, 1},
     };
 
     // Création des individus pour chaque chemin initial

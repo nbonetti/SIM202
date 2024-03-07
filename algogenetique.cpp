@@ -73,14 +73,6 @@ Population Population ::operator+(const Population &Pop2)
     return *this;
 };
 
-// fonction qui trie la population selon la fonction d'adaptation
-void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
-{
-    // Utilisez std::sort pour trier la population en fonction de la fonction de poids
-    sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
-         { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
-}
-
 void Population::print(ostream &out) const
 {
     for (const auto &individu : individus)
