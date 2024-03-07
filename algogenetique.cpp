@@ -80,6 +80,7 @@ void Population::trierPopulation(double (Individu::*pointeur_fct_poids)() const)
     sort(individus.begin(), individus.end(), [pointeur_fct_poids](const Individu *a, const Individu *b)
          { return (a->*pointeur_fct_poids)() < (b->*pointeur_fct_poids)(); });
 }
+
 void Population::print(ostream &out) const
 {
     for (const auto &individu : individus)

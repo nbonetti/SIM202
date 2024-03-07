@@ -14,6 +14,81 @@ std::string getTypeName(const T &variable)
     return typeid(variable).name();
 }
 
+Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproducteurs)
+{
+
+    //====================================================================================================================================
+    //                          initialisation
+    //====================================================================================================================================
+
+    int k = 0;
+    // nb de parents nécessaires pour que la population après reproduction et sélection garde la même taille intiale
+    int nb_parents_conservés = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
+
+    Population population_parents = Pop_initiale;
+    Population parents_selectionnés;
+    Population enfants;
+    Population parents_conservés;
+
+    //====================================================================================================================================
+    //                          iteration jusqu'à fin (critère d'arret )
+    //====================================================================================================================================
+    while (k < nb_iter)
+    {
+        //====================================================================================================================================
+        //                          SELECTION DES REPRODUCTEURS
+        //====================================================================================================================================
+
+        // proba de gagner lors de la selection par tournoi
+        double proba_tournoi;
+
+        // parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
+        parents_selectionnés = selection_rang(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
+
+        //====================================================================================================================================
+        //                          REPRODUCTION DES ENFANTS + MUTATION
+        //====================================================================================================================================
+        // il faut choisir la mutation appliquée aux enfants
+        // enfants des parents issus de la sélection
+        enfants = reproduction(parents_selectionnés, FactoryMethod);
+
+        // mutation des enfants
+        for (int i = 0; i < nb_reproducteurs; i++)
+        {
+            enfants.getIndividu(i)->mutationAleatoire();
+            // enfants.getIndividu(i)->mutationPermutation();
+        }
+
+        //====================================================================================================================================
+        //                          COMPLEMENT DE LA POPULATION ENFANTS POUR CONSERVER LE NB D'INDIVIDUS
+        //====================================================================================================================================
+
+        // à définir si sélection par tournoi
+        double proba_tournoi_conservés;
+        // sélection des parents que l'on va conservés pour la prochaine génération
+        // parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
+        parents_conservés = selection_rang(population_parents, nb_parents_conservés);
+        // parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
+
+        enfants = enfants + parents_conservés;
+
+        //====================================================================================================================================
+        //                         ITERATEURS
+        //====================================================================================================================================
+
+        population_parents = enfants;
+        k = k + 1;
+    };
+
+    // la population finale est
+    Population pop_finale = population_parents;
+
+    return pop_finale;
+};
+
 int main()
 {
     // Création des données des villes à parcourir
@@ -27,8 +102,8 @@ int main()
         {0, 1, 2, 3, 4}, // Chemin 1
         {0, 2, 4, 1, 3}, // Chemin 2
         {0, 3, 2, 1, 4},
-        {0, 3, 4, 1, 5},
-        {0, 8, 2, 7, 4} // Chemin 3
+        {0, 3, 4, 1, 2},
+        {0, 1, 2, 3, 4} // Chemin 3
     };
 
     // Création des individus pour chaque chemin initial
@@ -41,35 +116,38 @@ int main()
     // Création de la population initiale
     Population population(populationInitiale);
 
-    cout << "Population initiale:" << endl;
-    // population.print(cout);
-    cout << " hello taille de pop \n"
-         << population.getTaillePopulation() << "\n"
-         << "type de taille " << getTypeName(population.getTaillePopulation());
+    Population Pop_finale = algogenetique(population, 5, 3);
+    Pop_finale.print(cout);
 
-    // Sélection des individus pour la reproduction
-    // Population selection = selection_rang(population);
-    // Population selection = selection_roulette(population, 2);
-    // Population selection = selection_eugenisme(population, 3);
-    Population selection = selection_tournoi(population, 2, 0.7);
+    // cout << "Population initiale:" << endl;
+    // // population.print(cout);
+    // cout << " hello taille de pop \n"
+    //      << population.getTaillePopulation() << "\n"
+    //      << "type de taille " << getTypeName(population.getTaillePopulation());
 
-    cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
-    selection.print(cout);
+    // // Sélection des individus pour la reproduction
+    // Population selection = selection_rang(population, 4);
+    // // Population selection = selection_roulette(population, 2);
+    // // Population selection = selection_eugenisme(population, 3);
+    // // Population selection = selection_tournoi(population, 2, 0.7);
 
-    // Reproduction des individus sélectionnés
-    Population enfants = reproduction(selection, FactoryMethod);
+    // cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
+    // selection.print(cout);
 
-    cout << "\nEnfants après reproduction:" << endl;
-    enfants.print(cout);
+    // // Reproduction des individus sélectionnés
+    // Population enfants = reproduction(selection, FactoryMethod);
 
-    // Mutation des enfants
-    for (int i = 0; i < enfants.getTaillePopulation(); ++i)
-    {
-        enfants.getIndividu(i)->mutationPermutation();
-    }
+    // cout << "\nEnfants après reproduction:" << endl;
+    // enfants.print(cout);
 
-    cout << "\nEnfants après mutation:" << endl;
-    enfants.print(cout);
+    // // Mutation des enfants
+    // for (int i = 0; i < enfants.getTaillePopulation(); ++i)
+    // {
+    //     enfants.getIndividu(i)->mutationPermutation();
+    // }
 
-    return 0;
+    // cout << "\nEnfants après mutation:" << endl;
+    // enfants.print(cout);
+
+    // return 0;
 }

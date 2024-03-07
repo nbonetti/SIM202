@@ -151,15 +151,17 @@ Population selection_tournoi(Population &Pop_initiale, int nb_individus, double 
         Individu *best;
 
         // définit le meilleur individu selon la fonction poids
-
-        if (individu_1->poids() >= individu_2->poids())
+        if (individu_1 && individu_2)
         {
-            best = individu_1;
-        }
-        else
-        {
-            best = individu_2;
-        }
+            if (individu_1->poids() >= individu_2->poids())
+            {
+                best = individu_1;
+            }
+            else
+            {
+                best = individu_2;
+            }
+        };
 
         // génère un nombre aléatoire entre 0 et 1
         double random = rand() / RAND_MAX;
