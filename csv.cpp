@@ -9,6 +9,11 @@ using namespace std;          //allow to use cin/cout instead of std::cin
 //fonction pour lire le fichier
 vector<vector<double>> csv_reader(string fname){
     
+    double c1, c2, c3;
+    while (fscanf (stdin, "%lf,%lf,%lf", &c1, &c2, &c3) != EOF) {
+    cout << "Ligne: " << c1 << " " << c2 << " " << c3 << endl;
+
+  }
     vector<vector<double>> content;
     vector<double> row;
     string line, word;         //store the line and then the word in the line
