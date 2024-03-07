@@ -87,7 +87,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
     Population pop_finale = population_parents;
 
     return pop_finale;
-};
+}
 
 int main()
 {

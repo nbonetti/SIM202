@@ -76,7 +76,7 @@ Population trierPopulation(Population &P)
     }
     Population Pop_triee = Population(individ);
     return (Pop_triee);
-};
+}
 // surcharge d'opérateur qui permet de concaténer deux populations
 
 Population Population ::operator+(const Population &Pop2)
