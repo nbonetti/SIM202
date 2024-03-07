@@ -66,23 +66,22 @@ Population selection_rang(Population &Pop_initiale)
 
 // sélection par eugénisme p= nb d'individus à sélectionner
 
-Population select_eugenisme(Population &P, int p)
+Population select_eugenisme(Population &Pop_initiale, int p)
 {
     // Trier par la fonction d'adaptation (le plus faible est le mieux)
-    trierParPoids(P);
+    Pop_initiale.trierPopulation(&Individu::poids);
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
-    int n = P.getTaillePopulation();
-    int m = (p * n) / 100.0;
-    Population Q(m);
+    int n = Pop_initiale.getTaillePopulation();
+    Population P_finale;
 
-    for (int i = 0; i < m; i++)
+    for (int i = n - p; i < n; i++)
     {
-        //*Q.getIndividu(i) = *(P.getIndividu(i)->clone());
-        Q.addIndividu(P.getIndividu(i)->clone());
+        Individu *individu_selectionne = Pop_initiale.getIndividu(i); // a - 1 car les indices commencent à 0
+        P_finale = P_finale + Population({individu_selectionne});
     }
 
-    return Q;
+    return P_finale;
 }
 
 // Sélection par roulette p= nb d'individus à sélectionner
