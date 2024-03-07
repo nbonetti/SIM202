@@ -33,7 +33,6 @@ int main()
     vector<Point> coord;//coordonées (x,y)
     
     for (const auto &row : content)
-    
     {
         cout<<row[0];
         citynumber.push_back(row[0]); // Première colonne : indices

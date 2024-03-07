@@ -25,6 +25,7 @@ vector<vector<double>> csv_reader(string fname){
  
             while(getline(str, word, ','))  //Le fichier csv est séparé par des virgules
                 num=stod(word);
+                cout << "blah " << num << endl;
                 row.push_back(num);
             content.push_back(row);
         }
