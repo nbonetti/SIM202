@@ -125,9 +125,9 @@ public:
         type = IndividuType::CheminType;
         int n = premiersGenes.size();
         int r = 0;
-        for (int i = 1; i < n; ++i)
+        for (int i = 0; i < n-1; ++i)
         {
-            r = r + vsp->distances[genes[i]][genes[i - 1]];
+            r = r + vsp->distances[genes[i]][genes[i + 1]];
         }
     };
     void print(ostream &out) const; // afficher les villes dans le chemin
@@ -161,11 +161,11 @@ double Chemin ::poids() const
 {
     double poid = 0;
     int n = nombreGenes;
-    for (int i = 1; i < n - 1; ++i)
+    for (int i = 0; i < n - 1; ++i)
     {
-        poid += vsp->distances[genes[i]][genes[i + 1]];
+        poid =poid+ vsp->distances[genes[i]][genes[i +1]];
     }
-    poid += vsp->distances[genes.back()][genes[0]];
+    poid =poid+ vsp->distances[genes.back()][genes[0]];
     return poid;
 }
 Individu *Chemin ::clone() const
