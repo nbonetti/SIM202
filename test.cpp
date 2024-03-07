@@ -23,12 +23,12 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
     int k = 0;
     // nb de parents nécessaires pour que la population après reproduction et sélection garde la même taille intiale
-    int nb_parents_conservés = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
+    int nb_parents_conserves = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
 
     Population population_parents = Pop_initiale;
-    Population parents_selectionnés;
+    Population parents_selectionnes;
     Population enfants;
-    Population parents_conservés;
+    Population parents_conserves;
 
     //====================================================================================================================================
     //                          iteration jusqu'à fin (critère d'arret )
@@ -44,7 +44,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
         // parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
-        parents_selectionnés = selection_rang(population_parents, nb_reproducteurs);
+        parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
 
         //====================================================================================================================================
@@ -52,7 +52,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
         // il faut choisir la mutation appliquée aux enfants
         // enfants des parents issus de la sélection
-        enfants = reproduction(parents_selectionnés, FactoryMethod);
+        enfants = reproduction(parents_selectionnes, FactoryMethod);
 
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)
@@ -66,14 +66,14 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
 
         // à définir si sélection par tournoi
-        double proba_tournoi_conservés;
+        double proba_tournoi_conserves;
         // sélection des parents que l'on va conservés pour la prochaine génération
         // parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
-        parents_conservés = selection_rang(population_parents, nb_parents_conservés);
+        parents_conserves = selection_rang(population_parents, nb_parents_conserves);
         // parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
 
-        enfants = enfants + parents_conservés;
+        enfants = enfants + parents_conserves;
 
         //====================================================================================================================================
         //                         ITERATEURS
@@ -92,8 +92,8 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 int main()
 {
     // Création des données des villes à parcourir
-    vector<int> cityNames = {0, 1, 2, 3, 4};
-    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)}; // coordonnées de chaque ville
+    vector<int> cityNames = {0, 1, 2, 3, 4,5,6,7,8};
+    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2), Point(10,7), Point (14,1), Point(5,4), Point(5,9)}; // coordonnées de chaque ville
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
 
@@ -101,9 +101,9 @@ int main()
     vector<vector<double>> paths = {
         {0, 1, 2, 3, 4}, // Chemin 1
         {0, 2, 4, 1, 3}, // Chemin 2
-        {0, 3, 2, 1, 4},
-        {0, 3, 4, 1, 2},
-        {0, 1, 2, 3, 4} // Chemin 3
+        {5,6 , 7, 8, 1},
+        {1, 4, 5, 7, 3},
+        {8, 2, 4, 3, 1} // Chemin 3
     };
 
     // Création des individus pour chaque chemin initial
@@ -149,5 +149,5 @@ int main()
     // cout << "\nEnfants après mutation:" << endl;
     // enfants.print(cout);
 
-    // return 0;
+    return 0;
 }
