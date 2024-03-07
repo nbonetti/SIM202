@@ -43,6 +43,9 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
     int nb_parents_conservés = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
 
     Population population_parents = Pop_initiale;
+    Population parents_selectionnés;
+    Population enfants;
+    Population parents_conservés;
 
     //====================================================================================================================================
     //                          iteration jusqu'à fin (critère d'arret )
@@ -56,17 +59,17 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // proba de gagner lors de la selection par tournoi
         double proba_tournoi;
 
-        //  Population parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
-        //  Population parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
-        Population parents_selectionnés = selection_rang(population_parents, nb_reproducteurs);
-        // Population parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
+        // parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
+        parents_selectionnés = selection_rang(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
 
         //====================================================================================================================================
         //                          REPRODUCTION DES ENFANTS + MUTATION
         //====================================================================================================================================
         // il faut choisir la mutation appliquée aux enfants
         // enfants des parents issus de la sélection
-        Population enfants = reproduction(parents_selectionnés, FactoryMethod);
+        enfants = reproduction(parents_selectionnés, FactoryMethod);
 
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)
@@ -82,10 +85,10 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // à définir si sélection par tournoi
         double proba_tournoi_conservés;
         // sélection des parents que l'on va conservés pour la prochaine génération
-        // Population parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
-        // Population parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
-        Population parents_conservés = selection_rang(population_parents, nb_parents_conservés);
-        // Population parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
+        // parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
+        // parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
+        parents_conservés = selection_rang(population_parents, nb_parents_conservés);
+        // parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
 
         enfants = enfants + parents_conservés;
 
@@ -105,10 +108,12 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
 int main()
 
-{                                                              /*=========================================================================================================
-                                                              //                                             LECTURE DU FICHIER
-                                                              //==========================================================================================================
-                                                              */
+{
+
+    //=========================================================================================================
+    //                                             LECTURE DU FICHIER
+    //==========================================================================================================
+
     vector<vector<double>> content = csv_reader("Villes_csv"); // on récupère le fichier
 
     //========================================================================================
