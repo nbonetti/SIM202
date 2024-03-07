@@ -52,11 +52,15 @@ public:
     // constructeur générique de ville
     Ville(){};
     // constructeur
-    Ville(const vector<int> &n, const vector<Point> &p) : nom(n), coord(p.size())
+    Ville(const vector<int> &n, const vector<Point> &p) : nom(n.size()), coord(p.size())
     {
         for (int i = 0; i < p.size(); ++i)
         {
             coord[i] = p[i];
+        }
+        for (int i = 0; i < n.size(); ++i)
+        {
+            nom[i] = n[i];
         }
     }
     // calcul de la distance
