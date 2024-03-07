@@ -7,6 +7,7 @@
 #include <cmath>
 #include <string>
 #include "algogenetique.hpp"
+#include <list>
 using namespace std;
 
 //==================================================================================================================
@@ -45,7 +46,7 @@ class Ville : public Point
 {
 public:
     vector<Point> coord;              // coordonnées des villes
-    vector<int> nom;               // nom de la ville en vecteur
+    vector<int> nom;                  // nom de la ville en vecteur
     vector<vector<double>> distances; // distances villes sous forme de tableau
     void print(ostream &out) const;
     // constructeur générique de ville
@@ -173,18 +174,17 @@ Chemin *Chemin::clone()
     return new Chemin(*this);
 }
 
-
 //==========================================================================
-//                              FONCTION A PART 
+//                              FONCTION A PART
 //==========================================================================
 /*dans notre cas on va avoir un fichier avec plusieurs villes, on va donc pouvoir générer plien de chemins possibles et il faut donc que l'on génère une population
 avec tous ces chemins possibles*/
 
-Population& generateur_chemins(int nombre_chemins,const Ville city, Population &P)
+Population &generateur_chemins(int nombre_chemins, const Ville city, Population &P)
 {
     srand(time(NULL));
 
-    for (int j = 0; j<nombre_chemins;j++)
+    for (int j = 0; j < nombre_chemins; j++)
     {
         list<int> indice;
         vector<double> trace;
@@ -194,25 +194,22 @@ Population& generateur_chemins(int nombre_chemins,const Ville city, Population &
         {
             indice.push_back(i);
         }
-        //Génération du chemin :
-        for (int k = 0; k< city.nombre_villes(); k++)
+        // Génération du chemin :
+        for (int k = 0; k < city.nombre_villes(); k++)
         {
             int r = rand() % indice.size();
-            //on enlève d'indice
+            // on enlève d'indice
             list<int>::iterator itr = indice.begin();
             advance(itr, r);
 
             trace.push_back(*itr);
             indice.erase(itr);
-            
         }
 
-        Chemin* path = new Chemin(trace, city);
+        Chemin *path = new Chemin(trace, city);
         P.addIndividu(path);
-        
-
     }
-    return P ;
+    return P;
 }
 
 #endif
