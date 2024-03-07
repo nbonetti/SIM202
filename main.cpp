@@ -143,28 +143,32 @@ int main()
         cout << endl;
     }
 
-    vector<double> vmin;
+    
 
 //==============================================================================
-//                                  DEBUT
+//                                  RESOLUTION
 //==============================================================================
     Population paths;//population initiale avec tou sles chemins possibles avec le fichier de départ
     int nombre_chemins=10; //choisir le nombre de chemins que l'on veut dans notre population
-    int i = 0;
-    int k = 0;
-    vector<double> vmin;
+    
 //faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ
-    generateur_chemins(nombre_chemins,city,paths);
+    Population generee =generateur_chemins(nombre_chemins,city,paths);//initialisation
     paths.print(cout);
 
 
+    int nombre_iterations=10;
+    int nombre_reproducteurs=7; 
+
+    Population resultat= algogenetique(generee,nombre_iterations,nombre_reproducteurs);
+    resultat.trierPopulation(&Individu::poids);
+    Individu* I= resultat.getIndividu(0);//je prends le chemin avec le poids le plus petit
 
 
 
 
 
 
-    }*/
+
 
     return 0;
 }
