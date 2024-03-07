@@ -66,7 +66,7 @@ Population selection_rang(Population &Pop_initiale)
 
 // sélection par eugénisme p= nb d'individus à sélectionner
 
-Population select_eugenisme(Population &Pop_initiale, int p)
+Population selection_eugenisme(Population &Pop_initiale, int p)
 {
     // Trier par la fonction d'adaptation (le plus faible est le mieux)
     Pop_initiale.trierPopulation(&Individu::poids);
@@ -86,7 +86,7 @@ Population select_eugenisme(Population &Pop_initiale, int p)
 
 // Sélection par roulette p= nb d'individus à sélectionner
 
-Population select_roulette(Population &Pop_initiale, int p)
+Population selection_roulette(Population &Pop_initiale, int p)
 {
     Population P_finale;
     // vecteur des poids aka distances
@@ -133,4 +133,5 @@ Population select_roulette(Population &Pop_initiale, int p)
     return P_finale;
 };
 
+Population se
 #endif
