@@ -141,7 +141,6 @@ public:
 
     void print(ostream &out) const;
 };
-;
 
 // fonction qui trie la population selon la fonction d'adaptation
 Population trierPopulation(Population &P)
