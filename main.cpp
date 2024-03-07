@@ -41,7 +41,7 @@ int main()
     //création de l'objet ville 
     Ville city(citynumber,coord);
     city.calcul_distance();
-    //city.print(cout); 
+    city.print(cout); 
     cout << "Distances between cities:" << endl;
     for (const auto &row : city.distances)
     {
