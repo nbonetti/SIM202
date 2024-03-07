@@ -86,11 +86,9 @@ Population select_eugenisme(Population &Pop_initiale, int p)
 
 // Sélection par roulette p= nb d'individus à sélectionner
 
-Population select_roulette(Population &P, int p)
+Population select_roulette(Population &Pop_initiale, int p)
 {
-    srand(time(0));
-
-    Population P_select;
+    Population P_finale;
     // vecteur des poids aka distances
     vector<double> liste_poids_individu;
     vector<double> liste_poids_temp;
@@ -101,18 +99,17 @@ Population select_roulette(Population &P, int p)
     // vecteur des rangs
     vector<int> rang;
 
-    cout << P.getTaillePopulation();
     // Remplissage des vecteurs du poids des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i = 0; i < P.getTaillePopulation(); i++)
+    for (int i = 0; i < Pop_initiale.getTaillePopulation(); i++)
     {
-        liste_poids_individu.push_back(P.getIndividu(i)->poids());
-        liste_poids_temp.push_back(P.getIndividu(i)->poids());
-        Somme_poids = Somme_poids + P.getIndividu(i)->poids();
+        liste_poids_individu.push_back(Pop_initiale.getIndividu(i)->poids());
+        liste_poids_temp.push_back(Pop_initiale.getIndividu(i)->poids());
+        Somme_poids = Somme_poids + Pop_initiale.getIndividu(i)->poids();
         rang.push_back(i);
     }
 
     // selection roulette
-    for (int j = 0; j <= p; j++)
+    for (int j = 0; j < p; j++)
 
     { // k = rang que l'on cherche de l'individu
         int k = 0;
@@ -129,10 +126,11 @@ Population select_roulette(Population &P, int p)
             k = k + 1;
         }
 
-        // Ajouter l'individu à P_select
-        P_select.addIndividu(P.getIndividu(rang[k]));
+        Individu *individu_selectionne = Pop_initiale.getIndividu(rang[k]); // a - 1 car les indices commencent à 0
+        P_finale = P_finale + Population({individu_selectionne});
     }
-    return P_select;
+
+    return P_finale;
 };
 
 #endif
