@@ -1,12 +1,13 @@
 #ifndef ALGOGENETIQUE_HPP
 #define ALGOGENETIQUE_HPP
 
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <utility>
-#include <random>
-#include <random>
+#include <iostream>
+#include <algorithm> // Pour la fonction std::shuffle
+#include <random>    // Pour les générateurs de nombres aléatoire
+
 
 using namespace std;
 

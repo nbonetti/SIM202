@@ -1,7 +1,5 @@
 #include "algogenetique.hpp"
-#include <iostream>
-#include <algorithm> // Pour la fonction std::shuffle
-#include <random>    // Pour les générateurs de nombres aléatoire
+
 using namespace std;
 
 // permet de tirer un nombre aléatoire entre k et n suivant une loi uniforme
