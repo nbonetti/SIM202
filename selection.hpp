@@ -26,7 +26,7 @@ int findIndex(const vector<double> &arr, double item)
     return -1;
 }
 // selection par rang p= nb d'individus à sélectionner
-Population selection_rang(Population &Pop_initiale, int nb_enfants_voulus)
+Population selection_rang(Population &Pop_initiale, int nb_indis_voulus)
 {
     // Triez la population en fonction de la fonction d'adaptation
     Pop_initiale.trierPopulation(&Individu::poids);
@@ -45,7 +45,7 @@ Population selection_rang(Population &Pop_initiale, int nb_enfants_voulus)
     // Sélection d'individus par rang
     Population P_finale;
 
-    for (int i = 0; i < nb_enfants_voulus; ++i)
+    for (int i = 0; i < nb_indis_voulus; ++i)
     {
         double r = sommeProb * ((double)rand() / RAND_MAX);
         double S_temp = 0.0;
