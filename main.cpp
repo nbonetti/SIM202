@@ -54,7 +54,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
         // il faut choisir la mutation appliquée aux enfants
         // enfants des parents issus de la sélection
-        enfants = reproduction(parents_selectionnes, FactoryMethod);
+        enfants = reproduction(parents_selectionnes, FactoryMethod, CheminType);
 
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)

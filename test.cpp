@@ -8,6 +8,8 @@ using namespace std;
 #include <typeinfo>
 #include <string>
 
+Ville Chemin::vsp;
+
 template <typename T>
 std::string getTypeName(const T &variable)
 {
@@ -52,7 +54,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
         // il faut choisir la mutation appliquée aux enfants
         // enfants des parents issus de la sélection
-        enfants = reproduction(parents_selectionnes, FactoryMethod);
+        enfants = reproduction(parents_selectionnes, FactoryMethod, CheminType);
 
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)
@@ -82,6 +84,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         population_parents = enfants;
         k = k + 1;
     };
+    
 
     // la population finale est
     Population pop_finale = population_parents;
@@ -107,10 +110,11 @@ int main()
     };
 
     // Création des individus pour chaque chemin initial
+    Chemin::setVille(city);
     vector<Individu *> populationInitiale;
     for (auto &path : paths)
     {
-        populationInitiale.push_back(new Chemin(path, city));
+        populationInitiale.push_back(new Chemin(path));
     }
 
     // Création de la population initiale

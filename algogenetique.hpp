@@ -8,7 +8,6 @@
 #include <algorithm> // Pour la fonction std::shuffle
 #include <random>    // Pour les générateurs de nombres aléatoire
 
-
 using namespace std;
 
 // Fonction pour générer un nombre aléatoire entre k et n de manière uniforme
@@ -147,10 +146,10 @@ public:
 Population trierPopulation(Population &P);
 
 // permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
-Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));
+Population hybridation(Individu* parent_1, Individu* parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type);
 
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
-Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type));
+Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type);
 
 #endif

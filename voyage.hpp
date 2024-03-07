@@ -114,22 +114,17 @@ class Chemin : public Individu
     qui ici dans la classe chemin représente le nombre de villes
     et le numéro des villes présentes dans le chemin */
 public:
-    const Ville *vsp;
+    static Ville vsp;
     Chemin()
     {
         type = IndividuType::CheminType;
-        vsp = nullptr;
     };
-    Chemin(vector<double> premiersGenes, const Ville &v) : Individu(premiersGenes), vsp(&v)
+    Chemin(vector<double> premiersGenes) : Individu(premiersGenes)
     {
         type = IndividuType::CheminType;
-        int n = premiersGenes.size();
-        int r = 0;
-        for (int i = 0; i < n-1; ++i)
-        {
-            r = r + vsp->distances[genes[i]][genes[i + 1]];
-        }
     };
+    Chemin(const Chemin &c) : Chemin(c.genes){}
+
     void print(ostream &out) const; // afficher les villes dans le chemin
     double poids() const;           // calcul de la distance totale parcourue dans la tournée (adaptation)
     ~Chemin(){};                    // deconstructeur
@@ -140,6 +135,11 @@ public:
     }
     Individu *clone() const;
     Chemin *clone();
+
+    static void setVille(const Ville& v)
+    {
+        vsp = v;
+    }
 };
 
 // définition des fonctions de chemin
@@ -157,18 +157,18 @@ void Chemin::print(ostream &out) const
     out << "]" << endl;
 }
 
-double Chemin ::poids() const
+double Chemin::poids() const
 {
     double poid = 0;
     int n = nombreGenes;
     for (int i = 0; i < n - 1; ++i)
     {
-        poid =poid+ vsp->distances[genes[i]][genes[i +1]];
+        poid = poid + vsp.distances[genes[i]][genes[i + 1]];
     }
-    poid =poid+ vsp->distances[genes.back()][genes[0]];
+    poid = poid + vsp.distances[genes.back()][genes[0]];
     return poid;
 }
-Individu *Chemin ::clone() const
+Individu *Chemin::clone() const
 {
     return new Chemin(*this);
 }
@@ -186,6 +186,8 @@ avec tous ces chemins possibles*/
 
 Population &generateur_chemins(int nombre_chemins, const Ville city, Population &P)
 {
+    Chemin::setVille(city);
+    
     srand(time(NULL));
 
     for (int j = 0; j < nombre_chemins; j++)
@@ -210,7 +212,7 @@ Population &generateur_chemins(int nombre_chemins, const Ville city, Population 
             indice.erase(itr);
         }
 
-        Chemin *path = new Chemin(trace, city);
+        Chemin *path = new Chemin(trace);
         P.addIndividu(path);
     }
     return P;

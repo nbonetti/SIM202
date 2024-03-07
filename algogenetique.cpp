@@ -97,45 +97,45 @@ void Population::print(ostream &out) const
 
 // création de deux enfants issus de 2 parents
 // prend en argument les 2 parents, + un pointeur vers la fonction de factory méthode cf Factory.hpp
-Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type))
+Population hybridation(Individu* parent_1, Individu* parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type)
 
 {
-    if (parent_1.type != parent_2.type)
+    if (parent_1->type != parent_2->type)
     {
         exit(-1);
     }
     // Vérifie que les deux parents ont la même taille
-    if (parent_1.nombreGenes != parent_2.nombreGenes)
+    if (parent_1->nombreGenes != parent_2->nombreGenes)
     {
         cout << "Erreur : Les parents ont des tailles différentes." << std::endl;
         exit(-1);
     }
     // Vérifie que les tableaux de gènes ne sont pas vides
-    if (parent_1.genes.empty() || parent_2.genes.empty())
+    if (parent_1->genes.empty() || parent_2->genes.empty())
     {
         cout << "Erreur : Les tableaux de gènes sont vides." << std::endl;
         exit(-1);
     }
 
     // def la taille des individus
-    int taille = parent_1.nombreGenes;
+    int taille = parent_1->nombreGenes;
 
     // creer les deux enfants
-    Individu *child1 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
-    Individu *child2 = (*pointeur_FactoryMethod)(IndividuType::CheminType);
+    Individu *child1 = (*pointeur_FactoryMethod)(type);
+    Individu *child2 = (*pointeur_FactoryMethod)(type);
 
     // Choisissez un point de coupure aléatoire entre 0 et le nombre de gènes
     int point_coupure = rand() % taille;
 
     // créer les vecteurs de gènes des enfants - leur taille égale à celle des parents avec comme valeur par défaut -1
-    vector<double> genes1 = parent_1.genes;
-    vector<double> genes2 = parent_2.genes;
+    vector<double> genes1 = parent_1->genes;
+    vector<double> genes2 = parent_2->genes;
 
     // Copiez les parties restantes des gènes du parent 2 et 1
-    for (int i = point_coupure; i < parent_1.nombreGenes; ++i)
+    for (int i = point_coupure; i < parent_1->nombreGenes; ++i)
     {
-        genes1[i] = parent_2.genes[i];
-        genes2[i] = parent_1.genes[i];
+        genes1[i] = parent_2->genes[i];
+        genes2[i] = parent_1->genes[i];
     }
 
     child1->setGenes(genes1);
@@ -148,7 +148,7 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
 
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
-Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type))
+Population reproduction(const Population parents, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type)
 {
     // Crée une copie de la population parentale pour ne pas la modifier
     Population parentsMelanges = parents;
@@ -168,11 +168,11 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
         if (i + 1 < parentsMelanges.getTaillePopulation())
         {
             // Obtient les deux parents de manière aléatoire
-            const Individu &parent1 = *(parentsMelanges.getIndividu(i));
-            const Individu &parent2 = *(parentsMelanges.getIndividu(i + 1));
+            Individu* parent1 = parentsMelanges.getIndividu(i);
+            Individu* parent2 = parentsMelanges.getIndividu(i + 1);
 
             // Effectue l'hybridation pour obtenir les enfants
-            Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod);
+            Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod, type);
 
             // Ajoute les enfants à la population des descendants
             enfants = enfants + enfants_crees;
