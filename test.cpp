@@ -26,7 +26,9 @@ int main()
     vector<vector<double>> paths = {
         {0, 1, 2, 3, 4}, // Chemin 1
         {0, 2, 4, 1, 3}, // Chemin 2
-        {0, 3, 2, 1, 4}  // Chemin 3
+        {0, 3, 2, 1, 4},
+        {0, 3, 4, 1, 5},
+        {0, 8, 2, 7, 4} // Chemin 3
     };
 
     // Création des individus pour chaque chemin initial
