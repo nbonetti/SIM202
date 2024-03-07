@@ -173,4 +173,46 @@ Chemin *Chemin::clone()
     return new Chemin(*this);
 }
 
+
+//==========================================================================
+//                              FONCTION A PART 
+//==========================================================================
+/*dans notre cas on va avoir un fichier avec plusieurs villes, on va donc pouvoir générer plien de chemins possibles et il faut donc que l'on génère une population
+avec tous ces chemins possibles*/
+
+Population& generateur_chemins(int nombre_chemins,const Ville city, Population &P)
+{
+    srand(time(NULL));
+
+    for (int j = 0; j<nombre_chemins;j++)
+    {
+        list<int> indice;
+        vector<double> trace;
+
+        // Remplissage du vecteur d'indices
+        for (int i = 0; i < city.nombre_villes(); i++)
+        {
+            indice.push_back(i);
+        }
+        //Génération du chemin :
+        for (int k = 0; k< city.nombre_villes(); k++)
+        {
+            int r = rand() % indice.size();
+            //on enlève d'indice
+            list<int>::iterator itr = indice.begin();
+            advance(itr, r);
+
+            trace.push_back(*itr);
+            indice.erase(itr);
+            
+        }
+
+        Chemin* path = new Chemin(trace, city);
+        P.addIndividu(path);
+        
+
+    }
+    return P ;
+}
+
 #endif
