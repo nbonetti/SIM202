@@ -1,12 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
+//Fonction pour lire le fichier
+
 #include "csv.hpp"
-using namespace std;          //allow to use cin/cout instead of std::cin
-//utile 
-//fonction pour lire le fichier
+using namespace std;          
+
 vector<vector<double>> csv_reader(string fname){
     
     vector<vector<double>> content;
