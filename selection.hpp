@@ -66,31 +66,29 @@ Population selection_rang(Population &Pop_initiale)
 
 // sélection par eugénisme p= nb d'individus à sélectionner
 
-Population select_eugenisme(Population &P, int p)
+Population selection_eugenisme(Population &Pop_initiale, int p)
 {
     // Trier par la fonction d'adaptation (le plus faible est le mieux)
-    trierParPoids(P);
+    Pop_initiale.trierPopulation(&Individu::poids);
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
-    int n = P.getTaillePopulation();
-    int m = (int)((double)p) / 100.0 * (double)n;
-    Population Q(m);
+    int n = Pop_initiale.getTaillePopulation();
+    Population P_finale;
 
-    for (int i = 0; i < m; i++)
+    for (int i = n - p; i < n; i++)
     {
-        *Q.getIndividu(i) = *(P.getIndividu(i)->clone());
+        Individu *individu_selectionne = Pop_initiale.getIndividu(i); // a - 1 car les indices commencent à 0
+        P_finale = P_finale + Population({individu_selectionne});
     }
 
-    return Q;
+    return P_finale;
 }
 
 // Sélection par roulette p= nb d'individus à sélectionner
 
-Population select_roulette(Population &P, int p)
+Population selection_roulette(Population &Pop_initiale, int p)
 {
-    srand(time(0));
-
-    Population P_select(p);
+    Population P_finale;
     // vecteur des poids aka distances
     vector<double> liste_poids_individu;
     vector<double> liste_poids_temp;
@@ -102,11 +100,11 @@ Population select_roulette(Population &P, int p)
     vector<int> rang;
 
     // Remplissage des vecteurs du poids des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i; i < P.getTaillePopulation(); i++)
+    for (int i = 0; i < Pop_initiale.getTaillePopulation(); i++)
     {
-        liste_poids_individu.push_back(P.getIndividu(i)->poids());
-        liste_poids_temp.push_back(P.getIndividu(i)->poids());
-        Somme_poids = Somme_poids + P.getIndividu(i)->poids();
+        liste_poids_individu.push_back(Pop_initiale.getIndividu(i)->poids());
+        liste_poids_temp.push_back(Pop_initiale.getIndividu(i)->poids());
+        Somme_poids = Somme_poids + Pop_initiale.getIndividu(i)->poids();
         rang.push_back(i);
     }
 
@@ -128,13 +126,55 @@ Population select_roulette(Population &P, int p)
             k = k + 1;
         }
 
-        // Ajouter l'individu à P_select
-        P_select.addIndividu(P.getIndividu(rang[k]));
-        // supprimer le rang pour pas sélectionner plusieurs fois l'individu
-        rang.erase(rang.begin() + k);
+        Individu *individu_selectionne = Pop_initiale.getIndividu(rang[k]); // a - 1 car les indices commencent à 0
+        P_finale = P_finale + Population({individu_selectionne});
     }
 
-    return P_select;
+    return P_finale;
+};
+
+Population selection_tournoi(Population &Pop_initiale, int nb_individus, double proba_de_WIN)
+{
+    Population P_finale;
+    int taille = Pop_initiale.getTaillePopulation();
+
+    // selection du nombre d'individus voulus
+
+    for (int i = 0; i < nb_individus; i++)
+    {
+        // selection des deux individus parmi les n individus pour creer un couple de façon aléatoire
+        int p = unif_rand(0, taille);
+        int q = unif_rand(0, taille);
+        Individu *individu_1 = Pop_initiale.getIndividu(p);
+        Individu *individu_2 = Pop_initiale.getIndividu(q);
+
+        Individu *best;
+
+        // définit le meilleur individu selon la fonction poids
+
+        if (individu_1->poids() >= individu_2->poids())
+        {
+            best = individu_1;
+        }
+        else
+        {
+            best = individu_2;
+        }
+
+        // génère un nombre aléatoire entre 0 et 1
+        double random = rand() / RAND_MAX;
+
+        // si le nombre aléatoire est plus grang que la proba définie alors l'individu selectionner est le moins bon sinon c'est le best
+        if (random > proba_de_WIN)
+        {
+            best = individu_2;
+        }
+
+        // ajout de l'individu sélectionné dans la population finale
+        P_finale = P_finale + Population({best});
+    };
+
+    return P_finale;
 };
 
 #endif

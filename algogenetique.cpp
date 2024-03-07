@@ -137,13 +137,6 @@ Population hybridation(const Individu &parent_1, const Individu &parent_2, Indiv
 
     Population enfants = Population({child1, child2});
 
-    cout << "taille pop" << enfants.getTaillePopulation() << "\n";
-    // Affichez les enfants
-    for (int i = 0; i < enfants.getTaillePopulation(); ++i)
-    {
-        cout << "Enfant " << i + 1 << ": ";
-        enfants.getIndividu(i)->print(cout);
-    }
     return enfants;
 };
 
@@ -186,26 +179,3 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
 
     return enfants;
 };
-
-void trierParPoids(Population &P)
-{
-    // Récupérez la collection d'individus
-    const auto &individus = P.getIndividus();
-    size_t n = individus.size();
-
-    // Appliquez l'algorithme de tri à bulles personnalisé
-    for (size_t i = 0; i < n - 1; ++i)
-    {
-        for (size_t j = 0; j < n - i - 1; ++j)
-        {
-            // Comparez les poids des individus
-            if (individus[j]->poids() > individus[j + 1]->poids())
-            {
-                // Échangez les positions si nécessaire
-                Individu *temp = individus[j];
-                *individus[j] = *individus[j + 1];
-                *individus[j + 1] = *temp;
-            }
-        }
-    }
-}
