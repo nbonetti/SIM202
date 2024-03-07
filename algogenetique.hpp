@@ -143,24 +143,7 @@ public:
 };
 
 // fonction qui trie la population selon la fonction d'adaptation
-Population trierPopulation(Population &P)
-{
-    vector<Individu *> individ = P.getIndividus();
-    for (int i = 0; i < P.getTaillePopulation(); ++i)
-    {
-        for (int j = i + 1; j < P.getTaillePopulation(); ++j)
-        {
-            if ((individ[i]->poids()) > (individ[j]->poids()))
-            {
-                Individu *temp = individ[i];
-                individ[i] = individ[j];
-                individ[j] = temp;
-            }
-        }
-    }
-    Population Pop_triee = Population(individ);
-    return (Pop_triee);
-};
+Population trierPopulation(Population &P);
 
 // permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));

@@ -61,7 +61,24 @@ Individu *Individu::mutationAleatoire()
 //=========================================================================================================================
 //                                           CLASSE population
 //=========================================================================================================================
-
+Population trierPopulation(Population &P)
+{
+    vector<Individu *> individ = P.getIndividus();
+    for (int i = 0; i < P.getTaillePopulation(); ++i)
+    {
+        for (int j = i + 1; j < P.getTaillePopulation(); ++j)
+        {
+            if ((individ[i]->poids()) > (individ[j]->poids()))
+            {
+                Individu *temp = individ[i];
+                individ[i] = individ[j];
+                individ[j] = temp;
+            }
+        }
+    }
+    Population Pop_triee = Population(individ);
+    return (Pop_triee);
+};
 // surcharge d'opérateur qui permet de concaténer deux populations
 
 Population Population ::operator+(const Population &Pop2)
