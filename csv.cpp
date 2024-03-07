@@ -42,7 +42,7 @@ vector<vector<double>> csv_reader(string fname){
 
 
 
-void csv_write(vector<int> parcours)
+void csv_write(vector<double> parcours)
 {
       std::ofstream myfile;
       myfile.open ("solution.csv");
