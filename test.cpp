@@ -5,6 +5,15 @@
 
 using namespace std;
 
+#include <typeinfo>
+#include <string>
+
+template <typename T>
+std::string getTypeName(const T &variable)
+{
+    return typeid(variable).name();
+}
+
 int main()
 {
     // Création des données des villes à parcourir
@@ -32,12 +41,14 @@ int main()
 
     cout << "Population initiale:" << endl;
     // population.print(cout);
-    cout << "taille de pop \n"
-         << population.getTaillePopulation() << "\n";
+    cout << " hello taille de pop \n"
+         << population.getTaillePopulation() << "\n"
+         << "type de taille" << getTypeName(population.getTaillePopulation());
+
     // Sélection des individus pour la reproduction
-    // Population selection = selection_rang(population);
-    Population selection = select_roulette(population, 3);
-    // Population selection=select_eugenisme(population,2);
+    Population selection = selection_rang(population);
+    // Population selection = select_roulette(population, 3);
+    //  Population selection=select_eugenisme(population,2);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);

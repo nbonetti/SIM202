@@ -4,7 +4,9 @@
         "iosfwd": "cpp",
         "utility": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "ostream": "cpp",
+        "typeinfo": "cpp"
     },
     "makefile.launchConfigurations": [
         {

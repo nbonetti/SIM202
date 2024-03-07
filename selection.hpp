@@ -106,7 +106,6 @@ Population select_roulette(Population &P, int p)
     // Remplissage des vecteurs du poids des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
     for (int i = 0; i < P.getTaillePopulation(); i++)
     {
-        cout << i << "\n";
         liste_poids_individu.push_back(P.getIndividu(i)->poids());
         liste_poids_temp.push_back(P.getIndividu(i)->poids());
         Somme_poids = Somme_poids + P.getIndividu(i)->poids();
