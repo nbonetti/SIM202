@@ -47,8 +47,9 @@ int main()
 
     // Sélection des individus pour la reproduction
     // Population selection = selection_rang(population);
-    Population selection = selection_roulette(population, 2);
+    // Population selection = selection_roulette(population, 2);
     // Population selection = selection_eugenisme(population, 3);
+    Population selection = selection_tournoi(population, 2, 0.7);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);
