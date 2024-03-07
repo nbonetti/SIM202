@@ -5,7 +5,7 @@
 #include <sstream>
 #include "csv.hpp"
 using namespace std;          //allow to use cin/cout instead of std::cin
-
+//utile 
 //fonction pour lire le fichier
 vector<vector<double>> csv_reader(string fname){
     

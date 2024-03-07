@@ -143,58 +143,21 @@ int main()
         cout << endl;
     }
 
-    /*vector<double> vmin;
-
-
-
-
-
-
+    vector<double> vmin;
 
 //==============================================================================
 //                                  DEBUT
 //==============================================================================
-    Population paths;//population initaile avec tou sles chemins possibles avec le fichier de départ
-    int nombre_chemins; //choisir le nombre de chemins que l'on veut dans notre porpulation
+    Population paths;//population initiale avec tou sles chemins possibles avec le fichier de départ
+    int nombre_chemins=10; //choisir le nombre de chemins que l'on veut dans notre population
     int i = 0;
     int k = 0;
+    vector<double> vmin;
 //faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ
     generateur_chemins(nombre_chemins,city,paths);
     paths.print(cout);
 
 
-    Population enfants;
-    int p; //choisir nous mêmes
-    //test d'arrêt
-    while (k<=5 && i<=100)
-    {
-        //SELECTION DE LA POPULATION
-        Population selection=selection_rang(paths);
-        //Population selection=select_roulette(paths,p);
-        //Population selection=select_eugenisme(paths,p);
-        cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
-        selection.print(cout);
-
-
-        paths.trierPopulation(&Individu::poids);
-        Individu* I=paths.getIndividu(0);
-        double minimum= I->poids();
-
-        //HYBRIDATION -REPRODUCTION
-        // Reproduction des individus sélectionnés
-        enfants = reproduction(selection, FactoryMethod);
-        cout << "\nEnfants après reproduction:" << endl;
-        enfants.print(cout);
-
-
-        //MUTATION
-        for (int i = 0; i < enfants.getTaillePopulation(); ++i)
-        {
-            enfants.getIndividu(i)->mutationPermutation();
-        }
-
-        cout << "\nEnfants après mutation:" << endl;
-        enfants.print(cout);
 
 
 
