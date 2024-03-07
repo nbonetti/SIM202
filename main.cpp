@@ -27,16 +27,36 @@ int main()
 //========================================================================================
 //                                      DEBUT 
 //========================================================================================
-    vector<int> citynumber;
-    vector<Point> coord;
-    vector<double> vmin;
-    int i = 0;
-    int k = 0;
 
+
+    vector<int> citynumber;//index des villes dans le fichier 
+    vector<Point> coord;//coordonées (x,y)
+    
+    for (const auto &row : content)
+    {
+        citynumber.push_back(row[0]); // Première colonne : indices
+        coord.push_back(Point(row[1], row[2])); // Deuxième et troisième colonnes : coordonnées x et y
+    }
+    //création de l'objet ville 
     Ville city(citynumber,coord);
+    city.calcul_distance();
+    city.print(cout); 
+
+    /*vector<double> vmin;
+
+
+
+    
+
+
+
+//==============================================================================
+//                                  DEBUT 
+//==============================================================================
     Population paths;//population initaile avec tou sles chemins possibles avec le fichier de départ 
     int nombre_chemins; //choisir le nombre de chemins que l'on veut dans notre porpulation
-
+    int i = 0;
+    int k = 0;
 //faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ 
     generateur_chemins(nombre_chemins,city,paths);
     paths.print(cout);
@@ -51,26 +71,38 @@ int main()
         Population selection=selection_rang(paths);
         //Population selection=select_roulette(paths,p);
         //Population selection=select_eugenisme(paths,p);
+        cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
+        selection.print(cout);
+
 
         paths.trierPopulation(&Individu::poids);
         Individu* I=paths.getIndividu(0);
         double minimum= I->poids();
 
-        //HYBRIDATION 
-        //il me faut deux parents que je sélectionne dans la population selection 
-        //pour choisir ces parents, on le fait de manière aléatoire
-        int i_1=rand() % (nombre_chemins/2);
-        int i_2=rand() % (nombre_chemins/2);
+        //HYBRIDATION -REPRODUCTION 
+        // Reproduction des individus sélectionnés
+        enfants = reproduction(selection, FactoryMethod);
+        cout << "\nEnfants après reproduction:" << endl;
+        enfants.print(cout);
 
-        Individu* individu_1=selection.getIndividu(i_1);
-        Individu* individu_2=selection.getIndividu(i_2);
 
+        //MUTATION 
+        for (int i = 0; i < enfants.getTaillePopulation(); ++i)
+        {
+            enfants.getIndividu(i)->mutationPermutation();
+        }
+
+        cout << "\nEnfants après mutation:" << endl;
+        enfants.print(cout);
 
         
+        
 
-    }
 
 
+    }*/
+
+    return 0; 
 }
 
 

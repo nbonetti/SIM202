@@ -6,7 +6,8 @@
         "deque": "cpp",
         "string": "cpp",
         "ostream": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "iostream": "cpp"
     },
     "makefile.launchConfigurations": [
         {
