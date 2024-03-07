@@ -9,7 +9,7 @@ int main()
 {
     // Création des données des villes à parcourir
     vector<int> cityNames = {0, 1, 2, 3, 4};
-    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)};//coordonnées de chaque ville
+    vector<Point> cityCoords = {Point(0, 0), Point(3, 4), Point(6, 8), Point(10, 5), Point(12, 2)}; // coordonnées de chaque ville
     Ville city(cityNames, cityCoords);
     city.calcul_distance();
 
@@ -34,21 +34,22 @@ int main()
     population.print(cout);
 
     // Sélection des individus pour la reproduction
-    //Population selection = selection_rang(population);
-    //Population selection= select_roulette(population,2);
-    Population selection=select_eugenisme(population,2);
+    // Population selection = selection_rang(population);
+    Population selection = select_roulette(population, 2);
+    // Population selection=select_eugenisme(population,2);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;
     selection.print(cout);
 
-    //Reproduction des individus sélectionnés
+    // Reproduction des individus sélectionnés
     Population enfants = reproduction(selection, FactoryMethod);
 
     cout << "\nEnfants après reproduction:" << endl;
     enfants.print(cout);
 
     // Mutation des enfants
-    for (int i = 0; i < enfants.getTaillePopulation(); ++i) {
+    for (int i = 0; i < enfants.getTaillePopulation(); ++i)
+    {
         enfants.getIndividu(i)->mutationPermutation();
     }
 

@@ -73,7 +73,7 @@ Population select_eugenisme(Population &P, int p)
 
     // Séléctionner le meilleur pourcentage p% d'individus reproducteurs
     int n = P.getTaillePopulation();
-    int m = (p*n) / 100.0;
+    int m = (p * n) / 100.0;
     Population Q(m);
 
     for (int i = 0; i < m; i++)
@@ -103,7 +103,7 @@ Population select_roulette(Population &P, int p)
     vector<int> rang;
 
     // Remplissage des vecteurs du poids des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i=0; i < P.getTaillePopulation(); i++)
+    for (int i = 0; i <= P.getTaillePopulation(); i++)
     {
         liste_poids_individu.push_back(P.getIndividu(i)->poids());
         liste_poids_temp.push_back(P.getIndividu(i)->poids());
@@ -112,7 +112,7 @@ Population select_roulette(Population &P, int p)
     }
 
     // selection roulette
-    for (int j = 0; j < p; j++)
+    for (int j = 0; j <= p; j++)
 
     { // k = rang que l'on cherche de l'individu
         int k = 0;
@@ -131,10 +131,7 @@ Population select_roulette(Population &P, int p)
 
         // Ajouter l'individu à P_select
         P_select.addIndividu(P.getIndividu(rang[k]));
-        // supprimer le rang pour pas sélectionner plusieurs fois l'individu
-        rang.erase(rang.begin() + k);
     }
-
     return P_select;
 };
 
