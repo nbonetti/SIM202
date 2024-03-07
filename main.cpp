@@ -40,12 +40,12 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
     int k = 0;
     // nb de parents nécessaires pour que la population après reproduction et sélection garde la même taille intiale
-    int nb_parents_conservés = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
+    int nb_parents_conserves = Pop_initiale.getTaillePopulation() - nb_reproducteurs;
 
     Population population_parents = Pop_initiale;
-    Population parents_selectionnés;
+    Population parents_selectionnes;
     Population enfants;
-    Population parents_conservés;
+    Population parents_conserves;
 
     //====================================================================================================================================
     //                          iteration jusqu'à fin (critère d'arret )
@@ -61,7 +61,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
         // parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
-        parents_selectionnés = selection_rang(population_parents, nb_reproducteurs);
+        parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
 
         //====================================================================================================================================
@@ -69,7 +69,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
         // il faut choisir la mutation appliquée aux enfants
         // enfants des parents issus de la sélection
-        enfants = reproduction(parents_selectionnés, FactoryMethod);
+        enfants = reproduction(parents_selectionnes, FactoryMethod);
 
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)
@@ -83,14 +83,14 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         //====================================================================================================================================
 
         // à définir si sélection par tournoi
-        double proba_tournoi_conservés;
+        double proba_tournoi_conserves;
         // sélection des parents que l'on va conservés pour la prochaine génération
         // parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
         // parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
-        parents_conservés = selection_rang(population_parents, nb_parents_conservés);
+        parents_conserves = selection_rang(population_parents, nb_parents_conserves);
         // parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
 
-        enfants = enfants + parents_conservés;
+        enfants = enfants + parents_conserves;
 
         //====================================================================================================================================
         //                         ITERATEURS
@@ -159,14 +159,15 @@ int main()
 
     Population resultat= algogenetique(generee,nombre_iterations,nombre_reproducteurs);
     resultat.trierPopulation(&Individu::poids);
-    Individu* I= resultat.getIndividu(0);//je prends le chemin avec le poids le plus petit
-
+    Individu*I= resultat.getIndividu(0);//je prends le chemin avec le poids le plus petit
+    vector <double> sol= I->genes;
+    
 
 
 //===========================================================================================
 //                                       SORTIE 
 //===========================================================================================
-    csv_write(I);
+    csv_write(sol);
 
 
 
