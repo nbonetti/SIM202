@@ -160,7 +160,8 @@ Population trierPopulation(Population &P)
     }
     Population Pop_triee = Population(individ);
     return (Pop_triee);
-}
+};
+
 // permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
 Population hybridation(const Individu &parent_1, const Individu &parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type));
 
