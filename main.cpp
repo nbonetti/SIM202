@@ -15,21 +15,6 @@
 #include "csv.hpp"
 using namespace std;
 
-#include <cmath>
-#include <cstdlib>
-#include <vector>
-#include <random>
-#include <ctime>
-#include <list>
-#include <iostream>
-#include <fstream>
-#include <string>
-
-#include "algogenetique.hpp"
-#include "voyage.hpp"
-#include "Factory.hpp"
-#include "selection.hpp"
-using namespace std;
 
 Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproducteurs)
 {
@@ -158,8 +143,8 @@ int main()
     int nombre_reproducteurs=7; 
 
     Population resultat= algogenetique(generee,nombre_iterations,nombre_reproducteurs);
-    resultat.trierPopulation(&Individu::poids);
-    Individu*I= resultat.getIndividu(0);//je prends le chemin avec le poids le plus petit
+    Population resultat_2=trierPopulation(resultat);
+    Individu*I= resultat_2.getIndividu(0);//je prends le chemin avec le poids le plus petit
     vector <double> sol= I->genes;
     
 
