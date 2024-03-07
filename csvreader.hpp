@@ -7,9 +7,6 @@
 #include <vector>
 #include <sstream>
 
-#include "algogenetique.hpp"
-#include "voyage.hpp"
-#include "Factory.hpp"
 
 using namespace std;
 //fonction pour lire le fichier 
