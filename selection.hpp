@@ -133,5 +133,48 @@ Population selection_roulette(Population &Pop_initiale, int p)
     return P_finale;
 };
 
-Population se
+Population selection_tournoi(Population &Pop_initiale, int nb_individus, double proba_de_WIN)
+{
+    Population P_finale;
+    int taille = Pop_initiale.getTaillePopulation();
+
+    // selection du nombre d'individus voulus
+
+    for (int i = 0; i < nb_individus; i++)
+    {
+        // selection des deux individus parmi les n individus pour creer un couple de façon aléatoire
+        int p = unif_rand(0, taille);
+        int q = unif_rand(0, taille);
+        Individu *individu_1 = Pop_initiale.getIndividu(p);
+        Individu *individu_2 = Pop_initiale.getIndividu(q);
+
+        Individu *best;
+
+        // définit le meilleur individu selon la fonction poids
+
+        if (individu_1->poids() >= individu_2->poids())
+        {
+            best = individu_1;
+        }
+        else
+        {
+            best = individu_2;
+        }
+
+        // génère un nombre aléatoire entre 0 et 1
+        double random = rand() / RAND_MAX;
+
+        // si le nombre aléatoire est plus grang que la proba définie alors l'individu selectionner est le moins bon sinon c'est le best
+        if (random > proba_de_WIN)
+        {
+            best = individu_2;
+        }
+
+        // ajout de l'individu sélectionné dans la population finale
+        P_finale = P_finale + Population({best});
+    };
+
+    return P_finale;
+};
+
 #endif
