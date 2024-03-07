@@ -31,11 +31,12 @@ int main()
     Population population(populationInitiale);
 
     cout << "Population initiale:" << endl;
-    population.print(cout);
-
+    // population.print(cout);
+    cout << "taille de pop \n"
+         << population.getTaillePopulation() << "\n";
     // Sélection des individus pour la reproduction
     // Population selection = selection_rang(population);
-    Population selection = select_roulette(population, 2);
+    Population selection = select_roulette(population, 3);
     // Population selection=select_eugenisme(population,2);
 
     cout << "\nIndividus sélectionnés pour la reproduction:" << endl;

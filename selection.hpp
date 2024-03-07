@@ -91,7 +91,7 @@ Population select_roulette(Population &P, int p)
 {
     srand(time(0));
 
-    Population P_select(p);
+    Population P_select;
     // vecteur des poids aka distances
     vector<double> liste_poids_individu;
     vector<double> liste_poids_temp;
@@ -102,9 +102,11 @@ Population select_roulette(Population &P, int p)
     // vecteur des rangs
     vector<int> rang;
 
+    cout << P.getTaillePopulation();
     // Remplissage des vecteurs du poids des individus et de leur rang, et calcul de la somme des fonctions d'adaptation
-    for (int i = 0; i <= P.getTaillePopulation(); i++)
+    for (int i = 0; i < P.getTaillePopulation(); i++)
     {
+        cout << i << "\n";
         liste_poids_individu.push_back(P.getIndividu(i)->poids());
         liste_poids_temp.push_back(P.getIndividu(i)->poids());
         Somme_poids = Somme_poids + P.getIndividu(i)->poids();
