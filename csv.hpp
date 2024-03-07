@@ -14,6 +14,5 @@ using namespace std;
 vector<vector<double>> csv_reader(string fname);
 
 //fonction pour récupérer les données et avoir un nouveau fichier 
-void csv_write(int* parcours, int n_index); 
-
+void csv_write(vector<int> parcours);
 #endif
