@@ -102,6 +102,8 @@ int main()
         {0, 1, 2, 3, 4}, // Chemin 1
         {0, 2, 4, 1, 3}, // Chemin 2
         {0, 2, 3, 4, 1},
+        {0, 2, 3, 4, 1},
+        {0, 2, 3, 4, 1},
     };
 
     // Création des individus pour chaque chemin initial
@@ -114,7 +116,7 @@ int main()
     // Création de la population initiale
     Population population(populationInitiale);
 
-    Population Pop_finale = algogenetique(population, 5, 3);
+        Population Pop_finale = algogenetique(population, 5, 5);
     Pop_finale.print(cout);
 
     // cout << "Population initiale:" << endl;
