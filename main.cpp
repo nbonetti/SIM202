@@ -50,10 +50,10 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // proba de gagner lors de la selection par tournoi
         double proba_tournoi;
 
-        // parents_selectionnés = selection_eugenisme(population_parents, nb_reproducteurs);
-        // parents_selectionnés = selection_roulette(population_parents, nb_reproducteurs);
-        parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
-        // parents_selectionnés = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
+        // parents_selectionnes = selection_eugenisme(population_parents, nb_reproducteurs);
+        //  parents_selectionnes = selection_roulette(population_parents, nb_reproducteurs);
+        //   parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
+        // parents_selectionnes = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
 
         //====================================================================================================================================
         //                          REPRODUCTION DES ENFANTS + MUTATION
@@ -76,10 +76,10 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // à définir si sélection par tournoi
         double proba_tournoi_conserves;
         // sélection des parents que l'on va conservés pour la prochaine génération
-        // parents_conservés = selection_eugenisme(population_parents, nb_reproducteurs);
-        // parents_selectionnés = selection_roulette(population_parents, nb_parents_conservés);
+        // parents_conserves = selection_eugenisme(population_parents, nb_reproducteurs);
+        // parents_conserves = selection_roulette(population_parents, nb_parents_conserves);
         parents_conserves = selection_rang(population_parents, nb_parents_conserves);
-        // parents_conservés = selection_tournoi(population_parents, nb_parents_conservés, proba_tournoi_conservés);
+        // parents_conservés = selection_tournoi(population_parents, nb_parents_conserves, proba_tournoi_conservés);
 
         enfants = enfants + parents_conserves;
 
@@ -110,7 +110,7 @@ int main()
     //========================================================================================
     //                                      DEBUT
     //========================================================================================
-   
+
     vector<int> citynumber; // index des villes dans le fichier
     vector<Point> coord;    // coordonées (x,y)
 
@@ -135,34 +135,28 @@ int main()
     }
     Chemin::setVille(city);
 
-//==============================================================================
-//                                  RESOLUTION
-//==============================================================================
-    Population paths;//population initiale avec tou sles chemins possibles avec le fichier de départ
-    int nombre_chemins=10; //choisir le nombre de chemins que l'on veut dans notre population
-    
-//faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ
-    Population generee =generateur_chemins(nombre_chemins,city,paths);//initialisation
+    //==============================================================================
+    //                                  RESOLUTION
+    //==============================================================================
+    Population paths;        // population initiale avec tou sles chemins possibles avec le fichier de départ
+    int nombre_chemins = 10; // choisir le nombre de chemins que l'on veut dans notre population
+
+    // faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ
+    Population generee = generateur_chemins(nombre_chemins, city, paths); // initialisation
     paths.print(cout);
 
+    int nombre_iterations = 10;
+    int nombre_reproducteurs = 7;
 
-    int nombre_iterations=10;
-    int nombre_reproducteurs=7; 
+    Population resultat = algogenetique(generee, nombre_iterations, nombre_reproducteurs);
+    Population resultat_2 = trierPopulation(resultat);
+    Individu *I = resultat_2.getIndividu(0); // je prends le chemin avec le poids le plus petit
+    vector<double> sol = I->genes;
 
-    Population resultat= algogenetique(generee,nombre_iterations,nombre_reproducteurs);
-    Population resultat_2=trierPopulation(resultat);
-    Individu*I= resultat_2.getIndividu(0);//je prends le chemin avec le poids le plus petit
-    vector <double> sol= I->genes;
-    
-
-
-//===========================================================================================
-//                                       SORTIE 
-//===========================================================================================
+    //===========================================================================================
+    //                                       SORTIE
+    //===========================================================================================
     csv_write(sol);
-
-
-
 
     return 0;
 }
