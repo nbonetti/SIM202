@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#include <typeinfo>
 #include "algogenetique.hpp"
 #include "voyage.hpp"
 #include "Factory.hpp"
@@ -15,7 +15,13 @@
 #include "csv.hpp"
 using namespace std;
 
+Ville Chemin::vsp;
 
+template <typename T>
+std::string getTypeName(const T &variable)
+{
+    return typeid(variable).name();
+}
 Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproducteurs)
 {
 
@@ -104,7 +110,7 @@ int main()
     //========================================================================================
     //                                      DEBUT
     //========================================================================================
-
+   
     vector<int> citynumber; // index des villes dans le fichier
     vector<Point> coord;    // coordonées (x,y)
 
@@ -127,6 +133,7 @@ int main()
         }
         cout << endl;
     }
+    Chemin::setVille(city);
 
 //==============================================================================
 //                                  RESOLUTION
