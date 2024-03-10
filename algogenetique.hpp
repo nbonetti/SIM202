@@ -141,6 +141,7 @@ public:
     }
 
     void print(ostream &out) const;
+    void remplacerIndividu(int index, Individu* nouvelIndividu);
 };
 
 // fonction qui trie la population selon la fonction d'adaptation

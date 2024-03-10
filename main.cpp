@@ -71,8 +71,19 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // mutation des enfants
         for (int i = 0; i < nb_reproducteurs; i++)
         {
-            enfants.getIndividu(i)->mutationAleatoire();
+            Individu* enfant =enfants.getIndividu(i);
+            enfant->mutationAleatoire();
+            //enfants.getIndividu(i)->mutationAleatoire();
             // enfants.getIndividu(i)->mutationPermutation();
+            int s=0;
+            while (!enfant->respecteContraintes() && s<1000)
+            {
+                // Générer un nouvel enfant à la place de l'enfant non conforme
+                enfants.remplacerIndividu(i, reproduction(parents_selectionnes, FactoryMethod, CheminType).getIndividu(0));
+                enfant = enfants.getIndividu(i);
+                enfant->mutationAleatoire(); // Effectuer une mutation sur le nouvel enfant
+                ++s; 
+            }
         }
 
         //====================================================================================================================================
@@ -154,7 +165,7 @@ int main()
 
     //paths.print(cout);
 
-    int nombre_iterations = 10;
+    int nombre_iterations = 4;
     int nombre_reproducteurs = 10;
 
     Population resultat = algogenetique(generee, nombre_iterations, nombre_reproducteurs);

@@ -195,15 +195,7 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
 
             // Effectue l'hybridation pour obtenir les enfants
             Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod, type);
-            // Vérifiez et corrigez les enfants pour qu'ils respectent les contraintes
-            for (auto& enfant : enfants_crees.getIndividus())
-            {
-                // Appliquez la mutation jusqu'à ce que les contraintes soient respectées
-                while (!enfant->respecteContraintes())
-                {
-                    enfant->mutationPermutation(); // Appliquez une mutation de permutation
-                }
-            }
+        
 
             // Ajoute les enfants à la population des descendants
             enfants = enfants + enfants_crees;
@@ -215,4 +207,17 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
     }
 
     return enfants;
+}
+
+void Population::remplacerIndividu(int index, Individu* nouvelIndividu)
+{
+    if (index >= 0 && index < taille_Population)
+    {
+        delete individus[index]; // Supprimer l'individu existant à l'index donné
+        individus[index] = nouvelIndividu; // Remplacer par le nouvel individu
+    }
+    else
+    {
+        std::cerr << "L'index est hors limites." << std::endl;
+    }
 };
