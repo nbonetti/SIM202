@@ -52,7 +52,7 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
 
         // parents_selectionnes = selection_eugenisme(population_parents, nb_reproducteurs);
         //  parents_selectionnes = selection_roulette(population_parents, nb_reproducteurs);
-        //   parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
+        parents_selectionnes = selection_rang(population_parents, nb_reproducteurs);
         // parents_selectionnes = selection_tournoi(population_parents, nb_reproducteurs, proba_tournoi);
 
         //====================================================================================================================================
