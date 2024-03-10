@@ -6,7 +6,7 @@ INCLUDE =
 
 EXEC = main
 SRCS = main.cpp csv.cpp
-OBJS = test.o algogenetique.o
+OBJS = main.o csv.o
 
 all : $(EXEC)
 
