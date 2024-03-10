@@ -56,6 +56,28 @@ Individu *Individu::mutationAleatoire()
     return this;
 }
 
+bool Individu:: respecteContraintes() const
+{
+    // Vérifie si une ville est visitée plus d'une fois
+    vector<bool> visited(nombreGenes, false);
+    for (int i = 0; i < nombreGenes; ++i)
+    {
+        if (visited[genes[i]])
+        {
+            return false; // Si la ville est déjà visitée, la contrainte n'est pas respectée
+        }
+        visited[genes[i]] = true;
+    }
+
+    // Vérifie si le chemin revient à la ville de départ
+    if (genes.front() != genes.back())
+    {
+        return false; // Si le chemin revient à la ville de départ, la contrainte n'est pas respectée
+    }
+
+    return true; // Si toutes les contraintes sont respectées, retourne true
+}
+
 //=========================================================================================================================
 //                                           CLASSE population
 //=========================================================================================================================
@@ -173,6 +195,15 @@ Population reproduction(const Population parents, Individu *(*pointeur_FactoryMe
 
             // Effectue l'hybridation pour obtenir les enfants
             Population enfants_crees = hybridation(parent1, parent2, pointeur_FactoryMethod, type);
+            // Vérifiez et corrigez les enfants pour qu'ils respectent les contraintes
+            for (auto& enfant : enfants_crees.getIndividus())
+            {
+                // Appliquez la mutation jusqu'à ce que les contraintes soient respectées
+                while (!enfant->respecteContraintes())
+                {
+                    enfant->mutationPermutation(); // Appliquez une mutation de permutation
+                }
+            }
 
             // Ajoute les enfants à la population des descendants
             enfants = enfants + enfants_crees;

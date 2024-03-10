@@ -66,6 +66,7 @@ public:
     Individu *mutationAleatoire();
 
     IndividuType type;
+    bool respecteContraintes() const;
 };
 
 // // création d'un pointeur vers la fonction poids nécessaire pour la sélections
