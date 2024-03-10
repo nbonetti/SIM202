@@ -183,7 +183,7 @@ Chemin *Chemin::clone()
 /*dans notre cas on va avoir un fichier avec plusieurs villes, on va donc pouvoir générer plien de chemins possibles et il faut donc que l'on génère une population
 avec tous ces chemins possibles*/
 
-Population &generateur_chemins(int nombre_chemins, const Ville city, Population &P)
+/*Population &generateur_chemins(int nombre_chemins, const Ville city, Population &P)
 {
     Chemin::setVille(city);
     
@@ -192,7 +192,7 @@ Population &generateur_chemins(int nombre_chemins, const Ville city, Population 
     for (int j = 0; j < nombre_chemins; j++)
     {
         list<int> indice;
-        vector<double> trace;
+        vector<double> trace;//vecteur pour stocker le chemin 
 
         // Remplissage du vecteur d'indices
         for (int i = 0; i < city.nombre_villes(); i++)
@@ -215,6 +215,44 @@ Population &generateur_chemins(int nombre_chemins, const Ville city, Population 
         P.addIndividu(path);
     }
     return P;
+}*/
+Population generateur_chemins(int nombre_chemins, const Ville& city, Population& P) {
+    Chemin::setVille(city);
+    srand(time(NULL));
+
+    for (int j = 0; j < nombre_chemins; j++) {
+        vector<double> trace; // Vecteur pour stocker le chemin
+
+        vector<bool> visited(city.nombre_villes(), false); // Indique si une ville a été visitée
+
+        // Choisir une ville de départ aléatoire
+        int currentCityIndex = rand() % city.nombre_villes();
+        trace.push_back(currentCityIndex);
+        visited[currentCityIndex] = true;
+
+        // Construire le chemin en sélectionnant aléatoirement une ville non visitée à chaque étape
+        while (trace.size() < city.nombre_villes()) {
+            // Construire une liste de villes non visitées
+            vector<int> availableCities;
+            for (int i = 0; i < city.nombre_villes(); ++i) {
+                if (!visited[i]) {
+                    availableCities.push_back(i);
+                }
+            }
+
+            // Choisir aléatoirement une ville non visitée parmi les villes disponibles
+            int nextCityIndex = availableCities[rand() % availableCities.size()];
+
+            trace.push_back(nextCityIndex);
+            visited[nextCityIndex] = true;
+        }
+
+        Chemin* path = new Chemin(trace);
+        P.addIndividu(path);
+    }
+
+    return P;
 }
+
 
 #endif
