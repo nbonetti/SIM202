@@ -41,7 +41,7 @@ vector<vector<double>> csv_reader(string fname){
 void csv_write(vector<double> parcours)
 {
       std::ofstream myfile;
-      myfile.open ("solution_csv");
+      myfile.open ("solution.csv");
       myfile << "Chemin_solution\n";
       int x;
       int n=parcours.size();
