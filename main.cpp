@@ -116,7 +116,7 @@ int main()
 
     for (const auto &row : content)
     {
-        cout << row[0];
+        //cout << row[0];
         citynumber.push_back(row[0]);           // Première colonne : indices
         coord.push_back(Point(row[1], row[2])); // Deuxième et troisième colonnes : coordonnées x et y
     }
