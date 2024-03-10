@@ -25,6 +25,12 @@ std::string getTypeName(const T &variable)
 Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproducteurs)
 {
 
+// Génération de la population initiale avec des chemins corrects
+    Population population_initiale;
+    int nombre_chemins = Pop_initiale.getTaillePopulation(); // Nombre de chemins à générer
+    Ville city; // Définissez votre objet Ville avec les coordonnées des villes
+    population_initiale = generateur_chemins(nombre_chemins, city, Pop_initiale);
+
     //====================================================================================================================================
     //                          initialisation
     //====================================================================================================================================
@@ -143,13 +149,18 @@ int main()
 
     // faire une fonction qui génère la population totale avec tous les chemins possibles avec le fichier de départ
     Population generee = generateur_chemins(nombre_chemins, city, paths); // initialisation
-    paths.print(cout);
+    printf("population generee=");
+    generee.print(cout);
+
+    //paths.print(cout);
 
     int nombre_iterations = 10;
-    int nombre_reproducteurs = 7;
+    int nombre_reproducteurs = 10;
 
     Population resultat = algogenetique(generee, nombre_iterations, nombre_reproducteurs);
     Population resultat_2 = trierPopulation(resultat);
+    printf("resultat_2=");
+    resultat_2.print(cout);
     Individu *I = resultat_2.getIndividu(0); // je prends le chemin avec le poids le plus petit
     vector<double> sol = I->genes;
 

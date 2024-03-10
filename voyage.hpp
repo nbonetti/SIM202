@@ -94,7 +94,7 @@ void Ville ::calcul_distance()
         {
             if (i == j)
             {
-                distances[i][j] = 0;
+                distances[i][j] = -1;
             }
             else
             { // on applique à la ieme ligen et jieme colonne la distance entre les deux points (deux villes)
@@ -216,6 +216,7 @@ avec tous ces chemins possibles*/
     }
     return P;
 }*/
+
 Population generateur_chemins(int nombre_chemins, const Ville& city, Population& P) {
     Chemin::setVille(city);
     srand(time(NULL));
@@ -243,9 +244,16 @@ Population generateur_chemins(int nombre_chemins, const Ville& city, Population&
             // Choisir aléatoirement une ville non visitée parmi les villes disponibles
             int nextCityIndex = availableCities[rand() % availableCities.size()];
 
-            trace.push_back(nextCityIndex);
-            visited[nextCityIndex] = true;
+            // Vérifier si le chemin entre la ville courante et la prochaine ville n'est pas déjà dans le chemin
+            if (nextCityIndex != currentCityIndex) {
+                trace.push_back(nextCityIndex);
+                visited[nextCityIndex] = true;
+                currentCityIndex = nextCityIndex;
+            }
         }
+
+        // Ajouter la première ville à la fin pour fermer la boucle
+        trace.push_back(trace.front());
 
         Chemin* path = new Chemin(trace);
         P.addIndividu(path);
@@ -253,6 +261,7 @@ Population generateur_chemins(int nombre_chemins, const Ville& city, Population&
 
     return P;
 }
+
 
 
 #endif
