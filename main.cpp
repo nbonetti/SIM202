@@ -73,8 +73,8 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         {
             Individu* enfant =enfants.getIndividu(i);
             enfant->mutationAleatoire();
-            //enfants.getIndividu(i)->mutationAleatoire();
-            // enfants.getIndividu(i)->mutationPermutation();
+            enfant->mutationPermutation();
+            
             int s=0;
             while (!enfant->respecteContraintes() && s<1000)
             {
