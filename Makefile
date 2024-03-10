@@ -5,8 +5,8 @@ LIBRARY =
 INCLUDE =
 
 EXEC = main
-SRCS = main.cpp csv.cpp
-OBJS = main.o csv.o
+SRCS = main.cpp  algogenetique.cpp csv.cpp
+OBJS = main.o algogenetique.o csv.o
 
 all : $(EXEC)
 

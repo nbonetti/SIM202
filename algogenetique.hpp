@@ -146,7 +146,7 @@ public:
 Population trierPopulation(Population &P);
 
 // permet de créer deux enfants à partir de deux parents + argument de pointeur de la fonction de factory methode cf Factory.hpp
-Population hybridation(Individu* parent_1, Individu* parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type);
+Population hybridation(Individu *parent_1, Individu *parent_2, Individu *(*pointeur_FactoryMethod)(IndividuType type), IndividuType type);
 
 // prend en argument un population déjà sélectionner et applique la méthode d'hybridation à des couples aléatoires de parents
 
