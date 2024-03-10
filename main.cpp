@@ -93,10 +93,10 @@ Population algogenetique(Population &Pop_initiale, int nb_iter, int nb_reproduct
         // à définir si sélection par tournoi
         double proba_tournoi_conserves;
         // sélection des parents que l'on va conservés pour la prochaine génération
-        // parents_conserves = selection_eugenisme(population_parents, nb_reproducteurs);
+        parents_conserves = selection_eugenisme(population_parents, nb_reproducteurs);
         //parents_conserves = selection_roulette(population_parents, nb_parents_conserves);
         //parents_conserves = selection_rang(population_parents, nb_parents_conserves);
-        parents_conserves = selection_tournoi(population_parents, nb_parents_conserves, proba_tournoi_conserves);
+        //parents_conserves = selection_tournoi(population_parents, nb_parents_conserves, proba_tournoi_conserves);
 
         enfants = enfants + parents_conserves;
 
