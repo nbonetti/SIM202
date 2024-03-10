@@ -135,7 +135,6 @@ public:
     }
     Individu *clone() const;
     Chemin *clone();
-
     static void setVille(const Ville& v)
     {
         vsp = v;
