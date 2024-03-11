@@ -216,7 +216,7 @@ avec tous ces chemins possibles*/
     }
     return P;
 }*/
-
+//changement de la fonction pour tester les contraintes et ne pas prendre deux fois la meme ville 
 Population generateur_chemins(int nombre_chemins, const Ville& city, Population& P) {
     Chemin::setVille(city);
     srand(time(NULL));
